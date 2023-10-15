@@ -11,7 +11,7 @@ final class SearchViewController: UIViewController {
     
     private let searchTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = UIColor(named: "homeBackground")
+        tableView.backgroundColor = .systemPink
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView

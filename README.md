@@ -34,7 +34,7 @@
 		* [Opcionales](#requisitosOpcionales) 
 	* [Características adicionales de mejora](#caracteristicas)
 	* [Problemas, decisiones y resolución](#problemas)
-		* [Realización del diseño de interfaces de forma programática](#problemas1)
+		* [Añadir gradiente a vista específica dentro de una `UITableViewCell`](#problemas1)
 
 <a name="herramientas"></a>
 ## Herramientas
@@ -103,78 +103,58 @@ Como práctica final al módulo de *Fundamentos iOS* del *Bootcamp* en Desarroll
 <a name="caracteristicas"></a>
 ### Características adicionales de mejora
 
-Ya hemos comentado los requisitos, tanto obligatorios como opcionales, para conseguir superar la práctica; sin embargo, he querido ir más allá, ya sea con contenidos dados en el módulo y que no se requieren en la práctica o investigando nuevos recursos de forma autónoma, por lo que mi aplicación posee características adicionales como:
-
-* **Programada al 100% a través de código**, sin usar *storyboards* ni `.xibs`.
-* A pesar de no ser diseñador, me gusta poner atención, en la medida de lo posible, al diseño y a la experiencia de usuario:
-	* **Consulta de los *guidelines* de Apple** para el tamaño de la tipografía de elementos como los `UITextfield`.
-	* **Adición de botón de eliminado de texto** en `UITextField`.
-	* **Agregado de animaciones en bordes y cambio de color del fondo cuando se va a introducir texto** en los `UITextfield` (realizado con el *delegate*).
-	* **Botones animados** a la hora de pulsar en ellos.
-* **Prioridad a la organización del código** en un árbol de directorios que sea intuitivo y en el que cada una de las partes que lo componen sea fácil de identificar. De esta forma, conseguimos que la aplicación mantenga un sentido interno que pueda ayudarnos a entenderla en un futuro o a que podamos facilitar la labor de nuestros compañeros de trabajo una vez que sigan con el proyecto.
-* Una vez desarrollado el código y su funcionalidad, se ha atendido a la **refactorización** del mismo. Se han realizado tareas de conversión a **genérico** para reutilizar el `UITableview` ya que se empleaba en dos pantallas de forma idéntica a nivel de interfaz de usuario. A continuación, muestro un ejemplo del `UITableViewDelegate` que aplica un genérico del protocolo que rige el modelo de datos:
-
-```swift
-final class ListTableViewDelegate<T: MainHeroData>: NSObject, UITableViewDelegate {
-    // ...
-}
-```
-
-Como comentamos, la generalización desembocó en la aplicación de dos protocolos: uno para el modelo de datos y otro para el `UIViewController` que maneja el `UITableView`.
-
-```swift
-protocol MainHeroData: Decodable {
-    var id: String { get }
-    var name: String { get }
-    var description: String { get }
-    var photo: URL { get }
-}
-
-protocol ListViewControllerProtocol: AnyObject {
-    var heroData: [MainHeroData]? { get }
-}
-```
-
-Y aquí dejo un ejemplo de la potencia que posee el uso de genéricos y protocolos en Swift, en el que se representa el paso de la información del modelo de datos correspondiente a la celda pulsada en el `UITableView` hacia el `UIViewController` gracias al `UITableViewDelegate`.
-
-```swift
-final class ListTableViewDelegate<T: MainHeroData>: NSObject, UITableViewDelegate {
-    
-    // Conexión con ViewController
-    weak var viewController: ListViewControllerProtocol?
-    
-    // Closure/callback de envío de información al ViewController cuando se pulsa una celda
-    var cellTapHandler: ((T) -> Void)?
-    
-    // Método para saber qué celda se está pulsando
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let heroData = viewController?.heroData {
-            let model = heroData[indexPath.row]
-
-            if let model = model as? T {
-                cellTapHandler?(model)
-            }
-            
-        }
-        
-        // Deseleccionar la celda
-        tableView.deselectRow(at: indexPath, animated: true)
-
-    }
-}
-```
-
-* **Personalización de las celdas** del `UITableView` con `UITableViewCell`. Por código e intentando simular al detalle el prototipo dado en imágenes a representar, se ha optado hasta por agregar como `UIImageView` un *chevron* desde *SF Symbols*, que posee la funcionalidad de mejorar la experiencia de usuario al alertar de que al pulsar la celda vas a navegar a otra pantalla, para conocer cómo hacer de nuestro código algo más personal para cuando haya que realizar otro tipo de integraciones a nivel diseño ya que, en ese caso, podríamos haberlo realizado agregando la propiedad `accessoryType` a la celda y agregar aquellos elementos que, de forma predeterminada, nos ofrece *UIKit*.
-* He empleado **diversos tipos de navegación** a lo largo de la aplicación para mostrar las diversas pantallas en pos de conocer su actuación. En primer lugar, y aunque no pueda parecer lo más nativo y normal en aplicaciones *iOS*, he empleado un `present` del `UINavigationController` como `.fullScreen` en su propiedad `modalPresentationStyle` para que, a la hora de ingresar a la aplicación, la pantalla aparezca desde abajo hacia arriba; así como un cierre de sesión en sentido contrario con un `dismiss`. Por otro lado, para navegar por el *stack* del `UINavigationController` he empleado `pushViewController`.
-* Se ha añadido una **alerta** cuando el usuario introduce unas credenciales erróneas en la pantalla de *Login* en pos de mejorar la usabilidad de la aplicación y que el usuario reciba *feedback* del estado del sistema.
-* También se han añadido **dos `UIBarButtonItem` en el listado de héroes**: uno que abre *Safari* y enlaza con la *Wikipedia* dedicada a *Dragon Ball* (funcionalidad que nos permite retener al usuario en nuestra *app* ofreciéndole más información); y otro para cerrar sesión, lo cual te hace navegar a la pantalla de *Login*.
-
 <a name="problemas"></a>
 ### Problemas, decisiones y resolución
 
 <a name="problemas1"></a>
-#### Realización del diseño de interfaces de forma programática
+#### Añadir gradiente a vista específica dentro de una `UITableViewCell`
+
+Tuve un momento bloqueante al no conseguir la adicción de un gradiente a la `cardView` de la celda personalizada del `UITableView`. Al inicio, obtuve el gradiente como yo deseaba, incluyendo en la función `layoutSubviews` la configuración del gradiente; sin embargo, cada vez que realizaba *scroll* o pulsaba sobre la celda, el gradiente volvía a inicializarse y se iban acumulando constantemente gradientes.
+
+Esto se debía solucionar agregando la configuración al `init` de la celda para que sólo se inicialice el gradiente una sola vez. No obstante, esto no funcionaba ya que no se aplicaba el gradiente a la vista `cardView` porque su tamaño no estaba aún establecido en ese punto del código.
+
+De esta forma, realizando un proceso de *debug*, pude percatarme de la evolución que tenía el tamaño de la `cardView` a lo largo de la manipulación de la aplicación en el simulador y vi que parecía evidente que la solución pasaba por esperar que el tamaño de la `cardView` no fuera 0 y, además, debíamos asegurarnos que la gradiente solo se inicializara una sola vez para evitar acumulaciones y superposiciones.
+
+Así quedaría la `UITableViewCell` para conseguir la solución:
+
+```swift
+final class SearchTableViewCell: UITableViewCell {
+    // ...
+    
+    private var gradientAdded = false
+    
+    // ...
+    
+    public func addGradient() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.clear.cgColor,
+            UIColor.clear.cgColor,
+            UIColor.clear.cgColor,
+            UIColor.systemOrange.cgColor
+        ]
+        gradientLayer.locations = [0.01, 0.1, 0.7, 1.0]
+        gradientLayer.frame = cardView.bounds
+        gradientLayer.cornerRadius = 20
+        cardView.layer.addSublayer(gradientLayer)
+    }
+   
+   	// ...
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        heroImageView.frame = cardView.bounds
+        
+        if !gradientAdded && cardView.bounds != .zero {
+            addGradient()
+            gradientAdded = true
+        }
+    }
+    
+    // ...
+    
+}
+```
 
 ---
 
