@@ -28,7 +28,7 @@ final class SearchTableViewCell: UITableViewCell {
     
     private let cardView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .systemRed
+        uiView.backgroundColor = .systemGray
         uiView.layer.cornerRadius = 20
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView

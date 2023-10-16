@@ -23,7 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        navVC.setViewControllers([splashViewController], animated: true)
         
 //        window?.rootViewController = navVC
-        window?.rootViewController = MainTabBarViewcontroller()
+        
+//        window?.rootViewController = MainTabBarViewcontroller()
+        
+        window?.rootViewController = DetailViewController()
         window?.makeKeyAndVisible()
     }
 
