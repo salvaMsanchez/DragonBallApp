@@ -156,6 +156,9 @@ final class SearchTableViewCell: UITableViewCell {
 }
 ```
 
+<a name="problemas2"></a>
+#### Comportamiento inesperado `UICollectionViewCell`: la imagen y el gradiente aparecen en celdas que no se ven en pantalla y cuando pulsas en ellas, aparecen
+
 ---
 
 # Inspiración
