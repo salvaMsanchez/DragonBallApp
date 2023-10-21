@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        window?.rootViewController = MainTabBarViewcontroller()
         
-        window?.rootViewController = DetailViewController()
+        window?.rootViewController = GalleryViewController()
         window?.makeKeyAndVisible()
     }
 
