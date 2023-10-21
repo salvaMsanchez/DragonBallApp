@@ -65,7 +65,28 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 200)
+        return CGSize(width: collectionView.frame.width, height: 215)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil) { _ in
+                let downloadAction = UIAction(
+                    title: "Download",
+                    subtitle: nil,
+                    image: nil,
+                    identifier: nil,
+                    discoverabilityTitle: nil,
+                    state: .off) { _ in
+//                        guard let indexPath = indexPaths.first else {
+//                            return
+//                        }
+//                        self?.downloadTitleAt(indexPath: indexPath)
+                    }
+                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+            }
+        return config
     }
     
 }

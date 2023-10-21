@@ -24,9 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        window?.rootViewController = navVC
         
-//        window?.rootViewController = MainTabBarViewcontroller()
+        window?.rootViewController = MainTabBarViewcontroller()
         
-        window?.rootViewController = GalleryViewController()
+//        window?.rootViewController = GalleryViewController()
         window?.makeKeyAndVisible()
     }
 
