@@ -41,6 +41,9 @@
 		B46C4CB72AD9C4E80005FCB4 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CB62AD9C4E80005FCB4 /* Hero.swift */; };
 		B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */; };
 		B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24092AE4159900DFC337 /* TestViewController.swift */; };
+		B49F24102AE44D9C00DFC337 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */; };
+		B49F24122AE44E5500DFC337 /* SecureDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */; };
+		B49F24152AE44E7900DFC337 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B49F24142AE44E7900DFC337 /* KeychainSwift */; };
 		B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +102,8 @@
 		B46C4CB62AD9C4E80005FCB4 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewCell.swift; sourceTree = "<group>"; };
 		B49F24092AE4159900DFC337 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProvider.swift; sourceTree = "<group>"; };
 		B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49F24152AE44E7900DFC337 /* KeychainSwift in Frameworks */,
 				B46C4CB12AD9B20C0005FCB4 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,7 +333,6 @@
 				B46C4C9C2AD9A2E50005FCB4 /* App */,
 				B46C4C9D2AD9A30D0005FCB4 /* Resources */,
 				B46C4C9E2AD9A62B0005FCB4 /* Data */,
-				B46C4C9F2AD9A6390005FCB4 /* Domain */,
 				B46C4CA02AD9A6C30005FCB4 /* Presentation */,
 				B46C4CA52AD9A8960005FCB4 /* MainTabBarViewController.swift */,
 			);
@@ -372,18 +377,10 @@
 		B46C4C9E2AD9A62B0005FCB4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B46C4C722AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld */,
-				B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */,
+				B49F240B2AE44D4C00DFC337 /* API */,
+				B49F240C2AE44D5800DFC337 /* Local */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		B46C4C9F2AD9A6390005FCB4 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				B46C4CB62AD9C4E80005FCB4 /* Hero.swift */,
-			);
-			path = Domain;
 			sourceTree = "<group>";
 		};
 		B46C4CA02AD9A6C30005FCB4 /* Presentation */ = {
@@ -460,6 +457,41 @@
 			path = TestController;
 			sourceTree = "<group>";
 		};
+		B49F240B2AE44D4C00DFC337 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B49F240C2AE44D5800DFC337 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				B49F240E2AE44D8900DFC337 /* CoreData */,
+				B49F240D2AE44D6900DFC337 /* Models */,
+				B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		B49F240D2AE44D6900DFC337 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B46C4CB62AD9C4E80005FCB4 /* Hero.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B49F240E2AE44D8900DFC337 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B46C4C722AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld */,
+				B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -478,6 +510,7 @@
 			name = DragonBallApp;
 			packageProductDependencies = (
 				B46C4CB02AD9B20C0005FCB4 /* Lottie */,
+				B49F24142AE44E7900DFC337 /* KeychainSwift */,
 			);
 			productName = DragonBallApp;
 			productReference = B46C4C662AD9A2380005FCB4 /* DragonBallApp.app */;
@@ -553,6 +586,7 @@
 			mainGroup = B46C4C5D2AD9A2380005FCB4;
 			packageReferences = (
 				B46C4CAF2AD9B20C0005FCB4 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				B49F24132AE44E7900DFC337 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = B46C4C672AD9A2380005FCB4 /* Products */;
 			projectDirPath = "";
@@ -614,6 +648,7 @@
 				B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */,
 				B46C4CAC2AD9AB7B0005FCB4 /* SplashViewModel.swift in Sources */,
 				B46C4C6C2AD9A2380005FCB4 /* SceneDelegate.swift in Sources */,
+				B49F24122AE44E5500DFC337 /* SecureDataProvider.swift in Sources */,
 				B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */,
 				B43589BB2ADA93540077520D /* SearchViewController.swift in Sources */,
 				B43589B92ADA93350077520D /* SearchTableViewCell.swift in Sources */,
@@ -625,6 +660,7 @@
 				B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */,
 				B43589CF2ADA94C00077520D /* SettingsViewController.swift in Sources */,
 				B43589CA2ADA947B0077520D /* SettingsView.swift in Sources */,
+				B49F24102AE44D9C00DFC337 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +1002,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		B49F24132AE44E7900DFC337 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -973,6 +1017,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B46C4CAF2AD9B20C0005FCB4 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		B49F24142AE44E7900DFC337 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B49F24132AE44E7900DFC337 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

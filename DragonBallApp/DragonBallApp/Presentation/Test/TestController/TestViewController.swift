@@ -47,11 +47,4 @@ extension TestViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let testCell = cell as? TestCollectionViewCell {
-            print("Hola")
-            testCell.configure(image: UIImage(named: "goku"))
-        }
-    }
 }
