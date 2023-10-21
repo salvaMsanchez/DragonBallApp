@@ -39,6 +39,8 @@
 		B46C4CB32AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B46C4CB22AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json */; };
 		B46C4CB52AD9BE5C0005FCB4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */; };
 		B46C4CB72AD9C4E80005FCB4 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CB62AD9C4E80005FCB4 /* Hero.swift */; };
+		B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */; };
+		B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24092AE4159900DFC337 /* TestViewController.swift */; };
 		B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		B46C4CB22AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dragonBallSplashAnimation.json; sourceTree = "<group>"; };
 		B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B46C4CB62AD9C4E80005FCB4 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewCell.swift; sourceTree = "<group>"; };
+		B49F24092AE4159900DFC337 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,6 +389,7 @@
 		B46C4CA02AD9A6C30005FCB4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B49F24042AE414DC00DFC337 /* Test */,
 				B46C4CA12AD9A6FC0005FCB4 /* Splash */,
 				B434D8802ADC982F00C98852 /* Detail */,
 				B43589AA2ADA92470077520D /* Gallery */,
@@ -428,6 +433,31 @@
 				B46C4CAB2AD9AB7B0005FCB4 /* SplashViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B49F24042AE414DC00DFC337 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				B49F24052AE414E200DFC337 /* TestView */,
+				B49F24062AE414E800DFC337 /* TestController */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		B49F24052AE414E200DFC337 /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */,
+			);
+			path = TestView;
+			sourceTree = "<group>";
+		};
+		B49F24062AE414E800DFC337 /* TestController */ = {
+			isa = PBXGroup;
+			children = (
+				B49F24092AE4159900DFC337 /* TestViewController.swift */,
+			);
+			path = TestController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +611,7 @@
 				B43589C32ADA93E60077520D /* ExploreView.swift in Sources */,
 				B43589C52ADA94020077520D /* ExploreViewController.swift in Sources */,
 				B43589BD2ADA938E0077520D /* SearchViewModel.swift in Sources */,
+				B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */,
 				B46C4CAC2AD9AB7B0005FCB4 /* SplashViewModel.swift in Sources */,
 				B46C4C6C2AD9A2380005FCB4 /* SceneDelegate.swift in Sources */,
 				B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */,
@@ -591,6 +622,7 @@
 				B43589B12ADA92D00077520D /* GalleryCollectionViewCell.swift in Sources */,
 				B46C4CA82AD9AAB20005FCB4 /* SplashViewController.swift in Sources */,
 				B46C4CAA2AD9AB070005FCB4 /* SplashView.swift in Sources */,
+				B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */,
 				B43589CF2ADA94C00077520D /* SettingsViewController.swift in Sources */,
 				B43589CA2ADA947B0077520D /* SettingsView.swift in Sources */,
 			);

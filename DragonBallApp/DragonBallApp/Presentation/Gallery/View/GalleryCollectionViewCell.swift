@@ -43,6 +43,16 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private let heroNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "GOKU"
+        label.textColor = .label
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     public func addGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
@@ -76,6 +86,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         
         if !gradientAdded && cardView.bounds != .zero {
             addGradient()
+            cardView.addSubview(heroNameLabel)
             gradientAdded = true
         }
     }
@@ -90,6 +101,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
+        cardView.addSubview(heroNameLabel)
     }
     
     private func applyConstraints() {
@@ -107,7 +119,13 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
             cardView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: -2)
         ]
         
+        let heroNameLabelConstraints = [
+            heroNameLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -6),
+            heroNameLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
+        ]
+        
         NSLayoutConstraint.activate(shadowViewConstraints)
         NSLayoutConstraint.activate(cardViewConstraints)
+        NSLayoutConstraint.activate(heroNameLabelConstraints)
     }
 }

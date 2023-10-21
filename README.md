@@ -159,6 +159,33 @@ final class SearchTableViewCell: UITableViewCell {
 <a name="problemas2"></a>
 #### Comportamiento inesperado `UICollectionViewCell`: la imagen y el gradiente aparecen en celdas que no se ven en pantalla y cuando pulsas en ellas, aparecen
 
+<a name="problemas3"></a>
+#### `UILabel` sobre gradiente
+
+Al posicionar mi `UILabel` correctamente dentro de una `UIView` con una gradiente, tenía el problema de que la `UILabel` se colocaba dentrás de la gradiente.
+
+La solución es simple: agregar la `UILabel` después de añadir la gradiente al `UIView`.
+
+```swift
+override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    // ...
+    
+	addGradient()
+	cardView.addSubview(heroNameLabel)
+}
+```
+
+Además, no debemos olvidar volver a agregar el `UILabel` también cuando inicializamos todas las vistas en general.
+
+```swift
+private func addViews() {
+    // ...
+    cardView.addSubview(heroNameLabel)
+}
+```
+
 ---
 
 # Inspiración
