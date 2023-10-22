@@ -9,7 +9,7 @@ import Foundation
 
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String, apiRouter: APIRouter) async throws -> String
-    func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> [Hero]
+    func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> Heroes
 }
 
 // MARK: - APIRouter -
@@ -50,7 +50,7 @@ enum APIRouter {
 
 final class APIClient: ApiProviderProtocol {
     // MARK: - Singleton -
-    static let shared = APIClient()
+//    static let shared = APIClient()
     
     // MARK: - APIError -
     enum APIError: Error {
@@ -98,7 +98,7 @@ final class APIClient: ApiProviderProtocol {
         return token
     }
     
-    func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> [Hero] {
+    func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> Heroes {
         var components = URLComponents()
         components.host = apiRouter.host
         components.scheme = apiRouter.scheme
@@ -128,7 +128,7 @@ final class APIClient: ApiProviderProtocol {
             throw APIError.noData
         }
         
-        guard let resource = try? JSONDecoder().decode([Hero].self, from: data) else {
+        guard let resource = try? JSONDecoder().decode(Heroes.self, from: data) else {
             throw APIError.decodingFailed
         }
         

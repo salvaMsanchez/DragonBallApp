@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class GalleryCollectionViewCell: UICollectionViewCell {
     // MARK: - Static properties -
@@ -39,13 +40,13 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
-        imageView.image = UIImage(named: "goku")
+//        imageView.image = UIImage(named: "goku")
         return imageView
     }()
     
     private let heroNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "GOKU"
+//        label.text = "GOKU"
         label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
@@ -127,5 +128,10 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(shadowViewConstraints)
         NSLayoutConstraint.activate(cardViewConstraints)
         NSLayoutConstraint.activate(heroNameLabelConstraints)
+    }
+    
+    func configure(with model: Hero) {
+        heroNameLabel.text = model.name.capitalized
+        heroImageView.kf.setImage(with: model.photo)
     }
 }

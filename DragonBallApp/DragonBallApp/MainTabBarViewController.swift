@@ -26,7 +26,6 @@ final class MainTabBarViewcontroller: UITabBarController {
         
         view.backgroundColor = .systemBackground
         
-//        let vc1 = UINavigationController(rootViewController: GalleryViewController())
         let vc1 = UINavigationController(rootViewController: galleryViewController)
         let vc2 = UINavigationController(rootViewController: SearchViewController())
         let vc3 = UINavigationController(rootViewController: ExploreViewController())

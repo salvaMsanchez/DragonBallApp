@@ -12,6 +12,7 @@ protocol GalleryViewControllerDelegate {
     var viewState: ((GalleryViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     func onViewAppear()
+    func heroBy(index: Int) -> Hero?
 }
 
 // MARK: - View State -
@@ -56,12 +57,14 @@ final class GalleryViewController: UIViewController {
     
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
-            switch state {
-                case .loading(let isLoading):
-                    // TODO: Añadir UIView y activity indicator para simular carga hacia detalle - OPCIONAL
-                    print("¿La vista está cargando? -> \(isLoading)")
-                case .updateData:
-                    self?.galleryCollectionView.reloadData()
+            DispatchQueue.main.async {
+                switch state {
+                    case .loading(let isLoading):
+                        // TODO: Añadir UIView y activity indicator para simular carga hacia detalle - OPCIONAL
+                        print("¿La vista está cargando? -> \(isLoading)")
+                    case .updateData:
+                        self?.galleryCollectionView.reloadData()
+                }
             }
         }
     }
@@ -73,12 +76,14 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as? GalleryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        // TODO: Configurar celda
+        if let hero = viewModel?.heroBy(index: indexPath.row) {
+            cell.configure(with: hero)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.heroesCount ?? 0
     }
     
 //    func numberOfSections(in collectionView: UICollectionView) -> Int {

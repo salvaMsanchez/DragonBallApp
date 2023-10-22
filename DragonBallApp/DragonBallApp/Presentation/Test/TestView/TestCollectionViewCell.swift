@@ -65,17 +65,6 @@ final class TestCollectionViewCell: UICollectionViewCell {
             cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6)
         ]
         
-//        let heroImageViewConstraints = [
-//            heroImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-//            heroImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-//            heroImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-//            heroImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2)
-////            heroImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-////            heroImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-////            heroImageView.heightAnchor.constraint(equalToConstant: 200),
-////            heroImageView.widthAnchor.constraint(equalToConstant: 200)
-//        ]
-        
         let heroImageViewConstraints = [
             heroImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 12),
             heroImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 12),

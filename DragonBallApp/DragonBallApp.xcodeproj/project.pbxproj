@@ -39,6 +39,9 @@
 		B46C4CB32AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B46C4CB22AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json */; };
 		B46C4CB52AD9BE5C0005FCB4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */; };
 		B46C4CB72AD9C4E80005FCB4 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CB62AD9C4E80005FCB4 /* Hero.swift */; };
+		B49485762AE5A141003597FB /* DataPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49485752AE5A141003597FB /* DataPersistanceManager.swift */; };
+		B49485792AE5B82A003597FB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B49485782AE5B82A003597FB /* Kingfisher */; };
+		B494857C2AE5C58A003597FB /* HeroMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B494857B2AE5C58A003597FB /* HeroMapper.swift */; };
 		B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */; };
 		B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24092AE4159900DFC337 /* TestViewController.swift */; };
 		B49F24102AE44D9C00DFC337 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */; };
@@ -103,6 +106,8 @@
 		B46C4CB22AD9BD8C0005FCB4 /* dragonBallSplashAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dragonBallSplashAnimation.json; sourceTree = "<group>"; };
 		B46C4CB42AD9BE5C0005FCB4 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B46C4CB62AD9C4E80005FCB4 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		B49485752AE5A141003597FB /* DataPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistanceManager.swift; sourceTree = "<group>"; };
+		B494857B2AE5C58A003597FB /* HeroMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroMapper.swift; sourceTree = "<group>"; };
 		B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewCell.swift; sourceTree = "<group>"; };
 		B49F24092AE4159900DFC337 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49485792AE5B82A003597FB /* Kingfisher in Frameworks */,
 				B49F24152AE44E7900DFC337 /* KeychainSwift in Frameworks */,
 				B46C4CB12AD9B20C0005FCB4 /* Lottie in Frameworks */,
 			);
@@ -439,6 +445,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B494857A2AE5C56B003597FB /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				B494857B2AE5C58A003597FB /* HeroMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
 		B49F24042AE414DC00DFC337 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,8 +507,10 @@
 		B49F240E2AE44D8900DFC337 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B494857A2AE5C56B003597FB /* Mapper */,
 				B46C4C722AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld */,
 				B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */,
+				B49485752AE5A141003597FB /* DataPersistanceManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -552,6 +568,7 @@
 			packageProductDependencies = (
 				B46C4CB02AD9B20C0005FCB4 /* Lottie */,
 				B49F24142AE44E7900DFC337 /* KeychainSwift */,
+				B49485782AE5B82A003597FB /* Kingfisher */,
 			);
 			productName = DragonBallApp;
 			productReference = B46C4C662AD9A2380005FCB4 /* DragonBallApp.app */;
@@ -628,6 +645,7 @@
 			packageReferences = (
 				B46C4CAF2AD9B20C0005FCB4 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				B49F24132AE44E7900DFC337 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				B49485772AE5B82A003597FB /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = B46C4C672AD9A2380005FCB4 /* Products */;
 			projectDirPath = "";
@@ -698,9 +716,11 @@
 				B43589AF2ADA927F0077520D /* GalleryViewController.swift in Sources */,
 				B4EE1C7E2AE5122300A9295B /* LoginView.swift in Sources */,
 				B43589D12ADA94F50077520D /* SettingsViewModel.swift in Sources */,
+				B494857C2AE5C58A003597FB /* HeroMapper.swift in Sources */,
 				B43589B12ADA92D00077520D /* GalleryCollectionViewCell.swift in Sources */,
 				B46C4CA82AD9AAB20005FCB4 /* SplashViewController.swift in Sources */,
 				B46C4CAA2AD9AB070005FCB4 /* SplashView.swift in Sources */,
+				B49485762AE5A141003597FB /* DataPersistanceManager.swift in Sources */,
 				B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */,
 				B43589CF2ADA94C00077520D /* SettingsViewController.swift in Sources */,
 				B43589CA2ADA947B0077520D /* SettingsView.swift in Sources */,
@@ -1046,6 +1066,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		B49485772AE5B82A003597FB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		B49F24132AE44E7900DFC337 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -1061,6 +1089,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B46C4CAF2AD9B20C0005FCB4 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		B49485782AE5B82A003597FB /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B49485772AE5B82A003597FB /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		B49F24142AE44E7900DFC337 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
