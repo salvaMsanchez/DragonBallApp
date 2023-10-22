@@ -45,6 +45,9 @@
 		B49F24122AE44E5500DFC337 /* SecureDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */; };
 		B49F24152AE44E7900DFC337 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B49F24142AE44E7900DFC337 /* KeychainSwift */; };
 		B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */; };
+		B4EE1C7E2AE5122300A9295B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C7D2AE5122300A9295B /* LoginView.swift */; };
+		B4EE1C802AE5126C00A9295B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C7F2AE5126C00A9295B /* LoginViewController.swift */; };
+		B4EE1C822AE512E700A9295B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C812AE512E700A9295B /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,9 @@
 		B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProvider.swift; sourceTree = "<group>"; };
 		B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewController.swift; sourceTree = "<group>"; };
+		B4EE1C7D2AE5122300A9295B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B4EE1C7F2AE5126C00A9295B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B4EE1C812AE512E700A9295B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +392,7 @@
 		B46C4CA02AD9A6C30005FCB4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B4EE1C792AE5120100A9295B /* Login */,
 				B49F24042AE414DC00DFC337 /* Test */,
 				B46C4CA12AD9A6FC0005FCB4 /* Splash */,
 				B434D8802ADC982F00C98852 /* Detail */,
@@ -490,6 +497,40 @@
 				B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B4EE1C792AE5120100A9295B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B4EE1C7C2AE5121900A9295B /* View */,
+				B4EE1C7B2AE5121100A9295B /* ViewController */,
+				B4EE1C7A2AE5120800A9295B /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B4EE1C7A2AE5120800A9295B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B4EE1C812AE512E700A9295B /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B4EE1C7B2AE5121100A9295B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B4EE1C7F2AE5126C00A9295B /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B4EE1C7C2AE5121900A9295B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B4EE1C7D2AE5122300A9295B /* LoginView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,6 +674,7 @@
 			files = (
 				B46C4C742AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld in Sources */,
 				B434D8862ADC987700C98852 /* DetailView.swift in Sources */,
+				B4EE1C822AE512E700A9295B /* LoginViewModel.swift in Sources */,
 				B434D8882ADC989700C98852 /* DetailViewController.swift in Sources */,
 				B43589B32ADA92F00077520D /* GalleryViewModel.swift in Sources */,
 				B46C4CA62AD9A8960005FCB4 /* MainTabBarViewController.swift in Sources */,
@@ -643,6 +685,7 @@
 				B434D88A2ADC98F100C98852 /* DetailViewModel.swift in Sources */,
 				B43589C72ADA943D0077520D /* ExploreViewModel.swift in Sources */,
 				B43589C32ADA93E60077520D /* ExploreView.swift in Sources */,
+				B4EE1C802AE5126C00A9295B /* LoginViewController.swift in Sources */,
 				B43589C52ADA94020077520D /* ExploreViewController.swift in Sources */,
 				B43589BD2ADA938E0077520D /* SearchViewModel.swift in Sources */,
 				B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */,
@@ -653,6 +696,7 @@
 				B43589BB2ADA93540077520D /* SearchViewController.swift in Sources */,
 				B43589B92ADA93350077520D /* SearchTableViewCell.swift in Sources */,
 				B43589AF2ADA927F0077520D /* GalleryViewController.swift in Sources */,
+				B4EE1C7E2AE5122300A9295B /* LoginView.swift in Sources */,
 				B43589D12ADA94F50077520D /* SettingsViewModel.swift in Sources */,
 				B43589B12ADA92D00077520D /* GalleryCollectionViewCell.swift in Sources */,
 				B46C4CA82AD9AAB20005FCB4 /* SplashViewController.swift in Sources */,

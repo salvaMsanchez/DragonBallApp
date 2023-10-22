@@ -39,7 +39,7 @@ final class SplashView: UIView {
     }()
     
 //    var animationView = LottieAnimationView(name: "dragonBallSplashAnimation")
-    private let animationView: LottieAnimationView = {
+    public let animationView: LottieAnimationView = {
         let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
         animation.loopMode = .loop
         animation.play()

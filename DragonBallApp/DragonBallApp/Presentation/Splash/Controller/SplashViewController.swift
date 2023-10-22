@@ -10,15 +10,20 @@ import UIKit
 // MARK: - View Protocol -
 protocol SplashViewControllerDelegate {
     var viewState: ((SplashViewState) -> Void)? { get set }
+    var loginViewModel: LoginViewControllerDelegate { get }
+    func onViewAppear()
 }
 
 // MARK: View State -
 enum SplashViewState {
     case loading(_ isLoading: Bool)
-    case navigateToNext
+    case navigateToLogin
+    case navigateToMain
 }
 
 final class SplashViewController: UIViewController {
+    
+    var viewModel: SplashViewControllerDelegate?
     
     private let splashView = SplashView()
     
@@ -29,13 +34,38 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setObservers()
+        viewModel?.onViewAppear()
         
-        Task.init {
-            do {
-                let token = try await APIClient.shared.login(for: "morenosanchezsalva@gmail.com", with: "0000000", apiRouter: .login)
-                print("Tu token es \(token)")
-            } catch {
-                print(error)
+//        Task.init {
+//            do {
+//                let token = try await APIClient.shared.login(for: "morenosanchezsalva@gmail.com", with: "0000000", apiRouter: .login)
+//                print("Tu token es \(token)")
+//            } catch {
+//                print(error)
+//            }
+//        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        splashView.animationView.stop()
+    }
+    
+    private func setObservers() {
+        viewModel?.viewState = { [weak self] state in
+            DispatchQueue.main.async {
+                switch state {
+                    case .loading(let isLoading):
+                        self?.splashView.animationView.isHidden = !isLoading
+                    case .navigateToLogin:
+                        let nextVC = LoginViewController()
+                        nextVC.viewModel = self?.viewModel?.loginViewModel
+                        self?.navigationController?.setViewControllers([nextVC], animated: true)
+                    case .navigateToMain:
+                        let nextVC = MainTabBarViewcontroller()
+                        self?.navigationController?.setViewControllers([nextVC], animated: true)
+                }
             }
         }
     }
