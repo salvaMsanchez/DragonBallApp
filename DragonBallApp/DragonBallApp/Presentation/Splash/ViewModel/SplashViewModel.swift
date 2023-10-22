@@ -17,6 +17,10 @@ final class SplashViewModel: SplashViewControllerDelegate {
         LoginViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider)
     }()
     
+    lazy var galleryViewModel: GalleryViewControllerDelegate = {
+        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, userIsLogged: true)
+    }()
+    
     private var isLogged: Bool {
         secureDataProvider.getToken()?.isEmpty == false
     }
@@ -30,7 +34,8 @@ final class SplashViewModel: SplashViewControllerDelegate {
         viewState?(.loading(true))
         
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
-            self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
+//            self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
+            self.isLogged ? self.viewState?(.navigateToLogin) : self.viewState?(.navigateToMain)
         }
     }
 }

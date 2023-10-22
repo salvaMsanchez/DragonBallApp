@@ -7,13 +7,29 @@
 
 import UIKit
 
+// MARK: - View Protocol -
+protocol GalleryViewControllerDelegate {
+    var viewState: ((GalleryViewState) -> Void)? { get set }
+    var heroesCount: Int { get }
+    func onViewAppear()
+}
+
+// MARK: - View State -
+enum GalleryViewState {
+    case loading(_ isLoading: Bool)
+    case updateData
+}
+
 final class GalleryViewController: UIViewController {
+    
+    var viewModel: GalleryViewControllerDelegate?
     
     private let galleryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 191.5, height: 250)
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemRed
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         collectionView.register(GalleryHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: GalleryHeaderView.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,16 +39,31 @@ final class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBrown
         
         view.addSubview(galleryCollectionView)
         galleryCollectionView.dataSource = self
         galleryCollectionView.delegate = self
+        
+        setObservers()
+        viewModel?.onViewAppear()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         galleryCollectionView.frame = view.bounds
+    }
+    
+    private func setObservers() {
+        viewModel?.viewState = { [weak self] state in
+            switch state {
+                case .loading(let isLoading):
+                    // TODO: Añadir UIView y activity indicator para simular carga hacia detalle - OPCIONAL
+                    print("¿La vista está cargando? -> \(isLoading)")
+                case .updateData:
+                    self?.galleryCollectionView.reloadData()
+            }
+        }
     }
     
 }

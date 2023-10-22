@@ -23,14 +23,14 @@ final class ExploreViewController: UIViewController {
 //            }
 //        }
         let token = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6Im1vcmVub3NhbmNoZXpzYWx2YUBnbWFpbC5jb20iLCJleHBpcmF0aW9uIjo2NDA5MjIxMTIwMCwiaWRlbnRpZnkiOiJGOUQ0RDhCQy03NzBDLTQ1NEYtOTVFMC1FNzIyMUExMjhDN0YifQ.r-KPz6V-QobHNFxKke2yjxYtB6cWf2gWcbGTD4MpBd4"
-        Task.init {
-            do {
-                let heroes = try await APIClient.shared.getHeroes(by: nil, token: token, apiRouter: .getHeroes)
-                print("Heroes: \(heroes)")
-            } catch {
-                print(error)
-            }
-        }
+//        Task.init {
+//            do {
+//                let heroes = try await APIClient.shared.getHeroes(by: nil, token: token, apiRouter: .getHeroes)
+//                print("Heroes: \(heroes)")
+//            } catch {
+//                print(error)
+//            }
+//        }
     }
     
 }

@@ -11,6 +11,7 @@ import UIKit
 protocol SplashViewControllerDelegate {
     var viewState: ((SplashViewState) -> Void)? { get set }
     var loginViewModel: LoginViewControllerDelegate { get }
+    var galleryViewModel: GalleryViewControllerDelegate { get }
     func onViewAppear()
 }
 
@@ -63,7 +64,9 @@ final class SplashViewController: UIViewController {
                         nextVC.viewModel = self?.viewModel?.loginViewModel
                         self?.navigationController?.setViewControllers([nextVC], animated: true)
                     case .navigateToMain:
-                        let nextVC = MainTabBarViewcontroller()
+                        let galleryViewController = GalleryViewController()
+                        galleryViewController.viewModel = self?.viewModel?.galleryViewModel
+                        let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController)
                         self?.navigationController?.setViewControllers([nextVC], animated: true)
                 }
             }

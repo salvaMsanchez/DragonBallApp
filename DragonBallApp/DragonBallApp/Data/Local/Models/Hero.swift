@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias Heroes = [Hero]
+
 protocol MainHeroData: Decodable {
     var id: String { get }
     var name: String { get }
