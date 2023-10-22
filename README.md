@@ -159,6 +159,18 @@ final class SearchTableViewCell: UITableViewCell {
 <a name="problemas2"></a>
 #### Comportamiento inesperado `UICollectionViewCell`: la imagen y el gradiente aparecen en celdas que no se ven en pantalla y cuando pulsas en ellas, aparecen
 
+Situación bloqueante a la que no encontré solución rápida, ya que creía haber implementado todo correctamente y, además, buscando información no encontraba la manera de resolverlo.
+
+Aunque a ciencia cierta no sé con seguridad qué ocurría, he sacado algunas conclusiones de lo que podía suceder:
+
+- Uso de varias capas y `UIView` que podían provocar superposición en algún momento del ciclo de vida de la vista.
+- Empleo de `layoutSubviews()`, el cual se ejecuta cada vez que se carga o reusa una celda. Este método puede dar problemas cuando se usan varias capas, como me ocurrió en el problema anterior con el gradiente, el cual se superponía y acumulaba cada vez que interactuaba o reusaba una celda, provocando un efecto y comportamiento incorrectos.
+- Que se cargara la imagen antes que alguna `UIView`, lo cual provocaba que no se viera.
+
+Sin embargo, el análisis de estos casos y su respectivo cambio en el código, no me producía ningún avance, seguía obteniendo el mismo resultado.
+
+Hasta que decidí probar a, en vez de posicionar la imagen en el `layoutSubviews()` con los `bounds` de la `UIView`, situar la imagen a través de *constraints*, consiguiendo el resultado que yo deseaba y evitando el mal comportamiento del `UICollectionView` con respecto a la aparición de la imagen.
+
 <a name="problemas3"></a>
 #### `UILabel` sobre gradiente
 
