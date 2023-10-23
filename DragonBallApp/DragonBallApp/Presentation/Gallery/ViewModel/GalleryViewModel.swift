@@ -45,28 +45,28 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         } else {
             DispatchQueue.global().async { [weak self] in
                 defer { self?.viewState?(.loading(false)) }
-//                guard let token = self?.secureDataProvider.getToken() else {
-//                    return
-//                }
-                let token = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6Im1vcmVub3NhbmNoZXpzYWx2YUBnbWFpbC5jb20iLCJleHBpcmF0aW9uIjo2NDA5MjIxMTIwMCwiaWRlbnRpZnkiOiJGOUQ0RDhCQy03NzBDLTQ1NEYtOTVFMC1FNzIyMUExMjhDN0YifQ.r-KPz6V-QobHNFxKke2yjxYtB6cWf2gWcbGTD4MpBd4"
+                guard let token = self?.secureDataProvider.getToken() else {
+                    return
+                }
                 Task.init { [weak self] in
                     do {
                         let heroes = try await self?.apiProvider.getHeroes(by: nil, token: token, apiRouter: .getHeroes)
                         guard let heroes else { return }
                         self?.heroes = heroes.filter { $0.description != "No description" }
                         self?.viewState?(.updateData)
-//                        DispatchQueue.main.async { [weak self] in
-//                            heroes.forEach { hero in
-//                                self?.dataPersistanceManager.saveHero(hero: hero) { result in
-//                                    switch result {
-//                                        case .success():
-//                                            break
-//                                        case .failure(let error):
-//                                            print(error.localizedDescription)
-//                                    }
-//                                }
-//                            }
-//                        }
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            heroes.forEach { hero in
+                                self?.dataPersistanceManager.saveHero(hero: hero) { result in
+                                    switch result {
+                                        case .success():
+                                            break
+                                        case .failure(let error):
+                                            print(error.localizedDescription)
+                                    }
+                                }
+                            }
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -75,18 +75,18 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         }
     }
     
-    func onViewDidAppear() {
-        self.heroes.forEach { hero in
-            self.dataPersistanceManager.saveHero(hero: hero) { result in
-                switch result {
-                    case .success():
-                        break
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                }
-            }
-        }
-    }
+//    func onViewDidAppear() {
+//        self.heroes.forEach { hero in
+//            self.dataPersistanceManager.saveHero(hero: hero) { result in
+//                switch result {
+//                    case .success():
+//                        break
+//                    case .failure(let error):
+//                        print(error.localizedDescription)
+//                }
+//            }
+//        }
+//    }
     
     func heroBy(index: Int) -> Hero? {
         if index >= 0 && index < heroesCount {

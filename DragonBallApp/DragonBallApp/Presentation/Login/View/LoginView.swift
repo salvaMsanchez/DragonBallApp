@@ -7,7 +7,15 @@
 
 import UIKit
 
+typealias LoginData = (email: String, password: String)
+
+protocol LoginViewDelegate {
+    func onLoginButtonTapped(send loginData: LoginData)
+}
+
 final class LoginView: UIView {
+    
+    var delegate: LoginViewDelegate?
     
     private let emailContainerView: UIView = {
         let view = UIView()
@@ -169,6 +177,10 @@ final class LoginView: UIView {
     @objc
     func buttonTapped() {
         zoomOut()
+        if let emailInput = emailTextField.text,
+           let passwordInput = passwordTextField.text {
+            delegate?.onLoginButtonTapped(send: (emailInput, passwordInput))
+        }
 //        if let emailInput = emailTextField.text,
 //        let passwordInput = passwordTextField.text {
 //            buttonTapHandler?((emailInput, passwordInput))
