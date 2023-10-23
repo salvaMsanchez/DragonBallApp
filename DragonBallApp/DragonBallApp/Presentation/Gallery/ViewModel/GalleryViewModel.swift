@@ -55,21 +55,34 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
                         guard let heroes else { return }
                         self?.heroes = heroes.filter { $0.description != "No description" }
                         self?.viewState?(.updateData)
-                        DispatchQueue.main.async { [weak self] in
-                            heroes.forEach { hero in
-                                self?.dataPersistanceManager.saveHero(hero: hero) { result in
-                                    switch result {
-                                        case .success():
-                                            break
-                                        case .failure(let error):
-                                            print(error.localizedDescription)
-                                    }
-                                }
-                            }
-                        }
+//                        DispatchQueue.main.async { [weak self] in
+//                            heroes.forEach { hero in
+//                                self?.dataPersistanceManager.saveHero(hero: hero) { result in
+//                                    switch result {
+//                                        case .success():
+//                                            break
+//                                        case .failure(let error):
+//                                            print(error.localizedDescription)
+//                                    }
+//                                }
+//                            }
+//                        }
                     } catch {
                         print(error.localizedDescription)
                     }
+                }
+            }
+        }
+    }
+    
+    func onViewDidAppear() {
+        self.heroes.forEach { hero in
+            self.dataPersistanceManager.saveHero(hero: hero) { result in
+                switch result {
+                    case .success():
+                        break
+                    case .failure(let error):
+                        print(error.localizedDescription)
                 }
             }
         }

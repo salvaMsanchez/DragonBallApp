@@ -12,6 +12,7 @@ protocol GalleryViewControllerDelegate {
     var viewState: ((GalleryViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     func onViewAppear()
+    func onViewDidAppear()
     func heroBy(index: Int) -> Hero?
 }
 
@@ -48,6 +49,11 @@ final class GalleryViewController: UIViewController {
         
         setObservers()
         viewModel?.onViewAppear()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel?.onViewDidAppear()
     }
     
     override func viewDidLayoutSubviews() {

@@ -18,7 +18,7 @@ final class SplashViewModel: SplashViewControllerDelegate {
     }()
     
     lazy var galleryViewModel: GalleryViewControllerDelegate = {
-        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: true) // TODO: CAMBIAR A TRUE!!!
+        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: false) // TODO: CAMBIAR A TRUE!!!
     }()
     
     private var isLogged: Bool {

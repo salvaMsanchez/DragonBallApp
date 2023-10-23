@@ -17,15 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-//        let splashViewController = SplashViewController()
-//        splashViewController.viewModel = SplashViewModel(apiProvider: APIClient(), secureDataProvider: SecureDataProvider())
-//
-//        let navVC = UINavigationController()
-//        navVC.setViewControllers([splashViewController], animated: true)
-//
-//        window?.rootViewController = navVC
+        let splashViewController = SplashViewController()
+        splashViewController.viewModel = SplashViewModel(apiProvider: APIClient(), secureDataProvider: SecureDataProvider())
+
+        let navVC = UINavigationController()
+        navVC.setViewControllers([splashViewController], animated: true)
+
+        window?.rootViewController = navVC
         
-        window?.rootViewController = TestViewController()
+//        window?.rootViewController = TestViewController()
         window?.makeKeyAndVisible()
     }
 

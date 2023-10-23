@@ -31,6 +31,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         let uiView = UIView()
         uiView.backgroundColor = .systemGray
         uiView.layer.cornerRadius = 20
+        uiView.bounds = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 163.66666666666666, height: 234.0))
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
@@ -41,6 +42,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
 //        imageView.image = UIImage(named: "goku")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -74,6 +76,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         
         contentView.backgroundColor = .systemBlue
         setup()
+        addGradient()
     }
     
     @available(*, unavailable)
@@ -83,13 +86,15 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        heroImageView.frame = cardView.bounds
+//        heroImageView.frame = cardView.bounds
         
-        if !gradientAdded && cardView.bounds != .zero {
-            addGradient()
-            cardView.addSubview(heroNameLabel)
-            gradientAdded = true
-        }
+        print(cardView.bounds)
+        
+//        if !gradientAdded && cardView.bounds != .zero {
+//            addGradient()
+//            cardView.addSubview(heroNameLabel)
+//            gradientAdded = true
+//        }
     }
     
     // MARK: - Functions -
@@ -102,7 +107,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
-        cardView.addSubview(heroNameLabel)
+        contentView.addSubview(heroNameLabel)
     }
     
     private func applyConstraints() {
@@ -120,6 +125,13 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
             cardView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: -2)
         ]
         
+        let heroImageViewConstraints = [
+            heroImageView.topAnchor.constraint(equalTo: cardView.topAnchor),
+            heroImageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
+            heroImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            heroImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor)
+        ]
+        
         let heroNameLabelConstraints = [
             heroNameLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -6),
             heroNameLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
@@ -127,6 +139,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(shadowViewConstraints)
         NSLayoutConstraint.activate(cardViewConstraints)
+        NSLayoutConstraint.activate(heroImageViewConstraints)
         NSLayoutConstraint.activate(heroNameLabelConstraints)
     }
     
