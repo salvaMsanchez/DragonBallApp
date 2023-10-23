@@ -18,7 +18,7 @@ final class SplashViewModel: SplashViewControllerDelegate {
     }()
     
     lazy var galleryViewModel: GalleryViewControllerDelegate = {
-        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: false) // TODO: CAMBIAR A TRUE!!!
+        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: true) // TODO: CAMBIAR A TRUE!!!
     }()
     
     private var isLogged: Bool {
@@ -34,8 +34,8 @@ final class SplashViewModel: SplashViewControllerDelegate {
         viewState?(.loading(true))
         
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
-//            self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
-            self.isLogged ? self.viewState?(.navigateToLogin) : self.viewState?(.navigateToMain)
+            self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
+//            self.isLogged ? self.viewState?(.navigateToLogin) : self.viewState?(.navigateToMain)
         }
     }
 }
