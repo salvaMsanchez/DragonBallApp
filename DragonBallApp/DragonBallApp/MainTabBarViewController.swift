@@ -10,9 +10,11 @@ import UIKit
 final class MainTabBarViewcontroller: UITabBarController {
     
     private let galleryViewController: GalleryViewController
+    private let searchViewController: SearchViewController
     
-    init(galleryViewController: GalleryViewController) {
+    init(galleryViewController: GalleryViewController, searchViewController: SearchViewController) {
         self.galleryViewController = galleryViewController
+        self.searchViewController = searchViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +29,7 @@ final class MainTabBarViewcontroller: UITabBarController {
         view.backgroundColor = .systemBackground
         
         let vc1 = UINavigationController(rootViewController: galleryViewController)
-        let vc2 = UINavigationController(rootViewController: SearchViewController())
+        let vc2 = UINavigationController(rootViewController: searchViewController)
         let vc3 = UINavigationController(rootViewController: ExploreViewController())
         let vc4 = UINavigationController(rootViewController: SettingsViewController())
         

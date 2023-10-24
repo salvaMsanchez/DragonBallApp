@@ -12,6 +12,7 @@ protocol SplashViewControllerDelegate {
     var viewState: ((SplashViewState) -> Void)? { get set }
     var loginViewModel: LoginViewControllerDelegate { get }
     var galleryViewModel: GalleryViewControllerDelegate { get }
+    var searchViewModel: SearchViewControllerDelegate { get }
     func onViewAppear()
 }
 
@@ -37,15 +38,6 @@ final class SplashViewController: UIViewController {
         super.viewDidLoad()
         setObservers()
         viewModel?.onViewAppear()
-        
-//        Task.init {
-//            do {
-//                let token = try await APIClient.shared.login(for: "morenosanchezsalva@gmail.com", with: "0000000", apiRouter: .login)
-//                print("Tu token es \(token)")
-//            } catch {
-//                print(error)
-//            }
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -66,7 +58,10 @@ final class SplashViewController: UIViewController {
                     case .navigateToMain:
                         let galleryViewController = GalleryViewController()
                         galleryViewController.viewModel = self?.viewModel?.galleryViewModel
-                        let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController)
+                        let searchViewController = SearchViewController()
+                        searchViewController.viewModel = self?.viewModel?.searchViewModel
+                        
+                        let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController, searchViewController: searchViewController)
                         self?.navigationController?.setViewControllers([nextVC], animated: true)
                 }
             }

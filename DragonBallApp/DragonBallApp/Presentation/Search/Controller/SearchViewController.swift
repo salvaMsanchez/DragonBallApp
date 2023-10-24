@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol SearchViewControllerDelegate {
+    var heroesCount: Int { get }
+    func onViewAppear()
+    func heroBy(index: Int) -> Hero?
+}
+
 final class SearchViewController: UIViewController {
+    
+    var viewModel: SearchViewControllerDelegate?
     
     private let searchTableView: UITableView = {
         let tableView = UITableView()
@@ -37,6 +45,9 @@ final class SearchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .label
         
         searchController.searchResultsUpdater = self
+        
+        viewModel?.onViewAppear()
+        viewModel?.testConnection()
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,11 +63,14 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else {
             return UITableViewCell()
         }
+        if let hero = viewModel?.heroBy(index: indexPath.row) {
+            cell.configure(with: hero, index: indexPath.row)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.heroesCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -19,6 +19,10 @@ final class LoginViewModel: LoginViewControllerDelegate {
         GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: false) // TODO: CAMBIAR A TRUE!!!
     }()
     
+    lazy var searchViewModel: SearchViewControllerDelegate = {
+        SearchViewModel(dataPersistanceManager: DataPersistanceManager())
+    }()
+    
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
         self.apiProvider = apiProvider

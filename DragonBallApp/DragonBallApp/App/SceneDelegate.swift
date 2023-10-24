@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        let loginViewController = LoginViewController()
 //        loginViewController.viewModel = LoginViewModel(apiProvider: APIClient(), secureDataProvider: SecureDataProvider())
-//        window?.rootViewController = loginViewController
+//        window?.rootViewController = SearchViewController()
         window?.makeKeyAndVisible()
     }
 

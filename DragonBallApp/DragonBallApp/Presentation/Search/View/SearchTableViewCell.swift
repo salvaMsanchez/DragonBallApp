@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class SearchTableViewCell: UITableViewCell {
     // MARK: - Static properties -
@@ -43,7 +44,27 @@ final class SearchTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    public func addGradient() {
+    private let heroNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "GOKU"
+        label.textColor = .label
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let heroIndexLabel: UILabel = {
+        let label = UILabel()
+        label.text = "#1"
+        label.textColor = .label
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private func addGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,
@@ -94,6 +115,8 @@ final class SearchTableViewCell: UITableViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
+        contentView.addSubview(heroNameLabel)
+        contentView.addSubview(heroIndexLabel)
     }
     
     private func applyConstraints() {
@@ -111,8 +134,26 @@ final class SearchTableViewCell: UITableViewCell {
             cardView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: -2)
         ]
         
+        let heroNameLabelConstraints = [
+            heroNameLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12),
+            heroNameLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -24)
+        ]
+        
+        let heroIndexLabelConstraints = [
+            heroIndexLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12),
+            heroIndexLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 24)
+        ]
+        
         NSLayoutConstraint.activate(shadowViewConstraints)
         NSLayoutConstraint.activate(cardViewConstraints)
+        NSLayoutConstraint.activate(heroNameLabelConstraints)
+        NSLayoutConstraint.activate(heroIndexLabelConstraints)
+    }
+    
+    func configure(with model: Hero, index: Int) {
+        heroNameLabel.text = model.name
+        heroImageView.kf.setImage(with: model.photo)
+        heroIndexLabel.text = "#\(index + 1)"
     }
     
 }
@@ -127,6 +168,8 @@ extension SearchTableViewCell {
             initialSpringVelocity: 0.5
         ) { [weak self] in
             self?.shadowView.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
         }
     }
 
@@ -138,6 +181,8 @@ extension SearchTableViewCell {
             initialSpringVelocity: 2
         ) { [weak self] in
             self?.shadowView.transform = .identity
+            self?.heroNameLabel.transform = .identity
+            self?.heroIndexLabel.transform = .identity
         }
     }
 }

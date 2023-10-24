@@ -21,6 +21,10 @@ final class SplashViewModel: SplashViewControllerDelegate {
         GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: true) // TODO: CAMBIAR A TRUE!!!
     }()
     
+    lazy var searchViewModel: SearchViewControllerDelegate = {
+        SearchViewModel(dataPersistanceManager: DataPersistanceManager())
+    }()
+    
     private var isLogged: Bool {
         secureDataProvider.getToken()?.isEmpty == false
     }
