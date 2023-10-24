@@ -96,6 +96,8 @@ final class SearchTableViewCell: UITableViewCell {
         
         if !gradientAdded && cardView.bounds != .zero {
             addGradient()
+            cardView.addSubview(heroNameLabel)
+            cardView.addSubview(heroIndexLabel)
             gradientAdded = true
         }
     }
@@ -115,8 +117,10 @@ final class SearchTableViewCell: UITableViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
-        contentView.addSubview(heroNameLabel)
-        contentView.addSubview(heroIndexLabel)
+//        contentView.addSubview(heroNameLabel)
+        cardView.addSubview(heroNameLabel)
+        cardView.addSubview(heroIndexLabel)
+//        contentView.addSubview(heroIndexLabel)
     }
     
     private func applyConstraints() {
@@ -168,8 +172,8 @@ extension SearchTableViewCell {
             initialSpringVelocity: 0.5
         ) { [weak self] in
             self?.shadowView.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+//            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+//            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
         }
     }
 
@@ -181,8 +185,8 @@ extension SearchTableViewCell {
             initialSpringVelocity: 2
         ) { [weak self] in
             self?.shadowView.transform = .identity
-            self?.heroNameLabel.transform = .identity
-            self?.heroIndexLabel.transform = .identity
+//            self?.heroNameLabel.transform = .identity
+//            self?.heroIndexLabel.transform = .identity
         }
     }
 }

@@ -77,6 +77,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .systemBlue
         setup()
         addGradient()
+        cardView.addSubview(heroNameLabel)
     }
     
     @available(*, unavailable)
@@ -88,7 +89,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 //        heroImageView.frame = cardView.bounds
         
-        print(cardView.bounds)
+//        print(cardView.bounds)
         
 //        if !gradientAdded && cardView.bounds != .zero {
 //            addGradient()
@@ -98,6 +99,11 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Functions -
+    public func cellPressedAnimation() {
+        zoomIn()
+        zoomOut()
+    }
+    
     private func setup() {
         addViews()
         applyConstraints()
@@ -107,7 +113,8 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
-        contentView.addSubview(heroNameLabel)
+//        contentView.addSubview(heroNameLabel)
+        cardView.addSubview(heroNameLabel)
     }
     
     private func applyConstraints() {
@@ -146,5 +153,34 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     func configure(with model: Hero) {
         heroNameLabel.text = model.name.capitalized
         heroImageView.kf.setImage(with: model.photo)
+    }
+}
+
+// MARK: - Animations -
+extension GalleryCollectionViewCell {
+    func zoomIn() {
+        UIView.animate(
+            withDuration: 0.50,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 0.5
+        ) { [weak self] in
+            self?.shadowView.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+//            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+//            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
+        }
+    }
+
+    func zoomOut() {
+        UIView.animate(
+            withDuration: 0.50,
+            delay: 0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 2
+        ) { [weak self] in
+            self?.shadowView.transform = .identity
+//            self?.heroNameLabel.transform = .identity
+//            self?.heroIndexLabel.transform = .identity
+        }
     }
 }

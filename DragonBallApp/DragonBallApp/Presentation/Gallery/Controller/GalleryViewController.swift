@@ -92,6 +92,14 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         return viewModel?.heroesCount ?? 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? GalleryCollectionViewCell {
+            cell.cellPressedAnimation()
+        }
+    }
+    
 //    func numberOfSections(in collectionView: UICollectionView) -> Int {
 //        return 1
 //    }
