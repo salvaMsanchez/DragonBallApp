@@ -8,10 +8,16 @@
 import UIKit
 
 protocol SearchViewControllerDelegate {
+    var viewState: ((SearchViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     var getHeroes: [Hero] { get }
     func onViewAppear()
     func heroBy(index: Int) -> Hero?
+}
+
+// MARK: View State -
+enum SearchViewState {
+    case navigateToDetail(_ model: Hero)
 }
 
 final class SearchViewController: UIViewController {
@@ -47,12 +53,35 @@ final class SearchViewController: UIViewController {
         
         searchController.searchResultsUpdater = self
         
+        setObservers()
         viewModel?.onViewAppear()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchTableView.frame = view.bounds
+    }
+    
+    private func onHeroCellPressed(model: Hero) {
+        let detailViewController = DetailViewController()
+        detailViewController.viewModel = DetailViewModel(hero: model)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
+    }
+    
+    private func setObservers() {
+        viewModel?.viewState = { state in
+            DispatchQueue.main.async {
+                switch state {
+                    case .navigateToDetail(_):
+                        // TODO: Navegar al Detail
+                        break
+                }
+            }
+        }
     }
     
 }
@@ -83,6 +112,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? SearchTableViewCell {
             cell.cellPressedAnimation()
         }
+        
+        if let hero = viewModel?.heroBy(index: indexPath.row) {
+            onHeroCellPressed(model: hero)
+        }
+        
     }
 }
 

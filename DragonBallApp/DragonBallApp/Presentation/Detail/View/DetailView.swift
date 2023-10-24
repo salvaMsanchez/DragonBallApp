@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class DetailView: UIView {
     // MARK: - UI components -
     private let heroImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "goku")
+//        imageView.image = UIImage(named: "goku")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
 //        imageView.layer.cornerRadius = 20
@@ -43,7 +44,7 @@ final class DetailView: UIView {
     
     private let heroNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "GOKU"
+//        label.text = "GOKU"
         label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
@@ -53,7 +54,7 @@ final class DetailView: UIView {
     
     private let heroDescriptionText: UITextView = {
         let textView = UITextView()
-        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat orci a tincidunt iaculis. Sed vitae libero eu libero placerat convallis vitae a neque. Suspendisse libero odio, cursus vitae nibh a, iaculis egestas justo. Morbi mollis porta sapien id dictum. Aenean non erat massa. Pellentesque posuere lacus elit, commodo cursus orci tincidunt eget. Donec tempor, orci luctus fermentum dapibus, augue ipsum ultrices erat, et tincidunt eros erat finibus tellus. Donec urna lectus, viverra a lacus non, tempor dapibus mi. Integer varius velit sollicitudin magna feugiat lacinia. Ut aliquet, ligula vel elementum sollicitudin, est urna porta nunc, id porta lorem urna ut nisi. In in aliquam sapien.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+//        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat orci a tincidunt iaculis. Sed vitae libero eu libero placerat convallis vitae a neque. Suspendisse libero odio, cursus vitae nibh a, iaculis egestas justo. Morbi mollis porta sapien id dictum. Aenean non erat massa. Pellentesque posuere lacus elit, commodo cursus orci tincidunt eget. Donec tempor, orci luctus fermentum dapibus, augue ipsum ultrices erat, et tincidunt eros erat finibus tellus. Donec urna lectus, viverra a lacus non, tempor dapibus mi. Integer varius velit sollicitudin magna feugiat lacinia. Ut aliquet, ligula vel elementum sollicitudin, est urna porta nunc, id porta lorem urna ut nisi. In in aliquam sapien.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         textView.textColor = .label
         textView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         textView.textAlignment = .justified
@@ -129,6 +130,12 @@ final class DetailView: UIView {
         NSLayoutConstraint.activate(descriptionHeroUiViewConstraints)
         NSLayoutConstraint.activate(heroNameLabelConstraints)
         NSLayoutConstraint.activate(heroDescriptionTextConstraints)
+    }
+    
+    func configure(with model: Hero) {
+        heroImage.kf.setImage(with: model.photo)
+        heroNameLabel.text = model.name
+        heroDescriptionText.text = model.description
     }
     
 }

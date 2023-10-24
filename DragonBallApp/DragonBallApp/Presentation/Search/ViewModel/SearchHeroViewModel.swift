@@ -8,7 +8,7 @@
 import Foundation
 
 final class SearchHeroViewModel: SearchHeroViewControllerDelegate {
-    var viewState: ((SearchViewState) -> Void)?
+    var viewState: ((SearchHeroViewState) -> Void)?
     
     private var heroes: Heroes
     var heroesCount: Int {

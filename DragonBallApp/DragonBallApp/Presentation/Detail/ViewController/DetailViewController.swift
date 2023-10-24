@@ -7,13 +7,23 @@
 
 import UIKit
 
+protocol DetailViewControllerDelegate {
+    var heroModel: Hero { get }
+}
+
 final class DetailViewController: UIViewController {
+    
+    var viewModel: DetailViewControllerDelegate?
     
     private let detailView = DetailView()
     
     override func loadView() {
         super.loadView()
         view = detailView
+        
+        if let hero = viewModel?.heroModel {
+            detailView.configure(with: hero)
+        }
     }
     
     override func viewDidLoad() {

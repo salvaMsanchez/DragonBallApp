@@ -7,8 +7,16 @@
 
 import Foundation
 
-final class DetailViewModel {
+final class DetailViewModel: DetailViewControllerDelegate {
     
+    private let hero: Hero
     
+    init(hero: Hero) {
+        self.hero = hero
+    }
+    
+    var heroModel: Hero {
+        hero
+    }
     
 }

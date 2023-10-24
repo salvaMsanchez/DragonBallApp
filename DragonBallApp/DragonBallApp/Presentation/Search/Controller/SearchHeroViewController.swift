@@ -8,14 +8,14 @@
 import UIKit
 
 protocol SearchHeroViewControllerDelegate {
-    var viewState: ((SearchViewState) -> Void)? { get set }
+    var viewState: ((SearchHeroViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     func heroBy(index: Int) -> Hero?
 }
 
 // MARK: View State -
-enum SearchViewState {
-    case navigateToDetail
+enum SearchHeroViewState {
+    case navigateToDetail(_ model: Hero)
 }
 
 final class SearchHeroViewController: UIViewController {
@@ -39,6 +39,7 @@ final class SearchHeroViewController: UIViewController {
         searchHeroTableView.dataSource = self
         searchHeroTableView.delegate = self
         
+        setObservers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,7 +51,7 @@ final class SearchHeroViewController: UIViewController {
         viewModel?.viewState = { state in
             DispatchQueue.main.async {
                 switch state {
-                    case .navigateToDetail:
+                    case .navigateToDetail(_):
                         // TODO: Navegar al Detail
                         break
                 }
