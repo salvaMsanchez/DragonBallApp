@@ -48,6 +48,8 @@
 		B49F24122AE44E5500DFC337 /* SecureDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */; };
 		B49F24152AE44E7900DFC337 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B49F24142AE44E7900DFC337 /* KeychainSwift */; };
 		B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */; };
+		B4D5159B2AE7E729003AAC3B /* SearchHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D5159A2AE7E729003AAC3B /* SearchHeroViewModel.swift */; };
+		B4D5159D2AE7ED81003AAC3B /* SearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D5159C2AE7ED81003AAC3B /* SearchAlgorithm.swift */; };
 		B4EE1C7E2AE5122300A9295B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C7D2AE5122300A9295B /* LoginView.swift */; };
 		B4EE1C802AE5126C00A9295B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C7F2AE5126C00A9295B /* LoginViewController.swift */; };
 		B4EE1C822AE512E700A9295B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EE1C812AE512E700A9295B /* LoginViewModel.swift */; };
@@ -113,6 +115,8 @@
 		B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B49F24112AE44E5500DFC337 /* SecureDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProvider.swift; sourceTree = "<group>"; };
 		B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewController.swift; sourceTree = "<group>"; };
+		B4D5159A2AE7E729003AAC3B /* SearchHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewModel.swift; sourceTree = "<group>"; };
+		B4D5159C2AE7ED81003AAC3B /* SearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlgorithm.swift; sourceTree = "<group>"; };
 		B4EE1C7D2AE5122300A9295B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B4EE1C7F2AE5126C00A9295B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B4EE1C812AE512E700A9295B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 			children = (
 				B43589BA2ADA93540077520D /* SearchViewController.swift */,
 				B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */,
+				B4D5159C2AE7ED81003AAC3B /* SearchAlgorithm.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				B43589BC2ADA938E0077520D /* SearchViewModel.swift */,
+				B4D5159A2AE7E729003AAC3B /* SearchHeroViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				B46C4CB72AD9C4E80005FCB4 /* Hero.swift in Sources */,
 				B46C4C6A2AD9A2380005FCB4 /* AppDelegate.swift in Sources */,
 				B46C4CB52AD9BE5C0005FCB4 /* APIClient.swift in Sources */,
+				B4D5159D2AE7ED81003AAC3B /* SearchAlgorithm.swift in Sources */,
 				B43589D32ADA9FCE0077520D /* GalleryHeaderView.swift in Sources */,
 				B434D88A2ADC98F100C98852 /* DetailViewModel.swift in Sources */,
 				B43589C72ADA943D0077520D /* ExploreViewModel.swift in Sources */,
@@ -714,6 +721,7 @@
 				B43589BB2ADA93540077520D /* SearchViewController.swift in Sources */,
 				B43589B92ADA93350077520D /* SearchTableViewCell.swift in Sources */,
 				B43589AF2ADA927F0077520D /* GalleryViewController.swift in Sources */,
+				B4D5159B2AE7E729003AAC3B /* SearchHeroViewModel.swift in Sources */,
 				B4EE1C7E2AE5122300A9295B /* LoginView.swift in Sources */,
 				B43589D12ADA94F50077520D /* SettingsViewModel.swift in Sources */,
 				B494857C2AE5C58A003597FB /* HeroMapper.swift in Sources */,

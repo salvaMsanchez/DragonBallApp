@@ -8,6 +8,7 @@
 import Foundation
 
 final class SearchViewModel: SearchViewControllerDelegate {
+    
     // MARK: - Dependencies -
     private let dataPersistanceManager: DataPersistanceManagerProtocol
     
@@ -16,18 +17,19 @@ final class SearchViewModel: SearchViewControllerDelegate {
     var heroesCount: Int {
         heroes.count
     }
+    var getHeroes: [Hero] {
+        heroes
+    }
     
     init(dataPersistanceManager: DataPersistanceManagerProtocol) {
         self.dataPersistanceManager = dataPersistanceManager
     }
     
     func onViewAppear() {
-        print("On view appear")
         dataPersistanceManager.fetchingHeroes { [weak self] result in
             switch result {
                 case .success(let heroes):
                     self?.heroes = heroes
-                    print("Héroes \(heroes)")
                 case .failure(let error):
                     print(error.localizedDescription)
             }

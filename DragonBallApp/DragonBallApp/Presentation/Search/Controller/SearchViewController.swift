@@ -9,6 +9,7 @@ import UIKit
 
 protocol SearchViewControllerDelegate {
     var heroesCount: Int { get }
+    var getHeroes: [Hero] { get }
     func onViewAppear()
     func heroBy(index: Int) -> Hero?
 }
@@ -21,7 +22,7 @@ final class SearchViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .systemPink
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -47,7 +48,6 @@ final class SearchViewController: UIViewController {
         searchController.searchResultsUpdater = self
         
         viewModel?.onViewAppear()
-        viewModel?.testConnection()
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,6 +89,18 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - SEARCH CONTROLLER EXTENSION -
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        //
+        let searchBar = searchController.searchBar
+        
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let resultsController = searchController.searchResultsController as? SearchHeroViewController else {
+            return
+        }
+        
+        let heroesSearched = SearchAlgorithm.searchHeroesAlgorithm(heroes: viewModel?.getHeroes ?? [], query: query)
+        
+        resultsController.viewModel = SearchHeroViewModel(heroes: heroesSearched)
+        resultsController.searchHeroTableView.reloadData()
     }
 }
