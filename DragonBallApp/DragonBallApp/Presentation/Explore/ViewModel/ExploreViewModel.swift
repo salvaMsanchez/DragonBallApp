@@ -28,11 +28,16 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
             guard let token = self?.secureDataProvider.getToken() else {
                 return
             }
+            guard let heroesIds = self?.dataPersistanceManager.fetchingHeroesIds() else {
+                return
+            }
+            
             Task.init { [weak self] in
                 do {
-                    let locations = try await self?.apiProvider.getLocations(by: "D13A40E5-4418-4223-9CE6-D2F9A28EBE94", token: token, apiRouter: .getLocations)
-                    guard let locations else { return }
-                    print(locations)
+                    guard let locations = try await self?.apiProvider.getLocations(by: "D13A40E5-4418-4223-9CE6-D2F9A28EBE94", token: token, apiRouter: .getLocations) else {
+                        return
+                    }
+//                    print(locations)
                 } catch {
                     print(error.localizedDescription)
                 }

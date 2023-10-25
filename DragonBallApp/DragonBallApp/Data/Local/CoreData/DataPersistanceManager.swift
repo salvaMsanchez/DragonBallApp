@@ -11,11 +11,13 @@ import CoreData
 protocol DataPersistanceManagerProtocol {
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
     func fetchingHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void)
+    func fetchingHeroesIds() -> [String]
 }
 
 enum DataBaseError: Error {
     case failedToSaveData
-    case failedToFetchData
+    case failedToFetchHeroes
+    case failedToFetchHeroesIds
 }
 
 final class DataPersistanceManager: DataPersistanceManagerProtocol {
@@ -53,8 +55,22 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             let heroes: Heroes = heroesDAOFiltered.compactMap { HeroMapper.mapHeroDAOToHero($0) }
             completion(.success(heroes))
         } catch {
-            completion(.failure(.failedToFetchData))
+            completion(.failure(.failedToFetchHeroes))
         }
+    }
+    
+    func fetchingHeroesIds() -> [String] {
+        var heroesIds: [String] = [String]()
+        fetchingHeroes { result in
+            switch result {
+                case .success(let heroes):
+                    let ids: [String] = heroes.map { $0.id }
+                    heroesIds = ids
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+        return heroesIds
     }
     
 }
