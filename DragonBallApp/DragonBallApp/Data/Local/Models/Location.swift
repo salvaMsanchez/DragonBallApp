@@ -10,8 +10,8 @@ import Foundation
 typealias Locations = [Location]
 
 struct Location: Decodable {
-    let latitude: String
-    let date: String
+    let latitud: String
     let id: String
-    let longitude: String
+    let longitud: String
+    let dateShow: String
 }

@@ -10,6 +10,7 @@ import Foundation
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String, apiRouter: APIRouter) async throws -> String
     func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> Heroes
+    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> Locations
 }
 
 // MARK: - APIRouter -
@@ -132,6 +133,43 @@ final class APIClient: ApiProviderProtocol {
         }
         
         guard let resource = try? JSONDecoder().decode(Heroes.self, from: data) else {
+            throw APIError.decodingFailed
+        }
+        
+        return resource
+    }
+    
+    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> Locations {
+        var components = URLComponents()
+        components.host = apiRouter.host
+        components.scheme = apiRouter.scheme
+        components.path = apiRouter.path
+        
+        guard let url = components.url else {
+            throw APIError.malformedUrl
+        }
+        
+        var urlComponents = URLComponents()
+        urlComponents.queryItems = [URLQueryItem(name: "id", value: "\(id)")]
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = apiRouter.method
+        request.httpBody = urlComponents.query?.data(using: .utf8)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        let urlResponse = response as? HTTPURLResponse
+        let statusCode = urlResponse?.statusCode
+        guard statusCode == 200 else {
+            throw APIError.statusCode(code: statusCode)
+        }
+        
+        guard !data.isEmpty else {
+            throw APIError.noData
+        }
+        
+        guard let resource = try? JSONDecoder().decode(Locations.self, from: data) else {
             throw APIError.decodingFailed
         }
         
