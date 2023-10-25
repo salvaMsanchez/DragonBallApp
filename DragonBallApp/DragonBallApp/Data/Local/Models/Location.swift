@@ -7,11 +7,17 @@
 
 import Foundation
 
-typealias Locations = [Location]
+typealias LocationsHero = [Location]
+typealias Locations = [LocationsHero]
 
 struct Location: Decodable {
     let latitud: String
-    let id: String
+    let hero: HeroId
     let longitud: String
+    let id: String
     let dateShow: String
+}
+
+struct HeroId: Decodable {
+    let id: String
 }

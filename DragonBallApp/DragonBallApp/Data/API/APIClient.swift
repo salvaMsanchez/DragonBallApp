@@ -10,7 +10,7 @@ import Foundation
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String, apiRouter: APIRouter) async throws -> String
     func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> Heroes
-    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> Locations
+    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> LocationsHero
 }
 
 // MARK: - APIRouter -
@@ -139,7 +139,7 @@ final class APIClient: ApiProviderProtocol {
         return resource
     }
     
-    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> Locations {
+    func getLocations(by id: String, token: String, apiRouter: APIRouter) async throws -> LocationsHero {
         var components = URLComponents()
         components.host = apiRouter.host
         components.scheme = apiRouter.scheme
@@ -169,7 +169,7 @@ final class APIClient: ApiProviderProtocol {
             throw APIError.noData
         }
         
-        guard let resource = try? JSONDecoder().decode(Locations.self, from: data) else {
+        guard let resource = try? JSONDecoder().decode(LocationsHero.self, from: data) else {
             throw APIError.decodingFailed
         }
         

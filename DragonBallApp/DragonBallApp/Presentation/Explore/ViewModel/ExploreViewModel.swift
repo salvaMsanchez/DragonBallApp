@@ -15,6 +15,7 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
     
     // MARK: - Properties -
     private var locations: Locations = []
+    private var heroesIds: [String] = []
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, dataPersistanceManager: DataPersistanceManagerProtocol) {
@@ -31,17 +32,41 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
             guard let heroesIds = self?.dataPersistanceManager.fetchingHeroesIds() else {
                 return
             }
-            
-            Task.init { [weak self] in
-                do {
-                    guard let locations = try await self?.apiProvider.getLocations(by: "D13A40E5-4418-4223-9CE6-D2F9A28EBE94", token: token, apiRouter: .getLocations) else {
-                        return
+            self?.heroesIds = heroesIds
+            let dispatchGroup = DispatchGroup()
+            heroesIds.forEach { id in
+                dispatchGroup.enter()
+                Task.init { [weak self] in
+                    defer {
+                        dispatchGroup.leave()
                     }
-//                    print(locations)
-                } catch {
-                    print(error.localizedDescription)
+                    do {
+                        guard let locationsHero = try await self?.apiProvider.getLocations(by: id, token: token, apiRouter: .getLocations) else {
+                            return
+                        }
+                        self?.locations.append(locationsHero)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
+            dispatchGroup.notify(queue: .main) { [weak self] in
+                self?.sortLocations()
+            }
         }
+    }
+    
+    func sortLocations() {
+        self.locations.sort(by: compareLocations)
+    }
+    
+    func compareLocations(_ a: LocationsHero, _ b: LocationsHero) -> Bool {
+        guard let idA = a.first?.hero.id,
+              let idB = b.first?.hero.id,
+              let indexA = self.heroesIds.firstIndex(of: idA),
+              let indexB = self.heroesIds.firstIndex(of: idB) else {
+            return false
+        }
+        return indexA < indexB
     }
 }
