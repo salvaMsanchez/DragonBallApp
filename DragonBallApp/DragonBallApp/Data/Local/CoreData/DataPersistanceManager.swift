@@ -84,6 +84,32 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
         }
     }
     
+    func fetchingLocations(completion: @escaping (Result<Locations, DataBaseError>) -> Void) {
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<LocationContainer>
+        request = LocationContainer.fetchRequest()
+        
+        do {
+            let locationContainers = try context.fetch(request)
+            
+            locationContainers.forEach { heroLocation in
+                if let locations = heroLocation.locations as? Set<LocationDAO> {
+                    locations.forEach { location in
+                        if let locationHero = location {
+                            let locationHero2: Location = LocationMapper.mapLocationContainerToLocations(location)!
+                        }
+                    }
+                }
+            }
+//            let heroesDAOFiltered = heroesDAO.filter { $0.heroDescription != "No description" }
+            let heroes: Heroes = heroesDAOFiltered.compactMap { HeroMapper.mapHeroDAOToHero($0) }
+            completion(.success(heroes))
+        } catch {
+            completion(.failure(.failedToFetchHeroes))
+        }
+    }
+    
     func fetchingHeroesIds() -> [String] {
         var heroesIds: [String] = [String]()
         fetchingHeroes { result in
