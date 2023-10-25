@@ -43,6 +43,31 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
         }
     }
     
+    func saveLocation(id: String, heroLocations: LocationsHero, completion: @escaping (Result<Void, DataBaseError>) -> Void) {
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        
+        let container = LocationContainer(context: context)
+        container.heroId = id
+        
+        heroLocations.forEach { location in
+            let item = LocationDAO(context: context)
+            item.latitude = location.latitud
+            item.heroId = location.hero.id
+            item.longitude = location.latitud
+            item.id = location.id
+            item.date = location.dateShow
+            
+            container.addToLocations(item)
+        }
+        
+        do {
+            try context.save()
+            completion(.success(()))
+        } catch {
+            completion(.failure(.failedToSaveData))
+        }
+    }
+    
     func fetchingHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         
