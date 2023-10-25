@@ -42,6 +42,7 @@
 		B49485762AE5A141003597FB /* DataPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49485752AE5A141003597FB /* DataPersistanceManager.swift */; };
 		B49485792AE5B82A003597FB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B49485782AE5B82A003597FB /* Kingfisher */; };
 		B494857C2AE5C58A003597FB /* HeroMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B494857B2AE5C58A003597FB /* HeroMapper.swift */; };
+		B498FE8D2AE96B5200CB7A80 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B498FE8C2AE96B5200CB7A80 /* Location.swift */; };
 		B49F24082AE4152000DFC337 /* TestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */; };
 		B49F240A2AE4159900DFC337 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F24092AE4159900DFC337 /* TestViewController.swift */; };
 		B49F24102AE44D9C00DFC337 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */; };
@@ -110,6 +111,7 @@
 		B46C4CB62AD9C4E80005FCB4 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		B49485752AE5A141003597FB /* DataPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistanceManager.swift; sourceTree = "<group>"; };
 		B494857B2AE5C58A003597FB /* HeroMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroMapper.swift; sourceTree = "<group>"; };
+		B498FE8C2AE96B5200CB7A80 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		B49F24072AE4152000DFC337 /* TestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewCell.swift; sourceTree = "<group>"; };
 		B49F24092AE4159900DFC337 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B49F240F2AE44D9C00DFC337 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				B46C4CB62AD9C4E80005FCB4 /* Hero.swift */,
+				B498FE8C2AE96B5200CB7A80 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				B434D88A2ADC98F100C98852 /* DetailViewModel.swift in Sources */,
 				B43589C72ADA943D0077520D /* ExploreViewModel.swift in Sources */,
 				B43589C32ADA93E60077520D /* ExploreView.swift in Sources */,
+				B498FE8D2AE96B5200CB7A80 /* Location.swift in Sources */,
 				B4EE1C802AE5126C00A9295B /* LoginViewController.swift in Sources */,
 				B43589C52ADA94020077520D /* ExploreViewController.swift in Sources */,
 				B43589BD2ADA938E0077520D /* SearchViewModel.swift in Sources */,

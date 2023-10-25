@@ -16,17 +16,18 @@ protocol ApiProviderProtocol {
 enum APIRouter {
     case login
     case getHeroes
+    case getLocations
     
     var host: String {
         switch self {
-            case .login, .getHeroes:
+            case .login, .getHeroes, .getLocations:
                 return "dragonball.keepcoding.education"
         }
     }
     
     var scheme: String {
         switch self {
-            case .login, .getHeroes:
+            case .login, .getHeroes, .getLocations:
                 return "https"
         }
     }
@@ -37,12 +38,14 @@ enum APIRouter {
                 return "/api/auth/login"
             case .getHeroes:
                 return "/api/heros/all"
+            case .getLocations:
+                return "/api/heros/locations"
         }
     }
     
     var method: String {
         switch self {
-            case .login, .getHeroes:
+            case .login, .getHeroes, .getLocations:
                 return "POST"
         }
     }

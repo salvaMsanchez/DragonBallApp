@@ -6,31 +6,62 @@
 //
 
 import UIKit
+import MapKit
+
+protocol ExploreViewControllerDelegate {
+    func onViewAppear()
+}
 
 final class ExploreViewController: UIViewController {
+    
+    var viewModel: ExploreViewControllerDelegate?
+    
+    private let mapView: MKMapView = {
+        let map = MKMapView()
+        map.overrideUserInterfaceStyle = .dark
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemIndigo
         
-//        Task.init {
-//            do {
-//                let token = try await APIClient.shared.login(for: "morenosanchezsalva@gmail.com", with: "9999", apiRouter: .login)
-//                print("Tu token es \(token)")
-//            } catch {
-//                print(error)
-//            }
-//        }
-//        let token = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6Im1vcmVub3NhbmNoZXpzYWx2YUBnbWFpbC5jb20iLCJleHBpcmF0aW9uIjo2NDA5MjIxMTIwMCwiaWRlbnRpZnkiOiJGOUQ0RDhCQy03NzBDLTQ1NEYtOTVFMC1FNzIyMUExMjhDN0YifQ.r-KPz6V-QobHNFxKke2yjxYtB6cWf2gWcbGTD4MpBd4"
-//        Task.init {
-//            do {
-//                let heroes = try await APIClient.shared.getHeroes(by: nil, token: token, apiRouter: .getHeroes)
-//                print("Heroes: \(heroes)")
-//            } catch {
-//                print(error)
-//            }
-//        }
+        view.addSubview(mapView)
+        mapView.delegate = self
+//        setup()
+        
+        viewModel?.onViewAppear()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mapView.frame = view.bounds
+    }
+    
+//    private func setup() {
+//        addViews()
+//        applyConstraints()
+//    }
+//
+//    private func addViews() {
+//        view.addSubview(mapView)
+//    }
+//
+//    private func applyConstraints() {
+//        let mapViewConstraints = [
+//            mapView.topAnchor.constraint(equalTo: view.topAnchor),
+//            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//        ]
+//
+//        NSLayoutConstraint.activate(mapViewConstraints)
+//    }
+    
+}
+
+extension ExploreViewController: MKMapViewDelegate {
     
 }

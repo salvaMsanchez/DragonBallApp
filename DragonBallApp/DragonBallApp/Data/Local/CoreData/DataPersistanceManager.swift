@@ -37,10 +37,8 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             try context.save()
             completion(.success(()))
         } catch {
-//            print(error.localizedDescription)
             completion(.failure(.failedToSaveData))
         }
-        
     }
     
     func fetchingHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void) {
@@ -55,7 +53,6 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             let heroes: Heroes = heroesDAOFiltered.compactMap { HeroMapper.mapHeroDAOToHero($0) }
             completion(.success(heroes))
         } catch {
-//            print(error.localizedDescription)
             completion(.failure(.failedToFetchData))
         }
     }

@@ -16,10 +16,18 @@ protocol MainHeroData: Decodable {
     var photo: URL { get }
 }
 
-struct Hero: MainHeroData, Equatable {
+struct Hero: Decodable, Equatable {
     let id: String
     let name: String
     let description: String
     let photo: URL
     let favorite: Bool
 }
+
+//struct Hero: MainHeroData, Equatable {
+//    let id: String
+//    let name: String
+//    let description: String
+//    let photo: URL
+//    let favorite: Bool
+//}

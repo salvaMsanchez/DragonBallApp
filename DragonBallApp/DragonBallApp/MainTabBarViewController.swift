@@ -11,10 +11,12 @@ final class MainTabBarViewcontroller: UITabBarController {
     
     private let galleryViewController: GalleryViewController
     private let searchViewController: SearchViewController
+    private let exploreViewController: ExploreViewController
     
-    init(galleryViewController: GalleryViewController, searchViewController: SearchViewController) {
+    init(galleryViewController: GalleryViewController, searchViewController: SearchViewController, exploreViewController: ExploreViewController) {
         self.galleryViewController = galleryViewController
         self.searchViewController = searchViewController
+        self.exploreViewController = exploreViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +32,7 @@ final class MainTabBarViewcontroller: UITabBarController {
         
         let vc1 = UINavigationController(rootViewController: galleryViewController)
         let vc2 = UINavigationController(rootViewController: searchViewController)
-        let vc3 = UINavigationController(rootViewController: ExploreViewController())
+        let vc3 = UINavigationController(rootViewController: exploreViewController)
         let vc4 = UINavigationController(rootViewController: SettingsViewController())
         
         vc1.tabBarItem.image = UIImage(systemName: "square.grid.2x2.fill")

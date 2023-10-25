@@ -23,6 +23,10 @@ final class LoginViewModel: LoginViewControllerDelegate {
         SearchViewModel(dataPersistanceManager: DataPersistanceManager())
     }()
     
+    lazy var exploreViewModel: ExploreViewControllerDelegate = {
+        ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager())
+    }()
+    
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
         self.apiProvider = apiProvider
