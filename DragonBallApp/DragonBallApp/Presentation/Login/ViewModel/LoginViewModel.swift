@@ -24,7 +24,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }()
     
     lazy var exploreViewModel: ExploreViewControllerDelegate = {
-        ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager())
+        ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: UserDefaultsManager())
     }()
     
     // MARK: - Initializers -

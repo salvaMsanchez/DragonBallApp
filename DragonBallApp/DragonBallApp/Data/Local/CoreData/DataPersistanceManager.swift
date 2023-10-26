@@ -10,7 +10,9 @@ import CoreData
 
 protocol DataPersistanceManagerProtocol {
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
+    func saveLocation(id: String, heroLocations: LocationsHero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
     func fetchingHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void)
+    func fetchingLocations(completion: @escaping (Result<Locations, DataBaseError>) -> Void)
     func fetchingHeroesIds() -> [String]
 }
 

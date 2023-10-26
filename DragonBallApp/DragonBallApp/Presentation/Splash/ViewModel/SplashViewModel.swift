@@ -27,7 +27,7 @@ final class SplashViewModel: SplashViewControllerDelegate {
     }()
     
     lazy var exploreViewModel: ExploreViewControllerDelegate = {
-        ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager())
+        ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: userDefaultsManager)
     }()
     
     private var isLogged: Bool {
