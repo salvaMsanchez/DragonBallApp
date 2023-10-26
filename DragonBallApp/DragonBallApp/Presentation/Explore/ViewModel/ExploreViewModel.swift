@@ -15,8 +15,16 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
     private let userDefaultsManager: UserDefaultsManagerProtocol
     
     // MARK: - Properties -
-    private var locations: Locations = []
+    var viewState: ((ExploreViewState) -> Void)?
+    private var entireHeroes: Heroes = []
+    private var entireLocations: Locations = []
     private var heroesIds: [String] = []
+    var locations: Locations {
+        entireLocations
+    }
+    var heroes: Heroes {
+        entireHeroes
+    }
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, dataPersistanceManager: DataPersistanceManagerProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
@@ -28,29 +36,42 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
     
     func onViewAppear() {
         if self.userDefaultsManager.getIsLogged() ?? false {
+            defer {
+                viewState?(.addPins)
+            }
+            dataPersistanceManager.fetchingHeroes { [weak self] result in
+                switch result {
+                    case .success(let heroes):
+                        self?.entireHeroes = heroes
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                }
+            }
             dataPersistanceManager.fetchingLocations { [weak self] result in
                 switch result {
                     case .success(let locations):
-                        self?.locations = locations
-                        
-//                        self?.locations.forEach({ locationsHero in
-//                            print("-> LOCALIZACIÓN HÉROE: \(locationsHero)")
-//                        })
+                        self?.entireLocations = locations
                     case .failure(let error):
                         print(error.localizedDescription)
                 }
             }
         } else {
+            dataPersistanceManager.fetchingHeroes { [weak self] result in
+                switch result {
+                    case .success(let heroes):
+                        self?.entireHeroes = heroes
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                }
+            }
+            let heroesIds = self.dataPersistanceManager.fetchingHeroesIds()
+            self.heroesIds = heroesIds
             DispatchQueue.global().async { [weak self] in
                 guard let token = self?.secureDataProvider.getToken() else {
                     return
                 }
-                guard let heroesIds = self?.dataPersistanceManager.fetchingHeroesIds() else {
-                    return
-                }
-                self?.heroesIds = heroesIds
                 let dispatchGroup = DispatchGroup()
-                heroesIds.forEach { id in
+                self?.heroesIds.forEach { id in
                     dispatchGroup.enter()
                     Task.init { [weak self] in
                         defer {
@@ -60,7 +81,7 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
                             guard let locationsHero = try await self?.apiProvider.getLocations(by: id, token: token, apiRouter: .getLocations) else {
                                 return
                             }
-                            self?.locations.append(locationsHero)
+                            self?.entireLocations.append(locationsHero)
                         } catch {
                             print(error.localizedDescription)
                         }
@@ -69,17 +90,18 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
                 dispatchGroup.notify(queue: .main) { [weak self] in
                     self?.sortLocations()
                     self?.saveLocationsInTheDatabase()
+                    self?.viewState?(.addPins)
                 }
             }
         }
     }
     
     func sortLocations() {
-        self.locations.sort(by: compareLocations)
+        self.entireLocations.sort(by: compareLocations)
     }
     
     func saveLocationsInTheDatabase() {
-        self.locations.forEach {
+        self.entireLocations.forEach {
             dataPersistanceManager.saveLocation(id: $0[0].hero.id, heroLocations: $0) { result in
                 switch result {
                     case .success(()):

@@ -55,7 +55,7 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             let item = LocationDAO(context: context)
             item.latitude = location.latitud
             item.heroId = location.hero.id
-            item.longitude = location.latitud
+            item.longitude = location.longitud
             item.id = location.id
             item.date = location.dateShow
             
