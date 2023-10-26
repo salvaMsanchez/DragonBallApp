@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 // MARK: - View Protocol -
 protocol GalleryViewControllerDelegate {
@@ -38,6 +39,24 @@ final class GalleryViewController: UIViewController {
         return collectionView
     }()
     
+    private let activityIndicatorUiView: UIView = {
+        let uiView = UIView()
+        uiView.layer.cornerRadius = 20
+        uiView.backgroundColor = .black.withAlphaComponent(0.6)
+//        uiView.isHidden = true
+        uiView.translatesAutoresizingMaskIntoConstraints = false
+        return uiView
+    }()
+    
+    public let animationView: LottieAnimationView = {
+        let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
+        animation.loopMode = .loop
+        animation.play()
+//        animation.isHidden = true
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        return animation
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +65,8 @@ final class GalleryViewController: UIViewController {
         view.addSubview(galleryCollectionView)
         galleryCollectionView.dataSource = self
         galleryCollectionView.delegate = self
+        
+        setup()
         
         setObservers()
         viewModel?.onViewAppear()
@@ -61,18 +82,55 @@ final class GalleryViewController: UIViewController {
         galleryCollectionView.frame = view.bounds
     }
     
+    private func onHeroCellPressed(model: Hero) {
+        let detailViewController = DetailViewController()
+        detailViewController.viewModel = DetailViewModel(hero: model)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
+    }
+    
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        // TODO: Añadir UIView y activity indicator para simular carga hacia detalle - OPCIONAL
-                        print("¿La vista está cargando? -> \(isLoading)")
+                        print(isLoading)
+                        self?.activityIndicatorUiView.isHidden = !isLoading
+                        self?.animationView.isHidden = !isLoading
                     case .updateData:
                         self?.galleryCollectionView.reloadData()
                 }
             }
         }
+    }
+    
+    private func setup() {
+        addViews()
+        applyConstraints()
+    }
+
+    private func addViews() {
+        view.addSubview(activityIndicatorUiView)
+        view.addSubview(animationView)
+    }
+
+    private func applyConstraints() {
+        let activityIndicatorUiViewConstraints = [
+            activityIndicatorUiView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorUiView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
+            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 180)
+        ]
+        let animationViewConstraints = [
+            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+
+        NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
+        NSLayoutConstraint.activate(animationViewConstraints)
     }
     
 }
@@ -97,6 +155,10 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         
         if let cell = collectionView.cellForItem(at: indexPath) as? GalleryCollectionViewCell {
             cell.cellPressedAnimation()
+        }
+        
+        if let hero = viewModel?.heroBy(index: indexPath.row) {
+            onHeroCellPressed(model: hero)
         }
     }
     
