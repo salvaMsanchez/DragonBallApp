@@ -111,5 +111,36 @@ final class ExploreViewController: UIViewController {
 }
 
 extension ExploreViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
+
+        if annotationView == nil {
+            // TODO: Create view
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+            annotationView?.canShowCallout = true
+            
+            let pinImage = UIImage(named: "dragonBallPin")
+            let size = CGSize(width: 50, height: 50)
+            UIGraphicsBeginImageContext(size)
+            pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            annotationView?.image = resizedImage
+            
+            let rightButton: AnyObject = UIButton(type: UIButton.ButtonType.detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = rightButton as? UIView
+        } else {
+            // TODO: Assign annotation
+            annotationView?.annotation = annotation
+        }
+
+        return annotationView
+    }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print(view.annotation?.title as Any)
+    }
 }
