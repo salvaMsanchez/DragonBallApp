@@ -96,6 +96,14 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
         }
     }
     
+    func heroBy(name: String) -> Hero? {
+        if let hero = self.heroes.first(where: { $0.name == name }) {
+            return hero
+        } else {
+            return nil
+        }
+    }
+    
     func sortLocations() {
         self.entireLocations.sort(by: compareLocations)
     }

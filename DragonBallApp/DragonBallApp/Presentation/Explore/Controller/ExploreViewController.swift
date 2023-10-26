@@ -13,6 +13,7 @@ protocol ExploreViewControllerDelegate {
     var locations: Locations { get }
     var heroes: Heroes { get }
     func onViewAppear()
+    func heroBy(name: String) -> Hero?
 }
 
 // MARK: View State -
@@ -25,11 +26,20 @@ final class ExploreViewController: UIViewController {
     
     var viewModel: ExploreViewControllerDelegate?
     
+    var annotations: [MKAnnotation] = []
+    
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
+    }()
+    
+    private lazy var loginContinueButton: UIButton = {
+        let button = UIButton(type: .detailDisclosure)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
     }()
     
     override func viewDidLoad() {
@@ -108,6 +118,24 @@ final class ExploreViewController: UIViewController {
         }
     }
     
+    @objc
+    func buttonTapped(sender: UIButton) {
+        let index = sender.tag
+        
+        if index < annotations.count {
+            let annotation = annotations[index]
+            if let title = annotation.title {
+                guard let title,
+                      let model = viewModel?.heroBy(name: title) else {
+                    return
+                }
+                let detailViewController = DetailViewController()
+                detailViewController.viewModel = DetailViewModel(hero: model)
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
+    }
+    
 }
 
 extension ExploreViewController: MKMapViewDelegate {
@@ -115,11 +143,9 @@ extension ExploreViewController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         }
-
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
 
         if annotationView == nil {
-            // TODO: Create view
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
             annotationView?.canShowCallout = true
             
@@ -130,17 +156,30 @@ extension ExploreViewController: MKMapViewDelegate {
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             annotationView?.image = resizedImage
             
-            let rightButton: AnyObject = UIButton(type: UIButton.ButtonType.detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = rightButton as? UIView
+            annotations.append(annotation)
+            
+            let rightButton: UIButton = UIButton(type: .detailDisclosure)
+            if let index = annotations.firstIndex(where: { $0.isEqual(annotation) }) {
+                rightButton.tag = index
+            }
+            rightButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            
+            annotationView?.rightCalloutAccessoryView = rightButton
         } else {
-            // TODO: Assign annotation
             annotationView?.annotation = annotation
         }
 
         return annotationView
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation?.title as Any)
-    }
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        guard let annotationTitle = view.annotation?.title,
+//              let heroName = annotationTitle,
+//              let model = viewModel?.heroBy(name: heroName) else {
+//            return
+//        }
+//        let detailViewController = DetailViewController()
+//        detailViewController.viewModel = DetailViewModel(hero: model)
+//        navigationController?.pushViewController(detailViewController, animated: true)
+//    }
 }
