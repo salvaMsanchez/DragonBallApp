@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         let splashViewController = SplashViewController()
-        splashViewController.viewModel = SplashViewModel(apiProvider: APIClient(), secureDataProvider: SecureDataProvider())
+        splashViewController.viewModel = SplashViewModel(apiProvider: APIClient(), secureDataProvider: SecureDataProvider(), userDefaultsManager: UserDefaultsManager())
 
         let navVC = UINavigationController()
         navVC.setViewControllers([splashViewController], animated: true)

@@ -93,18 +93,18 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
         do {
             let locationContainers = try context.fetch(request)
             
-            locationContainers.forEach { heroLocation in
-                if let locations = heroLocation.locations as? Set<LocationDAO> {
-                    locations.forEach { location in
-                        if let locationHero = location {
-                            let locationHero2: Location = LocationMapper.mapLocationContainerToLocations(location)!
-                        }
+            var finalLocations: Locations = []
+            locationContainers.forEach { locationContainer in
+                if let locations = locationContainer.locations as? Set<LocationDAO> {
+//                    locations.forEach { location in
+//                        let locationsHero: LocationsHero =
+//                    }
+                    let locationsHero: LocationsHero = locations.compactMap { LocationMapper.mapLocationContainerToLocationsHero($0)
                     }
+                    finalLocations.append(locationsHero)
                 }
             }
-//            let heroesDAOFiltered = heroesDAO.filter { $0.heroDescription != "No description" }
-            let heroes: Heroes = heroesDAOFiltered.compactMap { HeroMapper.mapHeroDAOToHero($0) }
-            completion(.success(heroes))
+            completion(.success(finalLocations))
         } catch {
             completion(.failure(.failedToFetchHeroes))
         }

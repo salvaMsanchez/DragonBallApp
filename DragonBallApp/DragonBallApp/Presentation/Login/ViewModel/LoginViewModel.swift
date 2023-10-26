@@ -16,7 +16,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
     var viewState: ((LoginViewState) -> Void)?
     
     lazy var galleryViewModel: GalleryViewControllerDelegate = {
-        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: false) // TODO: CAMBIAR A TRUE!!!
+        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: UserDefaultsManager())
     }()
     
     lazy var searchViewModel: SearchViewControllerDelegate = {

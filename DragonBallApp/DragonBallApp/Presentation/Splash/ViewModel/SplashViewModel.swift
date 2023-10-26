@@ -10,6 +10,7 @@ import Foundation
 final class SplashViewModel: SplashViewControllerDelegate {
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
+    private let userDefaultsManager: UserDefaultsManagerProtocol
     
     var viewState: ((SplashViewState) -> Void)?
     
@@ -18,7 +19,7 @@ final class SplashViewModel: SplashViewControllerDelegate {
     }()
     
     lazy var galleryViewModel: GalleryViewControllerDelegate = {
-        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), isLogged: true) // TODO: CAMBIAR A TRUE!!!
+        GalleryViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: userDefaultsManager)
     }()
     
     lazy var searchViewModel: SearchViewControllerDelegate = {
@@ -33,20 +34,22 @@ final class SplashViewModel: SplashViewControllerDelegate {
         secureDataProvider.getToken()?.isEmpty == false
     }
     
-    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
+    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
+        self.userDefaultsManager = userDefaultsManager
     }
     
     func onViewAppear() {
         viewState?(.loading(true))
         
-        print(secureDataProvider.getToken() ?? "Default value")
+//        print(secureDataProvider.getToken() ?? "Default value")
         
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
             print("is logged: \(self.isLogged)")
             self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
 //            self.isLogged ? self.viewState?(.navigateToLogin) : self.viewState?(.navigateToMain)
+            self.isLogged ? self.userDefaultsManager.save(isLogged: true) : self.userDefaultsManager.save(isLogged: false)
         }
     }
 }

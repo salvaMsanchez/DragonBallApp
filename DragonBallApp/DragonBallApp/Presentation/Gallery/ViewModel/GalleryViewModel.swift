@@ -12,27 +12,29 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
     private let dataPersistanceManager: DataPersistanceManagerProtocol
+    private let userDefaultsManager: UserDefaultsManagerProtocol
     
     // MARK: - Properties -
     private var heroes: Heroes = []
-    private var isLogged: Bool
+//    private var isLogged: Bool
     var heroesCount: Int {
         heroes.count
     }
     var viewState: ((GalleryViewState) -> Void)?
     
     // MARK: - Initializers -
-    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, dataPersistanceManager: DataPersistanceManagerProtocol, isLogged: Bool) {
+    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, dataPersistanceManager: DataPersistanceManagerProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
         self.dataPersistanceManager = dataPersistanceManager
-        self.isLogged = isLogged
+        self.userDefaultsManager = userDefaultsManager
+//        self.isLogged = isLogged
     }
     
     func onViewAppear() {
         viewState?(.loading(true))
         
-        if isLogged {
+        if userDefaultsManager.getIsLogged() ?? false {
             defer { viewState?(.loading(false)) }
             dataPersistanceManager.fetchingHeroes(completion: { [weak self] result in
                 switch result {
