@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SearchHeroViewControllerNavigationDelegate: AnyObject {
+    func searchResultsViewControllerDidTapItem(_ model: Hero)
+}
+
 protocol SearchHeroViewControllerDelegate {
     var viewState: ((SearchHeroViewState) -> Void)? { get set }
     var heroesCount: Int { get }
@@ -21,6 +25,7 @@ enum SearchHeroViewState {
 final class SearchHeroViewController: UIViewController {
     
     var viewModel: SearchHeroViewControllerDelegate?
+    public weak var delegate: SearchHeroViewControllerNavigationDelegate?
     
     public let searchHeroTableView: UITableView = {
         let tableView = UITableView()
@@ -46,6 +51,18 @@ final class SearchHeroViewController: UIViewController {
         super.viewDidLayoutSubviews()
         searchHeroTableView.frame = view.bounds
     }
+    
+//    private func onHeroCellPressed(model: Hero) {
+//        print("Hola")
+//        let detailViewController = DetailViewController()
+//        detailViewController.viewModel = DetailViewModel(hero: model)
+//        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.navigationController?.pushViewController(detailViewController, animated: true)
+////                self?.present(detailViewController, animated: true)
+//            }
+//        }
+//    }
     
     private func setObservers() {
         viewModel?.viewState = { state in
@@ -85,6 +102,10 @@ extension SearchHeroViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let cell = tableView.cellForRow(at: indexPath) as? SearchTableViewCell {
             cell.cellPressedAnimation()
+        }
+        
+        if let hero = viewModel?.heroBy(index: indexPath.row) {
+            delegate?.searchResultsViewControllerDidTapItem(hero)
         }
     }
 }

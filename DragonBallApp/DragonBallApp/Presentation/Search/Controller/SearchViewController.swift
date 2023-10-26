@@ -131,10 +131,23 @@ extension SearchViewController: UISearchResultsUpdating {
               let resultsController = searchController.searchResultsController as? SearchHeroViewController else {
             return
         }
+        resultsController.delegate = self
         
         let heroesSearched = SearchAlgorithm.searchHeroesAlgorithm(heroes: viewModel?.getHeroes ?? [], query: query)
         
         resultsController.viewModel = SearchHeroViewModel(heroes: heroesSearched)
         resultsController.searchHeroTableView.reloadData()
+    }
+}
+
+extension SearchViewController: SearchHeroViewControllerNavigationDelegate {
+    func searchResultsViewControllerDidTapItem(_ model: Hero) {
+        let detailViewController = DetailViewController()
+        detailViewController.viewModel = DetailViewModel(hero: model)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
     }
 }

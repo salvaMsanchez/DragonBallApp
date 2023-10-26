@@ -131,7 +131,8 @@ final class ExploreViewController: UIViewController {
                 }
                 let detailViewController = DetailViewController()
                 detailViewController.viewModel = DetailViewModel(hero: model)
-                navigationController?.pushViewController(detailViewController, animated: true)
+                detailViewController.modalPresentationStyle = .formSheet
+                present(detailViewController, animated: true)
             }
         }
     }
