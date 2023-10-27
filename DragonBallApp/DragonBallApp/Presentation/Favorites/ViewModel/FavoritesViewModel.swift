@@ -9,7 +9,7 @@ import Foundation
 
 final class FavoritesViewModel: FavoritesViewControllerDelegate {
     // MARK: - Dependencies -
-    
+    private let dataPersistanceManager: DataPersistanceManagerProtocol
     // MARK: - Properties -
     var viewState: ((FavoritesViewState) -> Void)?
     private var heroes: Heroes = []
@@ -17,8 +17,13 @@ final class FavoritesViewModel: FavoritesViewControllerDelegate {
         heroes.count
     }
     
+    // MARK: - Initializers -
+    init(dataPersistanceManager: DataPersistanceManagerProtocol) {
+        self.dataPersistanceManager = dataPersistanceManager
+    }
+    
     func onViewAppear() {
-        <#code#>
+        // TODO: Hacer cuando la vista aparezca
     }
     
     func heroBy(index: Int) -> Hero? {

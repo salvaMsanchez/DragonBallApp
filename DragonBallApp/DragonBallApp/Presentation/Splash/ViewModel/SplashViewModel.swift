@@ -30,6 +30,10 @@ final class SplashViewModel: SplashViewControllerDelegate {
         ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: userDefaultsManager)
     }()
     
+    lazy var favoritesViewModel: FavoritesViewControllerDelegate = {
+        FavoritesViewModel(dataPersistanceManager: DataPersistanceManager())
+    }()
+    
     private var isLogged: Bool {
         secureDataProvider.getToken()?.isEmpty == false
     }

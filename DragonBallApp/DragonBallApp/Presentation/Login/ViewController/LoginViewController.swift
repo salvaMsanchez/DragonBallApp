@@ -13,6 +13,7 @@ protocol LoginViewControllerDelegate {
     var galleryViewModel: GalleryViewControllerDelegate { get }
     var searchViewModel: SearchViewControllerDelegate { get }
     var exploreViewModel: ExploreViewControllerDelegate { get }
+    var favoritesViewModel: FavoritesViewControllerDelegate { get }
     func onLoginPressed(email: String?, password: String?)
 }
 
@@ -69,8 +70,10 @@ final class LoginViewController: UIViewController {
                         searchViewController.viewModel = self?.viewModel?.searchViewModel
                         let exploreViewController = ExploreViewController()
                         exploreViewController.viewModel = self?.viewModel?.exploreViewModel
+                        let favoritesViewController = FavoritesViewController()
+                        favoritesViewController.viewModel = self?.viewModel?.favoritesViewModel
                         
-                        let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController, searchViewController: searchViewController, exploreViewController: exploreViewController)
+                        let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController, searchViewController: searchViewController, exploreViewController: exploreViewController, favoritesViewController: favoritesViewController)
                         self?.navigationController?.setViewControllers([nextVC], animated: true)
                 }
             }

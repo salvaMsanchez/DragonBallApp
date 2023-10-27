@@ -27,6 +27,10 @@ final class LoginViewModel: LoginViewControllerDelegate {
         ExploreViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, dataPersistanceManager: DataPersistanceManager(), userDefaultsManager: UserDefaultsManager())
     }()
     
+    lazy var favoritesViewModel: FavoritesViewControllerDelegate = {
+        FavoritesViewModel(dataPersistanceManager: DataPersistanceManager())
+    }()
+    
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
         self.apiProvider = apiProvider

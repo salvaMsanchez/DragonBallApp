@@ -12,11 +12,13 @@ final class MainTabBarViewcontroller: UITabBarController {
     private let galleryViewController: GalleryViewController
     private let searchViewController: SearchViewController
     private let exploreViewController: ExploreViewController
+    private let favoritesViewController: FavoritesViewController
     
-    init(galleryViewController: GalleryViewController, searchViewController: SearchViewController, exploreViewController: ExploreViewController) {
+    init(galleryViewController: GalleryViewController, searchViewController: SearchViewController, exploreViewController: ExploreViewController, favoritesViewController: FavoritesViewController) {
         self.galleryViewController = galleryViewController
         self.searchViewController = searchViewController
         self.exploreViewController = exploreViewController
+        self.favoritesViewController = favoritesViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,7 +35,7 @@ final class MainTabBarViewcontroller: UITabBarController {
         let vc1 = UINavigationController(rootViewController: galleryViewController)
         let vc2 = UINavigationController(rootViewController: searchViewController)
         let vc3 = UINavigationController(rootViewController: exploreViewController)
-        let vc4 = UINavigationController(rootViewController: FavoritesViewController())
+        let vc4 = UINavigationController(rootViewController: favoritesViewController)
         
         vc1.tabBarItem.image = UIImage(systemName: "square.grid.2x2.fill")
         vc2.tabBarItem.image = UIImage(systemName: "magnifyingglass")
