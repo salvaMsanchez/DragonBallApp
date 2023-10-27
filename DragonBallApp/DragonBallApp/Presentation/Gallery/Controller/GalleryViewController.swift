@@ -68,6 +68,7 @@ final class GalleryViewController: UIViewController {
         galleryCollectionView.delegate = self
         
         setup()
+        configureNavBar()
         
         setObservers()
         viewModel?.onViewAppear()
@@ -109,7 +110,21 @@ final class GalleryViewController: UIViewController {
     }
     
     private func configureNavBar() {
+        var image = UIImage(named: "title")
+        let size = CGSize(width: 135, height: 40)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let resizedImage = renderer.image { (context) in
+            image!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        }
         
+        image = resizedImage.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil)
+        ]
+        navigationController?.navigationBar.tintColor = .label
     }
     
     private func setup() {
@@ -223,6 +238,13 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
                 return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [isfavoriteAction, isNotfavoriteAction])
             }
         return config
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+        
+        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     
 }

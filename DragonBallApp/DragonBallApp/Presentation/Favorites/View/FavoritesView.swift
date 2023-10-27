@@ -7,6 +7,6 @@
 
 import UIKit
 
-final class SettingsView: UIView {
+final class FavoritesView: UIView {
     
 }

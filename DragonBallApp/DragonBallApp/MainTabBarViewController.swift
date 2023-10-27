@@ -33,17 +33,17 @@ final class MainTabBarViewcontroller: UITabBarController {
         let vc1 = UINavigationController(rootViewController: galleryViewController)
         let vc2 = UINavigationController(rootViewController: searchViewController)
         let vc3 = UINavigationController(rootViewController: exploreViewController)
-        let vc4 = UINavigationController(rootViewController: SettingsViewController())
+        let vc4 = UINavigationController(rootViewController: FavoritesViewController())
         
         vc1.tabBarItem.image = UIImage(systemName: "square.grid.2x2.fill")
         vc2.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         vc3.tabBarItem.image = UIImage(systemName: "map.fill")
-        vc4.tabBarItem.image = UIImage(systemName: "gear")
+        vc4.tabBarItem.image = UIImage(systemName: "heart")
         
         vc1.title = "Gallery"
         vc2.title = "Search"
         vc3.title = "Explore"
-        vc4.title = "Settings"
+        vc4.title = "Favorites"
         
         tabBar.tintColor = .systemOrange
 //        tabBar.itemPositioning = .centered
