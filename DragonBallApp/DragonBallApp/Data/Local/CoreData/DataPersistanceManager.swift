@@ -99,7 +99,7 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
         do {
             let heroesDAO = try context.fetch(request)
             let heroesDAOFiltered = heroesDAO.filter { $0.heroDescription != "No description" }
-            let heroesDAOFilteredByFavorite = heroesDAO.filter { $0.favorite != false }
+            let heroesDAOFilteredByFavorite = heroesDAOFiltered.filter { $0.favorite != false }
             let heroes: Heroes = heroesDAOFilteredByFavorite.compactMap { HeroMapper.mapHeroDAOToHero($0) }
             completion(.success(heroes))
         } catch {
@@ -159,6 +159,7 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             if let hero = heroesDAO.first {
                 hero.favorite = isFavorite
                 try context.save()
+                completion(.success(()))
             }
         } catch {
             completion(.failure(.failedToUpdateFavorite))

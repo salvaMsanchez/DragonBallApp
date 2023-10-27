@@ -10,7 +10,8 @@ import UIKit
 protocol FavoritesViewControllerDelegate {
     var viewState: ((FavoritesViewState) -> Void)? { get set }
     var heroesCount: Int { get }
-    func onViewAppear()
+    func onViewWillAppear()
+    func onDeleteButtonPressed(removeAt indexPath: IndexPath)
     func heroBy(index: Int) -> Hero?
 }
 
@@ -18,6 +19,7 @@ protocol FavoritesViewControllerDelegate {
 enum FavoritesViewState {
     case navigateToDetail(_ model: Hero)
     case updateData
+    case deleteData(_ indexPath: IndexPath, _ animation: UITableView.RowAnimation)
 }
 
 final class FavoritesViewController: UIViewController {
@@ -50,7 +52,7 @@ final class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.onViewAppear()
+        viewModel?.onViewWillAppear()
     }
     
     override func viewDidLayoutSubviews() {
@@ -67,6 +69,8 @@ final class FavoritesViewController: UIViewController {
                         break
                     case .updateData:
                         self?.favoritesTableView.reloadData()
+                    case .deleteData(let indexPath, let animation):
+                        self?.favoritesTableView.deleteRows(at: [indexPath], with: animation)
                 }
             }
         }
@@ -91,5 +95,14 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+            case .delete:
+                viewModel?.onDeleteButtonPressed(removeAt: indexPath)
+            default:
+                break
+        }
     }
 }
