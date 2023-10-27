@@ -98,4 +98,16 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         }
     }
     
+    func onAddFavoriteButtonPressed(model: Hero, isFavorite: Bool) {
+        // TODO: Actualizar CoreData parámetro favorite
+        dataPersistanceManager.updateFavorite(thisHero: model, to: isFavorite) { result in
+            switch result {
+                case .success(()):
+                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    
 }

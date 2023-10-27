@@ -15,6 +15,7 @@ protocol GalleryViewControllerDelegate {
     func onViewAppear()
 //    func onViewDidAppear()
     func heroBy(index: Int) -> Hero?
+    func onAddFavoriteButtonPressed(model: Hero, isFavorite: Bool)
 }
 
 // MARK: - View State -
@@ -107,6 +108,10 @@ final class GalleryViewController: UIViewController {
         }
     }
     
+    private func configureNavBar() {
+        
+    }
+    
     private func setup() {
         addViews()
         applyConstraints()
@@ -184,19 +189,38 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
-                let downloadAction = UIAction(
-                    title: "Download",
+                let isfavoriteAction = UIAction(
+                    title: "Add to favorites",
                     subtitle: nil,
                     image: nil,
                     identifier: nil,
                     discoverabilityTitle: nil,
-                    state: .off) { _ in
-//                        guard let indexPath = indexPaths.first else {
-//                            return
-//                        }
-//                        self?.downloadTitleAt(indexPath: indexPath)
+                    state: .off) { [weak self] _ in
+                        guard let indexPath = indexPaths.first else {
+                            return
+                        }
+                        guard let hero = self?.viewModel?.heroBy(index: indexPath.row) else {
+                            return
+                        }
+                        self?.viewModel?.onAddFavoriteButtonPressed(model: hero, isFavorite: true)
                     }
-                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+                let isNotfavoriteAction = UIAction(
+                    title: "Remove from favorites",
+                    subtitle: nil,
+                    image: nil,
+                    identifier: nil,
+                    discoverabilityTitle: nil,
+                    attributes: .destructive,
+                    state: .off) { [weak self] _ in
+                        guard let indexPath = indexPaths.first else {
+                            return
+                        }
+                        guard let hero = self?.viewModel?.heroBy(index: indexPath.row) else {
+                            return
+                        }
+                        self?.viewModel?.onAddFavoriteButtonPressed(model: hero, isFavorite: false)
+                    }
+                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [isfavoriteAction, isNotfavoriteAction])
             }
         return config
     }
