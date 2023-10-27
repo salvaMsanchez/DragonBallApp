@@ -17,6 +17,7 @@ protocol FavoritesViewControllerDelegate {
 // MARK: View State -
 enum FavoritesViewState {
     case navigateToDetail(_ model: Hero)
+    case updateData
 }
 
 final class FavoritesViewController: UIViewController {
@@ -35,11 +36,20 @@ final class FavoritesViewController: UIViewController {
         
         view.backgroundColor = .systemBrown
         
+        title = "Favorites"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        
         view.addSubview(favoritesTableView)
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
         
         setObservers()
+//        viewModel?.onViewAppear()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel?.onViewAppear()
     }
     
@@ -49,12 +59,14 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func setObservers() {
-        viewModel?.viewState = { state in
+        viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
                 switch state {
                     case .navigateToDetail(_):
                         // TODO: Navegar al Detail
                         break
+                    case .updateData:
+                        self?.favoritesTableView.reloadData()
                 }
             }
         }
@@ -74,10 +86,10 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel?.heroesCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 225
+        return 175
     }
 }

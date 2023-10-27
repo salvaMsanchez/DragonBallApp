@@ -44,6 +44,10 @@ final class SearchViewController: UIViewController {
         
         view.backgroundColor = .systemCyan
         
+        title = "Search"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        
         view.addSubview(searchTableView)
         searchTableView.dataSource = self
         searchTableView.delegate = self

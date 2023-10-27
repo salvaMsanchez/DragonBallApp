@@ -21,13 +21,14 @@ final class FavoritesTableViewCell: UITableViewCell {
     
     private let alphaBlackView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .black.withAlphaComponent(0.7)
+        uiView.backgroundColor = .black.withAlphaComponent(0.65)
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
     
     private let heroNameLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -60,14 +61,14 @@ final class FavoritesTableViewCell: UITableViewCell {
             heroImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             heroImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             heroImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            heroImageView.topAnchor.constraint(equalTo: contentView.bottomAnchor)
+            heroImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ]
         
         let alphaBlackViewConstraints = [
             alphaBlackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             alphaBlackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             alphaBlackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            alphaBlackView.topAnchor.constraint(equalTo: contentView.bottomAnchor)
+            alphaBlackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ]
         
         let heroNameLabelConstraints = [

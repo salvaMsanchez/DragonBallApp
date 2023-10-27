@@ -23,7 +23,15 @@ final class FavoritesViewModel: FavoritesViewControllerDelegate {
     }
     
     func onViewAppear() {
-        // TODO: Hacer cuando la vista aparezca
+        dataPersistanceManager.fetchingFavoritesHeroes { [weak self] result in
+            switch result {
+                case .success(let heroes):
+                    self?.heroes = heroes
+                    self?.viewState?(.updateData)
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
     }
     
     func heroBy(index: Int) -> Hero? {

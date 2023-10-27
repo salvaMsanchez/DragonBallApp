@@ -12,6 +12,7 @@ protocol DataPersistanceManagerProtocol {
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
     func saveLocation(id: String, heroLocations: LocationsHero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
     func fetchingHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void)
+    func fetchingFavoritesHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void)
     func fetchingLocations(completion: @escaping (Result<Locations, DataBaseError>) -> Void)
     func fetchingHeroesIds() -> [String]
     func updateFavorite(thisHero hero: Hero, to isFavorite: Bool, completion: @escaping (Result<Void, DataBaseError>) -> Void)
@@ -20,6 +21,7 @@ protocol DataPersistanceManagerProtocol {
 enum DataBaseError: Error {
     case failedToSaveData
     case failedToFetchHeroes
+    case failedToFetchFavoritesHeroes
     case failedToFetchHeroesIds
     case failedToUpdateFavorite
 }
@@ -88,6 +90,23 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
         }
     }
     
+    func fetchingFavoritesHeroes(completion: @escaping (Result<Heroes, DataBaseError>) -> Void) {
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<HeroDAO>
+        request = HeroDAO.fetchRequest()
+        
+        do {
+            let heroesDAO = try context.fetch(request)
+            let heroesDAOFiltered = heroesDAO.filter { $0.heroDescription != "No description" }
+            let heroesDAOFilteredByFavorite = heroesDAO.filter { $0.favorite != false }
+            let heroes: Heroes = heroesDAOFilteredByFavorite.compactMap { HeroMapper.mapHeroDAOToHero($0) }
+            completion(.success(heroes))
+        } catch {
+            completion(.failure(.failedToFetchFavoritesHeroes))
+        }
+    }
+    
     func fetchingLocations(completion: @escaping (Result<Locations, DataBaseError>) -> Void) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         
@@ -140,7 +159,6 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             if let hero = heroesDAO.first {
                 hero.favorite = isFavorite
                 try context.save()
-                print("\(hero.name) ha sido actualizado en favoritos a \(hero.favorite)")
             }
         } catch {
             completion(.failure(.failedToUpdateFavorite))
