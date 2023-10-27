@@ -162,6 +162,7 @@ final class GalleryViewController: UIViewController {
                 case .success(()):
                     let loginViewController = LoginViewController()
                     loginViewController.viewModel = self?.viewModel?.loginViewModel
+                    loginViewController.modalPresentationStyle = .fullScreen
                     self?.present(loginViewController, animated: true)
 //                    self?.navigationController?.setViewControllers([nextVC], animated: true)
                 case .failure(let error):

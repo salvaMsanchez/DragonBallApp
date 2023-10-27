@@ -119,9 +119,11 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         // TODO: Eliminar Keychain = Cambiar valor a ""
         
         // TODO: Integrar DISPATCH GROUP PARA AVISAR QUE HAN ACABADO CON ÉXITO LAS TAREAS Y HACER COMPLETION SUCCESS
+        let dispatchGroup = DispatchGroup()
         DispatchQueue.global().async { [weak self] in
             self?.secureDataProvider.save(token: "")
             self?.userDefaultsManager.deleteIsLogged()
+            dispatchGroup.enter()
             DispatchQueue.main.async {
                 self?.dataPersistanceManager.deleteAllHeroDAO { result in
                     switch result {
@@ -130,7 +132,12 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
                         case .failure(let error):
                             completion(.failure(error))
                     }
+                    dispatchGroup.leave()
                 }
+            }
+            
+            dispatchGroup.enter()
+            DispatchQueue.main.async {
                 self?.dataPersistanceManager.deleteAllLocationDAO(completion: { result in
                     switch result {
                         case .success(()):
@@ -138,8 +145,13 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
                         case .failure(let error):
                             completion(.failure(error))
                     }
+                    dispatchGroup.leave()
                 })
             }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(.success(()))
         }
     }
     
