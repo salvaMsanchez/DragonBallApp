@@ -21,6 +21,9 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         heroes.count
     }
     var viewState: ((GalleryViewState) -> Void)?
+    lazy var loginViewModel: LoginViewControllerDelegate = {
+        LoginViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider)
+    }()
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, dataPersistanceManager: DataPersistanceManagerProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
@@ -106,6 +109,36 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
                     break
                 case .failure(let error):
                     print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func onLogOutButtonPressed(completion: @escaping (Result<Void, DataBaseError>) -> Void) {
+        // TODO: Eliminar CoreData
+        // TODO: Eliminar UserDefaults
+        // TODO: Eliminar Keychain = Cambiar valor a ""
+        
+        // TODO: Integrar DISPATCH GROUP PARA AVISAR QUE HAN ACABADO CON ÉXITO LAS TAREAS Y HACER COMPLETION SUCCESS
+        DispatchQueue.global().async { [weak self] in
+            self?.secureDataProvider.save(token: "")
+            self?.userDefaultsManager.deleteIsLogged()
+            DispatchQueue.main.async {
+                self?.dataPersistanceManager.deleteAllHeroDAO { result in
+                    switch result {
+                        case .success(()):
+                            break
+                        case .failure(let error):
+                            completion(.failure(error))
+                    }
+                }
+                self?.dataPersistanceManager.deleteAllLocationDAO(completion: { result in
+                    switch result {
+                        case .success(()):
+                            break
+                        case .failure(let error):
+                            completion(.failure(error))
+                    }
+                })
             }
         }
     }

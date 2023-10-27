@@ -12,10 +12,12 @@ import Lottie
 protocol GalleryViewControllerDelegate {
     var viewState: ((GalleryViewState) -> Void)? { get set }
     var heroesCount: Int { get }
+    var loginViewModel: LoginViewControllerDelegate { get }
     func onViewAppear()
 //    func onViewDidAppear()
     func heroBy(index: Int) -> Hero?
     func onAddFavoriteButtonPressed(model: Hero, isFavorite: Bool)
+    func onLogOutButtonPressed(completion: @escaping (Result<Void, DataBaseError>) -> Void)
 }
 
 // MARK: - View State -
@@ -121,7 +123,7 @@ final class GalleryViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: #selector(logOut)),
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil)
         ]
         navigationController?.navigationBar.tintColor = .label
@@ -151,6 +153,21 @@ final class GalleryViewController: UIViewController {
 
         NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
         NSLayoutConstraint.activate(animationViewConstraints)
+    }
+    
+    @objc
+    func logOut() {
+        viewModel?.onLogOutButtonPressed(completion: { [weak self] result in
+            switch result {
+                case .success(()):
+                    let loginViewController = LoginViewController()
+                    loginViewController.viewModel = self?.viewModel?.loginViewModel
+                    self?.present(loginViewController, animated: true)
+//                    self?.navigationController?.setViewControllers([nextVC], animated: true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        })
     }
     
 }

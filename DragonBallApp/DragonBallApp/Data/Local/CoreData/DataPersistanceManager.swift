@@ -16,6 +16,8 @@ protocol DataPersistanceManagerProtocol {
     func fetchingLocations(completion: @escaping (Result<Locations, DataBaseError>) -> Void)
     func fetchingHeroesIds() -> [String]
     func updateFavorite(thisHero hero: Hero, to isFavorite: Bool, completion: @escaping (Result<Void, DataBaseError>) -> Void)
+    func deleteAllHeroDAO(completion: @escaping (Result<Void, DataBaseError>) -> Void)
+    func deleteAllLocationDAO(completion: @escaping (Result<Void, DataBaseError>) -> Void)
 }
 
 enum DataBaseError: Error {
@@ -24,6 +26,8 @@ enum DataBaseError: Error {
     case failedToFetchFavoritesHeroes
     case failedToFetchHeroesIds
     case failedToUpdateFavorite
+    case failedToDeleteAllHeroes
+    case failedToDeleteAllLocations
 }
 
 final class DataPersistanceManager: DataPersistanceManagerProtocol {
@@ -163,6 +167,38 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             }
         } catch {
             completion(.failure(.failedToUpdateFavorite))
+        }
+    }
+    
+    func deleteAllHeroDAO(completion: @escaping (Result<Void, DataBaseError>) -> Void) {
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<HeroDAO>
+        request = HeroDAO.fetchRequest()
+        
+        do {
+            let heroesDAO = try context.fetch(request)
+            heroesDAO.forEach { context.delete($0) }
+            try context.save()
+            completion(.success(()))
+        } catch {
+            completion(.failure(.failedToDeleteAllHeroes))
+        }
+    }
+    
+    func deleteAllLocationDAO(completion: @escaping (Result<Void, DataBaseError>) -> Void) {
+        let context = CoreDataStack.shared.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<LocationContainer>
+        request = LocationContainer.fetchRequest()
+        
+        do {
+            let locationContainers = try context.fetch(request)
+            locationContainers.forEach { context.delete($0) }
+            try context.save()
+            completion(.success(()))
+        } catch {
+            completion(.failure(.failedToDeleteAllLocations))
         }
     }
     
