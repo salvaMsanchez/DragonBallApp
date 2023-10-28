@@ -69,8 +69,8 @@ final class GalleryViewController: UIViewController {
         galleryCollectionView.dataSource = self
         galleryCollectionView.delegate = self
         
-        setup()
         configureNavBar()
+        setup()
         
         setObservers()
         viewModel?.onViewAppear()
@@ -88,7 +88,7 @@ final class GalleryViewController: UIViewController {
     
     private func onHeroCellPressed(model: Hero) {
         let detailViewController = DetailViewController()
-        detailViewController.viewModel = DetailViewModel(hero: model)
+        detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(detailViewController, animated: true)
@@ -118,7 +118,7 @@ final class GalleryViewController: UIViewController {
         let resizedImage = renderer.image { (context) in
             image!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         }
-        
+
         image = resizedImage.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
         
@@ -262,7 +262,7 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let defaultOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaultOffset
-        
+
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     

@@ -68,7 +68,7 @@ final class SearchViewController: UIViewController {
     
     private func onHeroCellPressed(model: Hero) {
         let detailViewController = DetailViewController()
-        detailViewController.viewModel = DetailViewModel(hero: model)
+        detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(detailViewController, animated: true)
@@ -147,7 +147,7 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController: SearchHeroViewControllerNavigationDelegate {
     func searchResultsViewControllerDidTapItem(_ model: Hero) {
         let detailViewController = DetailViewController()
-        detailViewController.viewModel = DetailViewModel(hero: model)
+        detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(detailViewController, animated: true)
