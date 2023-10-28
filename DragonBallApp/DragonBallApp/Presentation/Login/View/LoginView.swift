@@ -52,12 +52,12 @@ final class LoginView: UIView {
         return textField
     }()
     
-    private let invalidEmailText: UILabel = {
+    public let invalidEmailText: UILabel = {
         let label = UILabel()
-        label.text = "Indique un email válido"
+//        label.text = "Indique un email válido"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemRed
-//        label.isHidden = true
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -97,12 +97,12 @@ final class LoginView: UIView {
         return textField
     }()
     
-    private let invalidPasswordText: UILabel = {
+    public let invalidPasswordText: UILabel = {
         let label = UILabel()
-        label.text = "Indique una password válida"
+//        label.text = "Indique una password válida"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemRed
-//        label.isHidden = true
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

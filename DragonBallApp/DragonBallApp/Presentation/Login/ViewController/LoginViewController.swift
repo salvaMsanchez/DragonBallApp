@@ -20,8 +20,8 @@ protocol LoginViewControllerDelegate {
 // MARK: View State -
 enum LoginViewState {
     case loading(_ isLoading: Bool)
-//    case showErrorEmail(_ error: String?)
-//    case showErrorPassword(_ error: String?)
+    case showErrorEmail(_ error: String?)
+    case showErrorPassword(_ error: String?)
     case navigateToNext
 }
 
@@ -61,9 +61,14 @@ final class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-//                        print(isLoading)
                         self?.loginView.activityIndicatorUiView.isHidden = !isLoading
                         self?.loginView.animationView.isHidden = !isLoading
+                    case .showErrorEmail(let error):
+                        self?.loginView.invalidEmailText.text = error
+                        self?.loginView.invalidEmailText.isHidden = (error == nil || error?.isEmpty == true)
+                    case .showErrorPassword(let error):
+                        self?.loginView.invalidPasswordText.text = error
+                        self?.loginView.invalidPasswordText.isHidden = (error == nil || error?.isEmpty == true)
                     case .navigateToNext:
                         print("A navegar!")
                         let galleryViewController = GalleryViewController()
