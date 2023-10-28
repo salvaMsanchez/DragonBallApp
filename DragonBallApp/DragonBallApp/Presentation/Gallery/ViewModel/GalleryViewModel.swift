@@ -21,8 +21,8 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         heroes.count
     }
     var viewState: ((GalleryViewState) -> Void)?
-    lazy var loginViewModel: LoginViewControllerDelegate = {
-        LoginViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider)
+    lazy var splashViewModel: SplashViewControllerDelegate = {
+        SplashViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, userDefaultsManager: userDefaultsManager)
     }()
     
     // MARK: - Initializers -

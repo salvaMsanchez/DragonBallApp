@@ -44,7 +44,7 @@ final class SplashViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        splashView.animationView.stop()
+        splashView.splashAnimationView.stop()
     }
     
     private func setObservers() {
@@ -52,7 +52,7 @@ final class SplashViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        self?.splashView.animationView.isHidden = !isLoading
+                        self?.splashView.splashAnimationView.isHidden = !isLoading
                     case .navigateToLogin:
                         let nextVC = LoginViewController()
                         nextVC.viewModel = self?.viewModel?.loginViewModel

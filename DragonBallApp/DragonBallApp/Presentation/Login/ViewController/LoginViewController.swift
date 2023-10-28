@@ -29,13 +29,13 @@ final class LoginViewController: UIViewController {
     
     var viewModel: LoginViewControllerDelegate?
     
-    private let loginView = LoginView()
+    private var loginView = LoginView()
     
     override func loadView() {
         super.loadView()
         
-        loginView.delegate = self
         view = loginView
+        loginView.delegate = self
         
         setObservers()
     }
@@ -61,7 +61,9 @@ final class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        print("Loading: \(isLoading)")
+//                        print(isLoading)
+                        self?.loginView.activityIndicatorUiView.isHidden = !isLoading
+                        self?.loginView.animationView.isHidden = !isLoading
                     case .navigateToNext:
                         print("A navegar!")
                         let galleryViewController = GalleryViewController()
@@ -75,6 +77,8 @@ final class LoginViewController: UIViewController {
                         
                         let nextVC = MainTabBarViewcontroller(galleryViewController: galleryViewController, searchViewController: searchViewController, exploreViewController: exploreViewController, favoritesViewController: favoritesViewController)
                         self?.navigationController?.setViewControllers([nextVC], animated: true)
+                        self?.loginView.activityIndicatorUiView.isHidden = true
+                        self?.loginView.animationView.isHidden = true
                 }
             }
         }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 typealias LoginData = (email: String, password: String)
 
@@ -27,7 +28,7 @@ final class LoginView: UIView {
         return view
     }()
     
-    private let emailTextField: UITextField = {
+    public let emailTextField: UITextField = {
         let textField = UITextField()
         textField.tag = 1
         textField.layer.masksToBounds = true
@@ -99,6 +100,24 @@ final class LoginView: UIView {
         return button
     }()
     
+    public let activityIndicatorUiView: UIView = {
+        let uiView = UIView()
+        uiView.layer.cornerRadius = 20
+        uiView.backgroundColor = .black.withAlphaComponent(0.6)
+        uiView.isHidden = true
+        uiView.translatesAutoresizingMaskIntoConstraints = false
+        return uiView
+    }()
+    
+    public let animationView: LottieAnimationView = {
+        let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
+        animation.loopMode = .loop
+        animation.play()
+        animation.isHidden = true
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        return animation
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -126,6 +145,8 @@ final class LoginView: UIView {
         addSubview(passwordContainerView)
         passwordContainerView.addSubview(passwordTextField)
         addSubview(loginContinueButton)
+        addSubview(activityIndicatorUiView)
+        addSubview(animationView)
     }
     
     private func applyConstraints() {
@@ -162,11 +183,26 @@ final class LoginView: UIView {
             loginContinueButton.heightAnchor.constraint(equalToConstant: 44)
         ]
         
+        let activityIndicatorUiViewConstraints = [
+            activityIndicatorUiView.topAnchor.constraint(equalTo: topAnchor),
+            activityIndicatorUiView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            activityIndicatorUiView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            activityIndicatorUiView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
+//            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 180)
+        ]
+        let animationViewConstraints = [
+            animationView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ]
+        
         NSLayoutConstraint.activate(emailContainerViewConstraints)
         NSLayoutConstraint.activate(emailTextFieldConstraints)
         NSLayoutConstraint.activate(passwordContainerViewConstraints)
         NSLayoutConstraint.activate(passwordTextFieldConstraints)
         NSLayoutConstraint.activate(loginContinueButtonConstraints)
+        NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
+        NSLayoutConstraint.activate(animationViewConstraints)
     }
     
     @objc

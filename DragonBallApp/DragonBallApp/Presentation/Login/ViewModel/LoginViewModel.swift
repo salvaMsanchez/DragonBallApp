@@ -38,27 +38,31 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }
     
     func onLoginPressed(email: String?, password: String?) {
-        print("Hola")
-        DispatchQueue.global().async {
-            guard self.isValid(email: email) else {
-                self.viewState?(.loading(false))
-//                self.viewState?(.showErrorEmail("Indique un email válido")) // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
-                print("Email invalid")
-                return
+        viewState?(.loading(true))
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
+            DispatchQueue.global().async {
+                guard self.isValid(email: email) else {
+                    self.viewState?(.loading(false))
+    //                self.viewState?(.showErrorEmail("Indique un email válido")) // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
+                    print("Email invalid")
+                    return
+                }
+                
+                guard self.isValid(password: password) else {
+                    self.viewState?(.loading(false))
+    //                self.viewState?(.showErrorPassword("Indique una password válida"))
+                    print("Password invalid")
+                    return
+                }
+                
+                self.doLoginWith(
+                    email: email ?? "",
+                    password: password ?? ""
+                )
             }
-            
-            guard self.isValid(password: password) else {
-                self.viewState?(.loading(false))
-//                self.viewState?(.showErrorPassword("Indique una password válida"))
-                print("Password invalid")
-                return
-            }
-            
-            self.doLoginWith(
-                email: email ?? "",
-                password: password ?? ""
-            )
         }
+        
     }
     
     private func isValid(email: String?) -> Bool {
@@ -70,17 +74,18 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }
     
     private func doLoginWith(email: String, password: String) {
-        print("dologinwith")
+//        defer {
+//            viewState?(.loading(false))
+//        }
         Task.init {
             do {
                 let token = try await apiProvider.login(for: email, with: password, apiRouter: .login)
                 
                 guard !token.isEmpty else {
-                    print("Aquí hemos caído")
                     return
                 }
                 
-                print("Tokenaso: \(token)")
+//                print("Tokenaso: \(token)")
                 secureDataProvider.save(token: token)
                 viewState?(.navigateToNext)
             } catch {

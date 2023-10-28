@@ -20,7 +20,7 @@ final class SplashView: UIView {
         return imageView
     }()
     
-    private let activityIndicatorUiView: UIView = {
+    private let splashActivityIndicatorUiView: UIView = {
         let uiView = UIView()
 //        uiView.layer.cornerRadius = 20
 //        uiView.backgroundColor = .black.withAlphaComponent(0.7)
@@ -29,17 +29,17 @@ final class SplashView: UIView {
         return uiView
     }()
     
-    public let splashActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.style = .large
-        activityIndicator.color = .green
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        return activityIndicator
-    }()
+//    public let splashActivityIndicator: UIActivityIndicatorView = {
+//        let activityIndicator = UIActivityIndicatorView()
+//        activityIndicator.style = .large
+//        activityIndicator.color = .green
+//        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//        return activityIndicator
+//    }()
     
 //    var animationView = LottieAnimationView(name: "dragonBallSplashAnimation")
-    public let animationView: LottieAnimationView = {
+    public let splashAnimationView: LottieAnimationView = {
         let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
         animation.loopMode = .loop
         animation.play()
@@ -71,23 +71,23 @@ final class SplashView: UIView {
     private func addViews() {
 //        addSubview(backgroundImage)
 //        addSubview(splashActivityIndicator)
-        addSubview(activityIndicatorUiView)
-        addSubview(animationView)
+        addSubview(splashActivityIndicatorUiView)
+        addSubview(splashAnimationView)
     }
 
     private func applyConstraints() {
-        let activityIndicatorUiViewConstraints = [
+        let splashActivityIndicatorUiViewConstraints = [
 //            activityIndicatorUiView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicatorUiView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            splashActivityIndicatorUiView.centerYAnchor.constraint(equalTo: centerYAnchor),
 //            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
-            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 125),
-            activityIndicatorUiView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            activityIndicatorUiView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            splashActivityIndicatorUiView.heightAnchor.constraint(equalToConstant: 125),
+            splashActivityIndicatorUiView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            splashActivityIndicatorUiView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ]
         
-        let animationViewConstraints = [
-            animationView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            animationView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        let splashAnimationViewConstraints = [
+            splashAnimationView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            splashAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         
 //        let splashActivityIndicatorConstraints = [
@@ -96,8 +96,8 @@ final class SplashView: UIView {
 //        ]
 
 //        NSLayoutConstraint.activate(splashActivityIndicatorConstraints)
-        NSLayoutConstraint.activate(animationViewConstraints)
-        NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
+        NSLayoutConstraint.activate(splashAnimationViewConstraints)
+        NSLayoutConstraint.activate(splashActivityIndicatorUiViewConstraints)
     }
     
 }
