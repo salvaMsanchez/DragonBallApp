@@ -52,6 +52,16 @@ final class LoginView: UIView {
         return textField
     }()
     
+    private let invalidEmailText: UILabel = {
+        let label = UILabel()
+        label.text = "Indique un email válido"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .systemRed
+//        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let passwordContainerView: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.clear.cgColor
@@ -85,6 +95,16 @@ final class LoginView: UIView {
         textField.leftViewMode = .always
         
         return textField
+    }()
+    
+    private let invalidPasswordText: UILabel = {
+        let label = UILabel()
+        label.text = "Indique una password válida"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .systemRed
+//        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var loginContinueButton: UIButton = {
@@ -142,8 +162,10 @@ final class LoginView: UIView {
     private func addViews() {
         addSubview(emailContainerView)
         emailContainerView.addSubview(emailTextField)
+        addSubview(invalidEmailText)
         addSubview(passwordContainerView)
         passwordContainerView.addSubview(passwordTextField)
+        addSubview(invalidPasswordText)
         addSubview(loginContinueButton)
         addSubview(activityIndicatorUiView)
         addSubview(animationView)
@@ -153,34 +175,46 @@ final class LoginView: UIView {
         let emailContainerViewConstraints = [
             emailContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             emailContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            emailContainerView.bottomAnchor.constraint(equalTo: passwordContainerView.topAnchor, constant: -16),
-            emailContainerView.heightAnchor.constraint(equalToConstant: 44)
+            emailContainerView.bottomAnchor.constraint(equalTo: invalidEmailText.topAnchor, constant: -6),
+            emailContainerView.heightAnchor.constraint(equalToConstant: 48)
         ]
         
         let emailTextFieldConstraints = [
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            emailTextField.heightAnchor.constraint(equalToConstant: 44),
+            emailTextField.heightAnchor.constraint(equalToConstant: 48),
+        ]
+        
+        let invalidEmailTextConstraints = [
+            invalidEmailText.bottomAnchor.constraint(equalTo: passwordContainerView.topAnchor, constant: -6),
+            invalidEmailText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+            invalidEmailText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ]
         
         let passwordContainerViewConstraints = [
             passwordContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             passwordContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             passwordContainerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            passwordContainerView.heightAnchor.constraint(equalToConstant: 44)
+            passwordContainerView.heightAnchor.constraint(equalToConstant: 48)
         ]
         
         let passwordTextFieldConstraints = [
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 44)
+            passwordTextField.heightAnchor.constraint(equalToConstant: 48)
+        ]
+        
+        let invalidPasswordTextConstraints = [
+            invalidPasswordText.topAnchor.constraint(equalTo: passwordContainerView.bottomAnchor, constant: 6),
+            invalidPasswordText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+            invalidPasswordText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ]
         
         let loginContinueButtonConstraints = [
             loginContinueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             loginContinueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            loginContinueButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            loginContinueButton.heightAnchor.constraint(equalToConstant: 44)
+            loginContinueButton.topAnchor.constraint(equalTo: invalidPasswordText.bottomAnchor, constant: 6),
+            loginContinueButton.heightAnchor.constraint(equalToConstant: 48)
         ]
         
         let activityIndicatorUiViewConstraints = [
@@ -198,8 +232,10 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate(emailContainerViewConstraints)
         NSLayoutConstraint.activate(emailTextFieldConstraints)
+        NSLayoutConstraint.activate(invalidEmailTextConstraints)
         NSLayoutConstraint.activate(passwordContainerViewConstraints)
         NSLayoutConstraint.activate(passwordTextFieldConstraints)
+        NSLayoutConstraint.activate(invalidPasswordTextConstraints)
         NSLayoutConstraint.activate(loginContinueButtonConstraints)
         NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
         NSLayoutConstraint.activate(animationViewConstraints)
