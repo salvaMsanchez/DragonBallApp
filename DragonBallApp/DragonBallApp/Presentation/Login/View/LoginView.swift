@@ -18,6 +18,32 @@ final class LoginView: UIView {
     
     var delegate: LoginViewDelegate?
     
+    private let titleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "title")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    public let logInText: UILabel = {
+        let label = UILabel()
+        label.text = "Iniciar sesión"
+        label.font = UIFont.systemFont(ofSize: 24)
+        label.textColor = .systemOrange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    public let accessText: UILabel = {
+        let label = UILabel()
+        label.text = "Acceda a su cuenta"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let emailContainerView: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.clear.cgColor
@@ -160,6 +186,9 @@ final class LoginView: UIView {
     }
     
     private func addViews() {
+        addSubview(titleImageView)
+        addSubview(logInText)
+        addSubview(accessText)
         addSubview(emailContainerView)
         emailContainerView.addSubview(emailTextField)
         addSubview(invalidEmailText)
@@ -172,6 +201,24 @@ final class LoginView: UIView {
     }
     
     private func applyConstraints() {
+        let titleImageViewConstraints = [
+            titleImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleImageView.bottomAnchor.constraint(equalTo: logInText.topAnchor, constant: -40),
+            titleImageView.heightAnchor.constraint(equalToConstant: 60)
+        ]
+        
+        let logInTextConstraints = [
+            logInText.bottomAnchor.constraint(equalTo: accessText.topAnchor, constant: -6),
+            logInText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            logInText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ]
+        
+        let accessTextConstraints = [
+            accessText.bottomAnchor.constraint(equalTo: emailContainerView.topAnchor, constant: -32),
+            accessText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            accessText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ]
+        
         let emailContainerViewConstraints = [
             emailContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             emailContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
@@ -230,6 +277,9 @@ final class LoginView: UIView {
             animationView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         
+        NSLayoutConstraint.activate(logInTextConstraints)
+        NSLayoutConstraint.activate(accessTextConstraints)
+        NSLayoutConstraint.activate(titleImageViewConstraints)
         NSLayoutConstraint.activate(emailContainerViewConstraints)
         NSLayoutConstraint.activate(emailTextFieldConstraints)
         NSLayoutConstraint.activate(invalidEmailTextConstraints)

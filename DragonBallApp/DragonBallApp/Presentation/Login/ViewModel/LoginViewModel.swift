@@ -45,14 +45,16 @@ final class LoginViewModel: LoginViewControllerDelegate {
                 guard self.isValid(email: email) else {
                     self.viewState?(.loading(false))
                     self.viewState?(.showErrorEmail("Indique un email válido")) // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
-                    print("Email invalid")
+                    self.viewState?(.hideErrorPassword)
+//                    print("Email invalid")
                     return
                 }
                 
                 guard self.isValid(password: password) else {
                     self.viewState?(.loading(false))
                     self.viewState?(.showErrorPassword("Indique una contraseña válida"))
-                    print("Password invalid")
+                    self.viewState?(.hideErrorEmail)
+//                    print("Password invalid")
                     return
                 }
                 

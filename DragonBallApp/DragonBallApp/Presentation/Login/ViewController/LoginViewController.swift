@@ -21,7 +21,9 @@ protocol LoginViewControllerDelegate {
 enum LoginViewState {
     case loading(_ isLoading: Bool)
     case showErrorEmail(_ error: String?)
+    case hideErrorEmail
     case showErrorPassword(_ error: String?)
+    case hideErrorPassword
     case navigateToNext
 }
 
@@ -66,9 +68,13 @@ final class LoginViewController: UIViewController {
                     case .showErrorEmail(let error):
                         self?.loginView.invalidEmailText.text = error
                         self?.loginView.invalidEmailText.isHidden = (error == nil || error?.isEmpty == true)
+                    case .hideErrorEmail:
+                        self?.loginView.invalidEmailText.isHidden = true
                     case .showErrorPassword(let error):
                         self?.loginView.invalidPasswordText.text = error
                         self?.loginView.invalidPasswordText.isHidden = (error == nil || error?.isEmpty == true)
+                    case .hideErrorPassword:
+                        self?.loginView.invalidPasswordText.isHidden = true
                     case .navigateToNext:
                         print("A navegar!")
                         let galleryViewController = GalleryViewController()
