@@ -24,6 +24,7 @@ enum LoginViewState {
     case hideErrorEmail
     case showErrorPassword(_ error: String?)
     case hideErrorPassword
+    case showAlertFailedAuthentication
     case navigateToNext
 }
 
@@ -75,6 +76,14 @@ final class LoginViewController: UIViewController {
                         self?.loginView.invalidPasswordText.isHidden = (error == nil || error?.isEmpty == true)
                     case .hideErrorPassword:
                         self?.loginView.invalidPasswordText.isHidden = true
+                    case .showAlertFailedAuthentication:
+                        let alertController = UIAlertController(
+                            title: "Autenticación fallida",
+                            message: "Las credenciales proporcionadas son incorrectas. Por favor, verifica tu correo electrónico y contraseña e inténtalo nuevamente",
+                            preferredStyle: .alert
+                        )
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(alertController, animated: true)
                     case .navigateToNext:
                         print("A navegar!")
                         let galleryViewController = GalleryViewController()

@@ -78,9 +78,6 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }
     
     private func doLoginWith(email: String, password: String) {
-//        defer {
-//            viewState?(.loading(false))
-//        }
         Task.init {
             do {
                 let token = try await apiProvider.login(for: email, with: password, apiRouter: .login)
@@ -95,6 +92,8 @@ final class LoginViewModel: LoginViewControllerDelegate {
                 viewState?(.navigateToNext)
             } catch {
                 print(error.localizedDescription)
+                viewState?(.loading(false))
+                viewState?(.showAlertFailedAuthentication)
             }
         }
     }
