@@ -35,13 +35,6 @@ final class ExploreViewController: UIViewController {
         return map
     }()
     
-    private lazy var loginContinueButton: UIButton = {
-        let button = UIButton(type: .detailDisclosure)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,6 +88,8 @@ final class ExploreViewController: UIViewController {
     }
     
     func addPins() {
+        mapView.removeAnnotations(mapView.annotations)
+        
         guard let locations = viewModel?.locations,
         let heroes = viewModel?.heroes else {
             return
@@ -121,6 +116,7 @@ final class ExploreViewController: UIViewController {
     @objc
     func buttonTapped(sender: UIButton) {
         let index = sender.tag
+        print("El índice al pulsar es: \(index)")
         
         if index < annotations.count {
             let annotation = annotations[index]
@@ -129,10 +125,9 @@ final class ExploreViewController: UIViewController {
                       let model = viewModel?.heroBy(name: title) else {
                     return
                 }
-                let detailViewController = DetailViewController()
-                detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: false)
-                detailViewController.modalPresentationStyle = .formSheet
-                present(detailViewController, animated: true)
+                let exploreDetailViewController = ExploreDetailViewController()
+                exploreDetailViewController.viewModel = ExploreDetailViewModel(hero: model)
+                present(exploreDetailViewController, animated: true)
             }
         }
     }
@@ -156,31 +151,19 @@ extension ExploreViewController: MKMapViewDelegate {
             pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             annotationView?.image = resizedImage
-            
-            annotations.append(annotation)
-            
-            let rightButton: UIButton = UIButton(type: .detailDisclosure)
-            if let index = annotations.firstIndex(where: { $0.isEqual(annotation) }) {
-                rightButton.tag = index
-            }
-            rightButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            
-            annotationView?.rightCalloutAccessoryView = rightButton
-        } else {
-            annotationView?.annotation = annotation
         }
+
+        annotations.append(annotation)
+        
+        let rightButton: UIButton = UIButton(type: .detailDisclosure)
+        
+        if let index = annotations.lastIndex(where: { $0.title == annotation.title }) {
+            rightButton.tag = index
+        }
+        rightButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
+        annotationView?.rightCalloutAccessoryView = rightButton
 
         return annotationView
     }
-    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        guard let annotationTitle = view.annotation?.title,
-//              let heroName = annotationTitle,
-//              let model = viewModel?.heroBy(name: heroName) else {
-//            return
-//        }
-//        let detailViewController = DetailViewController()
-//        detailViewController.viewModel = DetailViewModel(hero: model)
-//        navigationController?.pushViewController(detailViewController, animated: true)
-//    }
 }

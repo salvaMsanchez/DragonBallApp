@@ -1,14 +1,14 @@
 //
-//  DetailView.swift
+//  ExploreDetailView.swift
 //  DragonBallApp
 //
-//  Created by Salva Moreno on 16/10/23.
+//  Created by Salva Moreno on 29/10/23.
 //
 
 import UIKit
 import Kingfisher
 
-final class DetailView: UIView {
+final class ExploreDetailView: UIView {
     
     public var layoutMarginsGuideActive = false
     
@@ -65,22 +65,6 @@ final class DetailView: UIView {
         return textView
     }()
     
-    public lazy var backButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        button.layer.cornerRadius = button.frame.width / 2
-        button.layer.masksToBounds = true
-        button.layer.backgroundColor = UIColor.systemBrown.cgColor
-        if let uiImage = UIImage(systemName: "chevron.backward") {
-            let image = uiImage.withRenderingMode(.alwaysTemplate)
-            button.setImage(image, for: .normal)
-            button.tintColor = UIColor.systemRed
-        }
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     // MARK: - Initializers -
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -105,12 +89,11 @@ final class DetailView: UIView {
         descriptionHeroUiView.addSubview(heroNameLabel)
         descriptionHeroUiView.addSubview(heroDescriptionText)
         addSubview(shadowView)
-        addSubview(backButton)
     }
     
     public func applyConstraints() {
         let heroImageConstraints = [
-            heroImage.topAnchor.constraint(equalTo: topAnchor, constant: 125),
+            heroImage.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             heroImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             heroImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             heroImage.heightAnchor.constraint(equalToConstant: 225)
@@ -142,19 +125,11 @@ final class DetailView: UIView {
             heroDescriptionText.bottomAnchor.constraint(equalTo: descriptionHeroUiView.bottomAnchor, constant: -16)
         ]
         
-        let backButtonConstraints = [
-            backButton.topAnchor.constraint(equalTo: topAnchor, constant: 164),
-            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            backButton.widthAnchor.constraint(equalToConstant: 50),
-            backButton.heightAnchor.constraint(equalToConstant: 50)
-        ]
-        
         NSLayoutConstraint.activate(heroImageConstraints)
         NSLayoutConstraint.activate(shadowViewConstraints)
         NSLayoutConstraint.activate(descriptionHeroUiViewConstraints)
         NSLayoutConstraint.activate(heroNameLabelConstraints)
         NSLayoutConstraint.activate(heroDescriptionTextConstraints)
-        NSLayoutConstraint.activate(backButtonConstraints)
     }
     
     func configure(with model: Hero) {
@@ -163,40 +138,4 @@ final class DetailView: UIView {
         heroDescriptionText.text = model.description
     }
     
-    @objc
-    func buttonTapped() {
-        zoomOut()
-        NotificationCenter.default.post(name: NSNotification.Name("BackButtonTapped"), object: nil)
-    }
-    
-    @objc
-    func buttonTouchDown() {
-        zoomIn()
-    }
-    
-}
-
-// MARK: Animations
-extension DetailView {
-    func zoomIn() {
-        UIView.animate(
-            withDuration: 0.50,
-            delay: 0,
-            usingSpringWithDamping: 0.2,
-            initialSpringVelocity: 0.5
-        ) { [weak self] in
-            self?.backButton.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-        }
-    }
-
-    func zoomOut() {
-        UIView.animate(
-            withDuration: 0.50,
-            delay: 0,
-            usingSpringWithDamping: 0.4,
-            initialSpringVelocity: 2
-        ) { [weak self] in
-            self?.backButton.transform = .identity
-        }
-    }
 }
