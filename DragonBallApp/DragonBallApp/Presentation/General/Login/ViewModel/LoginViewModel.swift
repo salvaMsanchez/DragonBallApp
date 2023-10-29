@@ -42,11 +42,11 @@ final class LoginViewModel: LoginViewControllerDelegate {
     func onLoginPressed(email: String?, password: String?) {
         viewState?(.loading(true))
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
             DispatchQueue.global().async {
                 guard self.isValid(email: email) else {
                     self.viewState?(.loading(false))
-                    self.viewState?(.showErrorEmail("Indique un email válido")) // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
+                    self.viewState?(.showErrorEmail("Indique un email válido"))
                     self.viewState?(.hideErrorPassword)
                     return
                 }
@@ -72,7 +72,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }
     
     func isValid(password: String?) -> Bool {
-        password?.isEmpty == false && (password?.count ?? 0) >= 3 // los números deberían estar en variables constantes!! y no hardcodearlos
+        password?.isEmpty == false && (password?.count ?? 0) >= 3
     }
     
     private func doLoginWith(email: String, password: String) {

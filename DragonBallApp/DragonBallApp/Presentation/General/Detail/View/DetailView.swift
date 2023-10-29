@@ -15,10 +15,8 @@ final class DetailView: UIView {
     // MARK: - UI components -
     private let heroImage: UIImageView = {
         let imageView = UIImageView()
-//        imageView.image = UIImage(named: "goku")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -39,8 +37,6 @@ final class DetailView: UIView {
         let uiView = UIView()
         uiView.backgroundColor = .systemBackground
         uiView.layer.cornerRadius = 20
-//        uiView.layer.borderColor = UIColor.blue.cgColor
-//        uiView.layer.borderWidth = 3
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
@@ -69,13 +65,13 @@ final class DetailView: UIView {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         button.layer.cornerRadius = button.frame.width / 2
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.systemOrange.cgColor
+        button.layer.borderColor = UIColor(named: "dragonBallColor")?.cgColor
         button.layer.masksToBounds = true
-        button.layer.backgroundColor = UIColor.systemBrown.cgColor
+        button.layer.backgroundColor = UIColor(named: "mainBackgroundColor")?.cgColor
         if let uiImage = UIImage(systemName: "chevron.backward") {
             let image = uiImage.withRenderingMode(.alwaysTemplate)
             button.setImage(image, for: .normal)
-            button.tintColor = UIColor.systemOrange
+            button.tintColor = UIColor(named: "dragonBallColor")
         }
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)

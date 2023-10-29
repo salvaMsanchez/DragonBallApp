@@ -37,10 +37,6 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationItem.hidesBackButton = true
-//        let customBackButton = UIBarButtonItem(title: "Volver", style: .plain, target: self, action: nil)
-//        navigationItem.leftBarButtonItem = detailView.backButton
-        
         NotificationCenter.default.addObserver(self, selector: #selector(backDetail), name: NSNotification.Name("BackButtonTapped"), object: nil)
         
         setObservers()
