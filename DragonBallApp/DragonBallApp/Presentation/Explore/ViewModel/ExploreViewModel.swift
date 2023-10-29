@@ -38,6 +38,9 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
         if self.userDefaultsManager.getIsLogged() ?? false {
             defer {
                 viewState?(.addPins)
+                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+                    self?.viewState?(.loading(false))
+                }
             }
             dataPersistanceManager.fetchingHeroes { [weak self] result in
                 switch result {
@@ -91,6 +94,9 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
                     self?.sortLocations()
                     self?.saveLocationsInTheDatabase()
                     self?.viewState?(.addPins)
+                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+                        self?.viewState?(.loading(false))
+                    }
                 }
             }
         }

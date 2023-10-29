@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Lottie
 
 protocol ExploreViewControllerDelegate {
     var viewState: ((ExploreViewState) -> Void)? { get set }
@@ -18,6 +19,7 @@ protocol ExploreViewControllerDelegate {
 
 // MARK: View State -
 enum ExploreViewState {
+    case loading(_ isLoading: Bool)
     case addPins
     case navigateToDetail(_ model: Hero)
 }
@@ -35,6 +37,24 @@ final class ExploreViewController: UIViewController {
         return map
     }()
     
+    private let activityIndicatorUiView: UIView = {
+        let uiView = UIView()
+//        uiView.layer.cornerRadius = 20
+        uiView.backgroundColor = .black.withAlphaComponent(0.6)
+//        uiView.isHidden = true
+        uiView.translatesAutoresizingMaskIntoConstraints = false
+        return uiView
+    }()
+    
+    private let animationView: LottieAnimationView = {
+        let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
+        animation.loopMode = .loop
+        animation.play()
+//        animation.isHidden = true
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        return animation
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,11 +68,6 @@ final class ExploreViewController: UIViewController {
         viewModel?.onViewAppear()
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        mapView.frame = view.bounds
-//    }
-    
     private func setup() {
         addViews()
         applyConstraints()
@@ -60,6 +75,8 @@ final class ExploreViewController: UIViewController {
 
     private func addViews() {
         view.addSubview(mapView)
+        view.addSubview(activityIndicatorUiView)
+        view.addSubview(animationView)
     }
 
     private func applyConstraints() {
@@ -69,14 +86,31 @@ final class ExploreViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
+        
+        let activityIndicatorUiViewConstraints = [
+            activityIndicatorUiView.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicatorUiView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorUiView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicatorUiView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+        
+        let animationViewConstraints = [
+            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
 
         NSLayoutConstraint.activate(mapViewConstraints)
+        NSLayoutConstraint.activate(activityIndicatorUiViewConstraints)
+        NSLayoutConstraint.activate(animationViewConstraints)
     }
     
     private func setObservers() {
         viewModel?.viewState = { state in
             DispatchQueue.main.async { [weak self] in
                 switch state {
+                    case .loading(let isLoading):
+                        self?.activityIndicatorUiView.isHidden = !isLoading
+                        self?.animationView.isHidden = !isLoading
                     case .addPins:
                         self?.addPins()
                     case .navigateToDetail(_):
@@ -116,7 +150,6 @@ final class ExploreViewController: UIViewController {
     @objc
     func buttonTapped(sender: UIButton) {
         let index = sender.tag
-        print("El índice al pulsar es: \(index)")
         
         if index < annotations.count {
             let annotation = annotations[index]

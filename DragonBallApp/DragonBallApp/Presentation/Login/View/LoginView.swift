@@ -148,7 +148,7 @@ final class LoginView: UIView {
     
     public let activityIndicatorUiView: UIView = {
         let uiView = UIView()
-        uiView.layer.cornerRadius = 20
+//        uiView.layer.cornerRadius = 20
         uiView.backgroundColor = .black.withAlphaComponent(0.6)
         uiView.isHidden = true
         uiView.translatesAutoresizingMaskIntoConstraints = false
@@ -272,6 +272,7 @@ final class LoginView: UIView {
 //            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
 //            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 180)
         ]
+        
         let animationViewConstraints = [
             animationView.centerXAnchor.constraint(equalTo: centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: centerYAnchor)

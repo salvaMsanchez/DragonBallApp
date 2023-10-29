@@ -53,6 +53,8 @@ final class SearchViewController: UIViewController {
         searchTableView.delegate = self
         
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
         navigationController?.navigationBar.tintColor = .label
         
         searchController.searchResultsUpdater = self
@@ -147,7 +149,7 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController: SearchHeroViewControllerNavigationDelegate {
     func searchResultsViewControllerDidTapItem(_ model: Hero) {
         let detailViewController = DetailViewController()
-        detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
+        detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: false)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(detailViewController, animated: true)

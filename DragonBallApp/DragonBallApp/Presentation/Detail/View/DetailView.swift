@@ -68,12 +68,14 @@ final class DetailView: UIView {
     public lazy var backButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         button.layer.cornerRadius = button.frame.width / 2
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.systemOrange.cgColor
         button.layer.masksToBounds = true
         button.layer.backgroundColor = UIColor.systemBrown.cgColor
         if let uiImage = UIImage(systemName: "chevron.backward") {
             let image = uiImage.withRenderingMode(.alwaysTemplate)
             button.setImage(image, for: .normal)
-            button.tintColor = UIColor.systemRed
+            button.tintColor = UIColor.systemOrange
         }
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
@@ -110,7 +112,7 @@ final class DetailView: UIView {
     
     public func applyConstraints() {
         let heroImageConstraints = [
-            heroImage.topAnchor.constraint(equalTo: topAnchor, constant: 125),
+            heroImage.topAnchor.constraint(equalTo: topAnchor, constant: 140),
             heroImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             heroImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             heroImage.heightAnchor.constraint(equalToConstant: 225)
@@ -143,7 +145,7 @@ final class DetailView: UIView {
         ]
         
         let backButtonConstraints = [
-            backButton.topAnchor.constraint(equalTo: topAnchor, constant: 164),
+            backButton.topAnchor.constraint(equalTo: topAnchor, constant: 114),
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             backButton.widthAnchor.constraint(equalToConstant: 50),
             backButton.heightAnchor.constraint(equalToConstant: 50)

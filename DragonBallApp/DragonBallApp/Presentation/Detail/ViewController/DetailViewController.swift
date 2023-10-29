@@ -26,6 +26,7 @@ final class DetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        
         view = detailView
         
         if let hero = viewModel?.heroModel {
@@ -36,7 +37,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.hidesBackButton = true
+//        navigationItem.hidesBackButton = true
 //        let customBackButton = UIBarButtonItem(title: "Volver", style: .plain, target: self, action: nil)
 //        navigationItem.leftBarButtonItem = detailView.backButton
         
