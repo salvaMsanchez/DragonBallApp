@@ -11,6 +11,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
+    private let userDefaultsManager: UserDefaultsManagerProtocol
     
     // MARK: - Properties -
     var viewState: ((LoginViewState) -> Void)?
@@ -32,9 +33,10 @@ final class LoginViewModel: LoginViewControllerDelegate {
     }()
     
     // MARK: - Initializers -
-    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
+    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
+        self.userDefaultsManager = userDefaultsManager
     }
     
     func onLoginPressed(email: String?, password: String?) {
@@ -89,6 +91,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
                 
 //                print("Tokenaso: \(token)")
                 secureDataProvider.save(token: token)
+                userDefaultsManager.save(isLogged: false)
                 viewState?(.navigateToNext)
             } catch {
                 print(error.localizedDescription)

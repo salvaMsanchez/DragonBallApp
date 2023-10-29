@@ -15,7 +15,7 @@ final class SplashViewModel: SplashViewControllerDelegate {
     var viewState: ((SplashViewState) -> Void)?
     
     lazy var loginViewModel: LoginViewControllerDelegate = {
-        LoginViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider)
+        LoginViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider, userDefaultsManager: userDefaultsManager)
     }()
     
     lazy var galleryViewModel: GalleryViewControllerDelegate = {

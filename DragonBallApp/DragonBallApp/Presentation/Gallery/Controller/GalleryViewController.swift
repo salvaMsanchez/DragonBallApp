@@ -12,7 +12,7 @@ import Lottie
 protocol GalleryViewControllerDelegate {
     var viewState: ((GalleryViewState) -> Void)? { get set }
     var heroesCount: Int { get }
-    var splashViewModel: SplashViewControllerDelegate { get }
+    var loginViewModel: LoginViewControllerDelegate { get }
     func onViewAppear()
 //    func onViewDidAppear()
     func heroBy(index: Int) -> Hero?
@@ -160,10 +160,10 @@ final class GalleryViewController: UIViewController {
         viewModel?.onLogOutButtonPressed(completion: { [weak self] result in
             switch result {
                 case .success(()):
-                    let splashViewController = SplashViewController()
-                    splashViewController.viewModel = self?.viewModel?.splashViewModel
-                    splashViewController.modalPresentationStyle = .fullScreen
-                    let navVC = UINavigationController(rootViewController: splashViewController)
+                    let loginViewController = LoginViewController()
+                    loginViewController.viewModel = self?.viewModel?.loginViewModel
+                    loginViewController.modalPresentationStyle = .fullScreen
+                    let navVC = UINavigationController(rootViewController: loginViewController)
                     navVC.modalPresentationStyle = .fullScreen
                     self?.present(navVC, animated: true)
                 case .failure(let error):
