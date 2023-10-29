@@ -35,6 +35,9 @@
 	* [Características adicionales de mejora](#caracteristicas)
 	* [Problemas, decisiones y resolución](#problemas)
 		* [Añadir gradiente a vista específica dentro de una `UITableViewCell`](#problemas1)
+		* [Comportamiento inesperado `UICollectionViewCell`: la imagen y el gradiente aparecen en celdas que no se ven en pantalla y cuando pulsas en ellas, aparecen](#problemas2)
+		* [`UILabel` sobre gradiente](#problemas3)
+		* [Mala adjudicación del tag del `UIButton` cada vez que se creaba una `annotation` en la función `mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?` del `MKMapViewDelegate`](#problemas4)
 
 <a name="herramientas"></a>
 ## Herramientas
@@ -197,6 +200,19 @@ private func addViews() {
     cardView.addSubview(heroNameLabel)
 }
 ```
+
+<a name="problemas4"></a>
+#### Mala adjudicación del tag del `UIButton` cada vez que se creaba una `annotation` en la función `mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?` del `MKMapViewDelegate` 
+
+A pesar de poder navegar al detalle del personaje empleando el método `didSelect` del `MKMapViewDelegate`, no me gustaba el efecto que realizaba ya que navegaba directamente sin que el usuario pudiera saber a qué pertenece ese *pin* en el mapa y pudiera decidir si quiere ampliar información.
+
+Por tanto, decidí crear un botón personalizado a la derecha del nombre del personaje para que, así, el usuario tuviera la capacidad de elegir si quiere o no saber más. Sin embargo, tuve problemas con la adjudicación del modelo del héroe a cada botón una vez que se instanciaba.
+
+Cuando lo desarrollé por primera vez, el comportamiento era correcto con los *pins* que se inicializaban por primera vez en el mapa; pero, a la hora de inicializar aquellos que se reusaban, no estaba aportándole al botón un *tag* al botón `rightButton` cuando `annotationView` era `nil`. Esto sucedía en el bloque `if` del código. Así que cuando navegaba por el mapa y encontraba *pins* que no se habían inicializado al aparecer la vista completa, navegaba al detalle de un héroe que no era el correcto.
+
+Se quería asignar un *tag* al botón incluso cuando el código entrara en la parte del `else`, es decir, cuando `annotationView` no era `nil`, por lo que se movió la lógica de asignación del *tag* y la adición de la anotación fuera de las condiciones `if` y `else`. De esta manera, independientemente de si `annotationView` es `nil` o no, se asignará el *tag* al botón `rightButton`.
+
+Esto significa que ahora se está asignando un *tag* a `rightButton` tanto en el caso de que `annotationView` sea `nil` (cuando se crea una nueva vista de anotación) como en el caso de que no lo sea (cuando se reutiliza una vista de anotación existente).
 
 ---
 
