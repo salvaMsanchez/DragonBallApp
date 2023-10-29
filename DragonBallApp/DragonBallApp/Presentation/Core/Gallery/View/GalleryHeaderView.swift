@@ -7,10 +7,12 @@
 
 import UIKit
 
+// MARK: - GalleryHeaderView -
 final class GalleryHeaderView: UICollectionReusableView {
-    
+    // MARK: - Properties -
     static let identifier = "GalleryHeaderView"
     
+    // MARK: - UI elements -
     private let headerImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "shenron")
@@ -30,6 +32,7 @@ final class GalleryHeaderView: UICollectionReusableView {
         return label
     }()
     
+    // MARK: - Initializers -
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -43,6 +46,7 @@ final class GalleryHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()
@@ -69,5 +73,4 @@ final class GalleryHeaderView: UICollectionReusableView {
         NSLayoutConstraint.activate(headerImageConstraints)
         NSLayoutConstraint.activate(headerLabelConstraints)
     }
-    
 }

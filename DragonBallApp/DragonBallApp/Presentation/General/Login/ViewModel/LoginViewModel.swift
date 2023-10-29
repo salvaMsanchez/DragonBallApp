@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - LoginViewModel -
 final class LoginViewModel: LoginViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
@@ -39,6 +40,7 @@ final class LoginViewModel: LoginViewControllerDelegate {
         self.userDefaultsManager = userDefaultsManager
     }
     
+    // MARK: Functions -
     func onLoginPressed(email: String?, password: String?) {
         viewState?(.loading(true))
         

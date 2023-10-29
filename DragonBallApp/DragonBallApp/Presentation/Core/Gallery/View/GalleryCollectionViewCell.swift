@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 
+// MARK: - GalleryCollectionViewCell -
 final class GalleryCollectionViewCell: UICollectionViewCell {
     // MARK: - Static properties -
     static let identifier = "GalleryCollectionViewCell"
@@ -83,19 +84,6 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-////        heroImageView.frame = cardView.bounds
-//
-////        print(cardView.bounds)
-//
-////        if !gradientAdded && cardView.bounds != .zero {
-////            addGradient()
-////            cardView.addSubview(heroNameLabel)
-////            gradientAdded = true
-////        }
-//    }
     
     // MARK: - Functions -
     public func cellPressedAnimation() {

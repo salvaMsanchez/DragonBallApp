@@ -7,10 +7,12 @@
 
 import UIKit
 
+// MARK: - FavoritesTableViewCell -
 final class FavoritesTableViewCell: UITableViewCell {
     // MARK: - Static properties -
     static let identifier = "FavoritesTableViewCell"
     
+    // MARK: - UI elements -
     private let heroImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -45,6 +47,7 @@ final class FavoritesTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()

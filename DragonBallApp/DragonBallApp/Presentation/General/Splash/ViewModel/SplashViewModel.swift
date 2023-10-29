@@ -7,12 +7,14 @@
 
 import Foundation
 
+// MARK: SplashViewModel -
 final class SplashViewModel: SplashViewControllerDelegate {
-    // MARK: Properties -
+    // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
     private let userDefaultsManager: UserDefaultsManagerProtocol
     
+    // MARK: - Properties -
     var viewState: ((SplashViewState) -> Void)?
     
     lazy var loginViewModel: LoginViewControllerDelegate = {

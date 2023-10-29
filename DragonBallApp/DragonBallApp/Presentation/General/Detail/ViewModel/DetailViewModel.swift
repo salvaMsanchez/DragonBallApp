@@ -7,23 +7,24 @@
 
 import Foundation
 
+// MARK: - DetailViewModel -
 final class DetailViewModel: DetailViewControllerDelegate {
-    
+    // MARK: - Properties -
     private let hero: Hero
     private let backButtonActive: Bool
     var viewState: ((DetailViewState) -> Void)?
+    var heroModel: Hero {
+        hero
+    }
     
+    // MARK: - Initializers -
     init(hero: Hero, backButtonActive: Bool) {
         self.hero = hero
         self.backButtonActive = backButtonActive
     }
     
-    var heroModel: Hero {
-        hero
-    }
-    
+    // MARK: - Functions -
     func onViewAppear() {
         viewState?(.backButton(isActive: backButtonActive))
     }
-    
 }

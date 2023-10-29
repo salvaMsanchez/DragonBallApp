@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 
+// MARK: - SplashView -
 final class SplashView: UIView {
     // MARK: - UI elements -
     private let backgroundImage: UIImageView = {

@@ -7,16 +7,18 @@
 
 import UIKit
 
+// MARK: - Protocol -
 protocol ExploreDetailViewControllerDelegate {
     var heroModel: Hero { get }
 }
 
+// MARK: - ExploreDetailViewController -
 final class ExploreDetailViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: ExploreDetailViewControllerDelegate?
-    
     private let exploreDetailView = ExploreDetailView()
     
+    // MARK: - Lifecycle -
     override func loadView() {
         super.loadView()
         view = exploreDetailView
@@ -36,5 +38,4 @@ final class ExploreDetailViewController: UIViewController {
         presentationController.prefersGrabberVisible = true
         presentationController.preferredCornerRadius = 20
     }
-    
 }

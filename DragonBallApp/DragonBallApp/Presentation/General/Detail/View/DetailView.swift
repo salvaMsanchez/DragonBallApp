@@ -8,10 +8,8 @@
 import UIKit
 import Kingfisher
 
+// MARK: - DetailView -
 final class DetailView: UIView {
-    
-    public var layoutMarginsGuideActive = false
-    
     // MARK: - UI components -
     private let heroImage: UIImageView = {
         let imageView = UIImageView()
@@ -92,6 +90,7 @@ final class DetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()
@@ -106,7 +105,7 @@ final class DetailView: UIView {
         addSubview(backButton)
     }
     
-    public func applyConstraints() {
+    private func applyConstraints() {
         let heroImageConstraints = [
             heroImage.topAnchor.constraint(equalTo: topAnchor, constant: 140),
             heroImage.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -171,7 +170,6 @@ final class DetailView: UIView {
     func buttonTouchDown() {
         zoomIn()
     }
-    
 }
 
 // MARK: Animations

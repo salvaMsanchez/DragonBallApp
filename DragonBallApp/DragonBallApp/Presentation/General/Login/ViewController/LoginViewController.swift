@@ -28,12 +28,13 @@ enum LoginViewState {
     case navigateToNext
 }
 
+// MARK: LoginViewController -
 final class LoginViewController: UIViewController {
-    
+    // MARK: Properties -
     var viewModel: LoginViewControllerDelegate?
-    
     private var loginView = LoginView()
     
+    // MARK: Lifecycle -
     override func loadView() {
         super.loadView()
         
@@ -53,6 +54,7 @@ final class LoginViewController: UIViewController {
         )
     }
     
+    // MARK: Functions -
     @objc
     func dismissKeyboard() {
         // Para ocultar el teclado al pulsar en cualquier punto de la vista
@@ -102,9 +104,9 @@ final class LoginViewController: UIViewController {
             }
         }
     }
-    
 }
 
+// MARK: LoginViewController extension -
 extension LoginViewController: LoginViewDelegate {
     func onLoginButtonTapped(send loginData: LoginData) {
         viewModel?.onLoginPressed(email: loginData.email, password: loginData.password)

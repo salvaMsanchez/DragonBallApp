@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 
+// MARK: - SearchTableViewCell -
 final class SearchTableViewCell: UITableViewCell {
     // MARK: - Static properties -
     static let identifier = "SearchTableViewCell"
@@ -154,7 +155,6 @@ final class SearchTableViewCell: UITableViewCell {
         heroImageView.kf.setImage(with: model.photo)
         heroIndexLabel.text = "#\(index + 1)"
     }
-    
 }
 
 // MARK: - Animations -

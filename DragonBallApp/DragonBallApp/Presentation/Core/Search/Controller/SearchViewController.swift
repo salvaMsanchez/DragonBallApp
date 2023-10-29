@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocol -
 protocol SearchViewControllerDelegate {
     var viewState: ((SearchViewState) -> Void)? { get set }
     var heroesCount: Int { get }
@@ -20,10 +21,12 @@ enum SearchViewState {
     case navigateToDetail(_ model: Hero)
 }
 
+// MARK: - SearchViewController -
 final class SearchViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: SearchViewControllerDelegate?
     
+    // MARK: - UI elements -
     private let searchTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
@@ -38,6 +41,7 @@ final class SearchViewController: UIViewController {
         return controller
     }()
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +69,7 @@ final class SearchViewController: UIViewController {
         searchTableView.frame = view.bounds
     }
     
+    // MARK: - Functions -
     private func onHeroCellPressed(model: Hero) {
         let detailViewController = DetailViewController()
         detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
@@ -86,7 +91,6 @@ final class SearchViewController: UIViewController {
             }
         }
     }
-    
 }
 
 // MARK: - TABLE VIEW EXTENSION -
@@ -119,7 +123,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if let hero = viewModel?.heroBy(index: indexPath.row) {
             onHeroCellPressed(model: hero)
         }
-        
     }
 }
 
@@ -143,6 +146,7 @@ extension SearchViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - SearchHeroViewControllerNavigationDelegate -
 extension SearchViewController: SearchHeroViewControllerNavigationDelegate {
     func searchResultsViewControllerDidTapItem(_ model: Hero) {
         let detailViewController = DetailViewController()

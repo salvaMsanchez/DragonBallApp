@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocol -
 protocol SearchHeroViewControllerNavigationDelegate: AnyObject {
     func searchResultsViewControllerDidTapItem(_ model: Hero)
 }
@@ -22,11 +23,13 @@ enum SearchHeroViewState {
     case navigateToDetail(_ model: Hero)
 }
 
+// MARK: - SearchHeroViewController -
 final class SearchHeroViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: SearchHeroViewControllerDelegate?
     public weak var delegate: SearchHeroViewControllerNavigationDelegate?
     
+    // MARK: - UI Elements -
     public let searchHeroTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
@@ -34,6 +37,7 @@ final class SearchHeroViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,18 +53,7 @@ final class SearchHeroViewController: UIViewController {
         searchHeroTableView.frame = view.bounds
     }
     
-//    private func onHeroCellPressed(model: Hero) {
-//        print("Hola")
-//        let detailViewController = DetailViewController()
-//        detailViewController.viewModel = DetailViewModel(hero: model)
-//        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.navigationController?.pushViewController(detailViewController, animated: true)
-////                self?.present(detailViewController, animated: true)
-//            }
-//        }
-//    }
-    
+    // MARK: - Functions -
     private func setObservers() {
         viewModel?.viewState = { state in
             DispatchQueue.main.async {
@@ -72,9 +65,9 @@ final class SearchHeroViewController: UIViewController {
             }
         }
     }
-    
 }
 
+// MARK: - SearchHeroViewController extension -
 extension SearchHeroViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else {

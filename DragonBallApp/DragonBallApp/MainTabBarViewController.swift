@@ -7,13 +7,15 @@
 
 import UIKit
 
+// MARK: - MainTabBarViewcontroller -
 final class MainTabBarViewcontroller: UITabBarController {
-    
+    // MARK: - Properties -
     private let galleryViewController: GalleryViewController
     private let searchViewController: SearchViewController
     private let exploreViewController: ExploreViewController
     private let favoritesViewController: FavoritesViewController
     
+    // MARK: - Initializers -
     init(galleryViewController: GalleryViewController, searchViewController: SearchViewController, exploreViewController: ExploreViewController, favoritesViewController: FavoritesViewController) {
         self.galleryViewController = galleryViewController
         self.searchViewController = searchViewController
@@ -27,6 +29,7 @@ final class MainTabBarViewcontroller: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,5 +53,4 @@ final class MainTabBarViewcontroller: UITabBarController {
         
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
     }
-    
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - GalleryViewModel -
 final class GalleryViewModel: GalleryViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
@@ -16,7 +17,6 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
     
     // MARK: - Properties -
     private var heroes: Heroes = []
-//    private var isLogged: Bool
     var heroesCount: Int {
         heroes.count
     }
@@ -31,7 +31,6 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         self.secureDataProvider = secureDataProvider
         self.dataPersistanceManager = dataPersistanceManager
         self.userDefaultsManager = userDefaultsManager
-//        self.isLogged = isLogged
     }
     
     func onViewAppear() {
@@ -88,19 +87,6 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         }
     }
     
-//    func onViewDidAppear() {
-//        self.heroes.forEach { hero in
-//            self.dataPersistanceManager.saveHero(hero: hero) { result in
-//                switch result {
-//                    case .success():
-//                        break
-//                    case .failure(let error):
-//                        print(error.localizedDescription)
-//                }
-//            }
-//        }
-//    }
-    
     func heroBy(index: Int) -> Hero? {
         if index >= 0 && index < heroesCount {
             return heroes[index]
@@ -122,11 +108,6 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
     }
     
     func onLogOutButtonPressed(completion: @escaping (Result<Void, DataBaseError>) -> Void) {
-        // TODO: Eliminar CoreData
-        // TODO: Eliminar UserDefaults
-        // TODO: Eliminar Keychain = Cambiar valor a ""
-        
-        // TODO: Integrar DISPATCH GROUP PARA AVISAR QUE HAN ACABADO CON ÉXITO LAS TAREAS Y HACER COMPLETION SUCCESS
         let dispatchGroup = DispatchGroup()
         DispatchQueue.global().async { [weak self] in
             self?.secureDataProvider.save(token: "")
@@ -157,10 +138,8 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
                 })
             }
         }
-        
         dispatchGroup.notify(queue: .main) {
             completion(.success(()))
         }
     }
-    
 }

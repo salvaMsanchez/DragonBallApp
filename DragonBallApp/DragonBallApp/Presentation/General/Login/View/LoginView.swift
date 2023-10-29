@@ -10,14 +10,17 @@ import Lottie
 
 typealias LoginData = (email: String, password: String)
 
+// MARK: - Protocol -
 protocol LoginViewDelegate {
     func onLoginButtonTapped(send loginData: LoginData)
 }
 
+// MARK: - LoginView -
 final class LoginView: UIView {
-    
+    // MARK: - Properties -
     var delegate: LoginViewDelegate?
     
+    // MARK: - UI elements -
     private let titleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -161,6 +164,7 @@ final class LoginView: UIView {
         return animation
     }()
     
+    // MARK: - Init -
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -177,6 +181,7 @@ final class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()
@@ -326,7 +331,6 @@ extension LoginView {
             self?.loginContinueButton.transform = .identity
         }
     }
-
 }
 
 extension LoginView: UITextFieldDelegate {

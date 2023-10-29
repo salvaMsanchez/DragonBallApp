@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocol -
 protocol DetailViewControllerDelegate {
     var viewState: ((DetailViewState) -> Void)? { get set }
     var heroModel: Hero { get }
@@ -18,12 +19,13 @@ enum DetailViewState {
     case backButton(isActive: Bool)
 }
 
+// MARK: - DetailViewController -
 final class DetailViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: DetailViewControllerDelegate?
-    
     private let detailView = DetailView()
     
+    // MARK: - Lifecycle -
     override func loadView() {
         super.loadView()
         
@@ -40,7 +42,6 @@ final class DetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(backDetail), name: NSNotification.Name("BackButtonTapped"), object: nil)
         
         setObservers()
-        
         viewModel?.onViewAppear()
     }
     
@@ -54,6 +55,7 @@ final class DetailViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    // MARK: - Functions -
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
@@ -69,5 +71,4 @@ final class DetailViewController: UIViewController {
     func backDetail() {
         navigationController?.popViewController(animated: true)
     }
-    
 }

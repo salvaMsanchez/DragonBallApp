@@ -25,10 +25,12 @@ enum GalleryViewState {
     case updateData
 }
 
+// MARK: - GalleryViewController -
 final class GalleryViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: GalleryViewControllerDelegate?
     
+    // MARK: - UI elements -
     private let galleryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 191.5, height: 250)
@@ -48,7 +50,7 @@ final class GalleryViewController: UIViewController {
         return uiView
     }()
     
-    public let animationView: LottieAnimationView = {
+    private let animationView: LottieAnimationView = {
         let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
         animation.loopMode = .loop
         animation.play()
@@ -56,6 +58,7 @@ final class GalleryViewController: UIViewController {
         return animation
     }()
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,16 +73,12 @@ final class GalleryViewController: UIViewController {
         viewModel?.onViewAppear()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-////        viewModel?.onViewDidAppear()
-//    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         galleryCollectionView.frame = view.bounds
     }
     
+    // MARK: - Functions -
     private func onHeroCellPressed(model: Hero) {
         let detailViewController = DetailViewController()
         detailViewController.viewModel = DetailViewModel(hero: model, backButtonActive: true)
@@ -164,9 +163,9 @@ final class GalleryViewController: UIViewController {
             }
         })
     }
-    
 }
 
+// MARK: - GalleryViewController extension -
 extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as? GalleryCollectionViewCell else {
@@ -254,5 +253,4 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
 
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
-    
 }

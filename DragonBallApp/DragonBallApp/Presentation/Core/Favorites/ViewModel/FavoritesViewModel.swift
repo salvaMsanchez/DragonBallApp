@@ -7,9 +7,11 @@
 
 import Foundation
 
+// MARK: - FavoritesViewModel -
 final class FavoritesViewModel: FavoritesViewControllerDelegate {
     // MARK: - Dependencies -
     private let dataPersistanceManager: DataPersistanceManagerProtocol
+    
     // MARK: - Properties -
     var viewState: ((FavoritesViewState) -> Void)?
     private var heroes: Heroes = []
@@ -22,6 +24,7 @@ final class FavoritesViewModel: FavoritesViewControllerDelegate {
         self.dataPersistanceManager = dataPersistanceManager
     }
     
+    // MARK: - Functions -
     func onViewWillAppear() {
         dataPersistanceManager.fetchingFavoritesHeroes { [weak self] result in
             switch result {

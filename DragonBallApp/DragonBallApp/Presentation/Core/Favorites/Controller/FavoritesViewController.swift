@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocol -
 protocol FavoritesViewControllerDelegate {
     var viewState: ((FavoritesViewState) -> Void)? { get set }
     var heroesCount: Int { get }
@@ -22,10 +23,12 @@ enum FavoritesViewState {
     case deleteData(_ indexPath: IndexPath, _ animation: UITableView.RowAnimation)
 }
 
+// MARK: - FavoritesViewController -
 final class FavoritesViewController: UIViewController {
-    
+    // MARK: - Properties -
     var viewModel: FavoritesViewControllerDelegate?
     
+    // MARK: - UI elements -
     private let favoritesTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
@@ -33,6 +36,7 @@ final class FavoritesViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +61,7 @@ final class FavoritesViewController: UIViewController {
         favoritesTableView.frame = view.bounds
     }
     
+    // MARK: - Functions -
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {

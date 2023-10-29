@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - ExploreViewModel -
 final class ExploreViewModel: ExploreViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
@@ -34,6 +35,7 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
         self.userDefaultsManager = userDefaultsManager
     }
     
+    // MARK: - Functions -
     func onViewAppear() {
         if self.userDefaultsManager.getIsLogged() ?? false {
             defer {

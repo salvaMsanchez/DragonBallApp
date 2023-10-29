@@ -7,14 +7,16 @@
 
 import Foundation
 
+// MARK: - ExploreDetailViewModel -
 final class ExploreDetailViewModel: ExploreDetailViewControllerDelegate {
+    // MARK: - Properties -
     private let hero: Hero
-    
-    init(hero: Hero) {
-        self.hero = hero
-    }
-    
     var heroModel: Hero {
         hero
+    }
+    
+    // MARK: - Initializers -
+    init(hero: Hero) {
+        self.hero = hero
     }
 }

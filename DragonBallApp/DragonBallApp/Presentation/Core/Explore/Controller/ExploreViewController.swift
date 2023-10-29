@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import Lottie
 
+// MARK: - Protocol -
 protocol ExploreViewControllerDelegate {
     var viewState: ((ExploreViewState) -> Void)? { get set }
     var locations: Locations { get }
@@ -17,19 +18,20 @@ protocol ExploreViewControllerDelegate {
     func heroBy(name: String) -> Hero?
 }
 
-// MARK: View State -
+// MARK: - View State -
 enum ExploreViewState {
     case loading(_ isLoading: Bool)
     case addPins
     case navigateToDetail(_ model: Hero)
 }
 
+// MARK: - ExploreViewController -
 final class ExploreViewController: UIViewController {
-    
+    // MARK: Properties -
     var viewModel: ExploreViewControllerDelegate?
-    
     var annotations: [MKAnnotation] = []
     
+    // MARK: - UI elements -
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
@@ -39,9 +41,7 @@ final class ExploreViewController: UIViewController {
     
     private let activityIndicatorUiView: UIView = {
         let uiView = UIView()
-//        uiView.layer.cornerRadius = 20
         uiView.backgroundColor = .black.withAlphaComponent(0.6)
-//        uiView.isHidden = true
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
@@ -50,11 +50,11 @@ final class ExploreViewController: UIViewController {
         let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
         animation.loopMode = .loop
         animation.play()
-//        animation.isHidden = true
         animation.translatesAutoresizingMaskIntoConstraints = false
         return animation
     }()
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +68,7 @@ final class ExploreViewController: UIViewController {
         viewModel?.onViewAppear()
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()
@@ -164,9 +165,9 @@ final class ExploreViewController: UIViewController {
             }
         }
     }
-    
 }
 
+// MARK: - ExploreViewController extension -
 extension ExploreViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {

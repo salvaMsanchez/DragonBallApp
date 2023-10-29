@@ -8,17 +8,13 @@
 import UIKit
 import Kingfisher
 
+// MARK: - ExploreDetailView -
 final class ExploreDetailView: UIView {
-    
-    public var layoutMarginsGuideActive = false
-    
     // MARK: - UI components -
     private let heroImage: UIImageView = {
         let imageView = UIImageView()
-//        imageView.image = UIImage(named: "goku")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -39,8 +35,6 @@ final class ExploreDetailView: UIView {
         let uiView = UIView()
         uiView.backgroundColor = .systemBackground
         uiView.layer.cornerRadius = 20
-//        uiView.layer.borderColor = UIColor.blue.cgColor
-//        uiView.layer.borderWidth = 3
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
@@ -78,6 +72,7 @@ final class ExploreDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()
@@ -137,5 +132,4 @@ final class ExploreDetailView: UIView {
         heroNameLabel.text = model.name
         heroDescriptionText.text = model.description
     }
-    
 }
