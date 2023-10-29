@@ -121,7 +121,6 @@ final class ExploreViewModel: ExploreViewControllerDelegate {
             dataPersistanceManager.saveLocation(id: $0[0].hero.id, heroLocations: $0) { result in
                 switch result {
                     case .success(()):
-                        print("Localizaciones guardadas con éxito en CoreData")
                         break
                     case .failure(let error):
                         print(error.localizedDescription)

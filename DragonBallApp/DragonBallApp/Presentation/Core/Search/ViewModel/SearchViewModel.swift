@@ -7,12 +7,12 @@
 
 import Foundation
 
+// MARK: - SearchViewModel -
 final class SearchViewModel: SearchViewControllerDelegate {
     // MARK: - Dependencies -
     private let dataPersistanceManager: DataPersistanceManagerProtocol
     
     // MARK: - Properties -
-    var viewState: ((SearchViewState) -> Void)?
     private var heroes: Heroes = []
     var heroesCount: Int {
         heroes.count
@@ -21,10 +21,12 @@ final class SearchViewModel: SearchViewControllerDelegate {
         heroes
     }
     
+    // MARK: - Initializers -
     init(dataPersistanceManager: DataPersistanceManagerProtocol) {
         self.dataPersistanceManager = dataPersistanceManager
     }
     
+    // MARK: - Functions -
     func onViewAppear() {
         dataPersistanceManager.fetchingHeroes { [weak self] result in
             switch result {

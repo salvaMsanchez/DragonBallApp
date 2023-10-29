@@ -9,16 +9,10 @@ import UIKit
 
 // MARK: - Protocol -
 protocol SearchViewControllerDelegate {
-    var viewState: ((SearchViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     var getHeroes: [Hero] { get }
     func onViewAppear()
     func heroBy(index: Int) -> Hero?
-}
-
-// MARK: View State -
-enum SearchViewState {
-    case navigateToDetail(_ model: Hero)
 }
 
 // MARK: - SearchViewController -
@@ -60,7 +54,6 @@ final class SearchViewController: UIViewController {
         
         searchController.searchResultsUpdater = self
         
-        setObservers()
         viewModel?.onViewAppear()
     }
     
@@ -76,18 +69,6 @@ final class SearchViewController: UIViewController {
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(detailViewController, animated: true)
-            }
-        }
-    }
-    
-    private func setObservers() {
-        viewModel?.viewState = { state in
-            DispatchQueue.main.async {
-                switch state {
-                    case .navigateToDetail(_):
-                        // TODO: Navegar al Detail
-                        break
-                }
             }
         }
     }

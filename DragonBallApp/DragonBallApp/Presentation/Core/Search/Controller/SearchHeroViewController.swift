@@ -13,14 +13,8 @@ protocol SearchHeroViewControllerNavigationDelegate: AnyObject {
 }
 
 protocol SearchHeroViewControllerDelegate {
-    var viewState: ((SearchHeroViewState) -> Void)? { get set }
     var heroesCount: Int { get }
     func heroBy(index: Int) -> Hero?
-}
-
-// MARK: View State -
-enum SearchHeroViewState {
-    case navigateToDetail(_ model: Hero)
 }
 
 // MARK: - SearchHeroViewController -
@@ -44,26 +38,11 @@ final class SearchHeroViewController: UIViewController {
         view.addSubview(searchHeroTableView)
         searchHeroTableView.dataSource = self
         searchHeroTableView.delegate = self
-        
-        setObservers()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchHeroTableView.frame = view.bounds
-    }
-    
-    // MARK: - Functions -
-    private func setObservers() {
-        viewModel?.viewState = { state in
-            DispatchQueue.main.async {
-                switch state {
-                    case .navigateToDetail(_):
-                        // TODO: Navegar al Detail
-                        break
-                }
-            }
-        }
     }
 }
 

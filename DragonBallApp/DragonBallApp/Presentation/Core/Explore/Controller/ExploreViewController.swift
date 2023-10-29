@@ -22,7 +22,6 @@ protocol ExploreViewControllerDelegate {
 enum ExploreViewState {
     case loading(_ isLoading: Bool)
     case addPins
-    case navigateToDetail(_ model: Hero)
 }
 
 // MARK: - ExploreViewController -
@@ -114,9 +113,6 @@ final class ExploreViewController: UIViewController {
                         self?.animationView.isHidden = !isLoading
                     case .addPins:
                         self?.addPins()
-                    case .navigateToDetail(_):
-                        // TODO: Navigate to Detail
-                        break
                 }
             }
         }

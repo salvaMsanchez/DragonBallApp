@@ -222,6 +222,7 @@ Esto significa que ahora se está asignando un *tag* a `rightButton` tanto en el
  // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
  // Lo suyo sería hacerlo genérico para poder guardar cualquier tipo de dato!
  - Se podría separar los elementos de la UI que se incluyen en el ExploreViewController
+ - Eliminar mensajes de error cuando ya no son necesarios, como, por ejmeplo, cuando se pulsa en una celda de nuevo tras errar. Esto lo podrñíamos hacer en el delegado de los textfields.
 
 ---
 

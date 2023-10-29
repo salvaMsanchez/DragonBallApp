@@ -7,18 +7,20 @@
 
 import Foundation
 
+// MARK: - SearchHeroViewModel -
 final class SearchHeroViewModel: SearchHeroViewControllerDelegate {
-    var viewState: ((SearchHeroViewState) -> Void)?
-    
+    // MARK: - Properties -
     private var heroes: Heroes
     var heroesCount: Int {
         heroes.count
     }
     
+    // MARK: - Initializers -
     init(heroes: Heroes) {
         self.heroes = heroes
     }
     
+    // MARK: - Functions -
     func heroBy(index: Int) -> Hero? {
         if index >= 0 && index < heroesCount {
             return heroes[index]
