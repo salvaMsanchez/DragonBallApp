@@ -30,8 +30,6 @@ final class MainTabBarViewcontroller: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        
         let vc1 = UINavigationController(rootViewController: galleryViewController)
         let vc2 = UINavigationController(rootViewController: searchViewController)
         let vc3 = UINavigationController(rootViewController: exploreViewController)
@@ -42,16 +40,13 @@ final class MainTabBarViewcontroller: UITabBarController {
         vc3.tabBarItem.image = UIImage(systemName: "map.fill")
         vc4.tabBarItem.image = UIImage(systemName: "heart")
         
-        vc1.title = "Gallery"
-        vc2.title = "Search"
-        vc3.title = "Explore"
-        vc4.title = "Favorites"
+        vc1.title = "Galería"
+        vc2.title = "Búsquedas"
+        vc3.title = "Explora"
+        vc4.title = "Favoritos"
         
-        tabBar.tintColor = .systemOrange
-//        tabBar.itemPositioning = .centered
-//        tabBar.itemSpacing = 1
+        tabBar.tintColor = UIColor(named: "dragonBallColor")
         tabBar.isTranslucent = false
-        tabBar.backgroundColor = .systemGray
         
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
     }

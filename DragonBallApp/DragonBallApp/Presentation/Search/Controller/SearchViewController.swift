@@ -26,15 +26,14 @@ final class SearchViewController: UIViewController {
     
     private let searchTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemPink
+        tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
     private let searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: SearchHeroViewController())
-        controller.searchBar.placeholder = "Search for a hero"
+        controller.searchBar.placeholder = "Buscar un héroe"
         controller.searchBar.searchBarStyle = .minimal
         return controller
     }()
@@ -42,9 +41,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemCyan
-        
-        title = "Search"
+        title = "Búsquedas"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
@@ -55,7 +52,7 @@ final class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        navigationController?.navigationBar.tintColor = .label
+        navigationController?.navigationBar.tintColor = .white
         
         searchController.searchResultsUpdater = self
         

@@ -29,6 +29,7 @@ final class FavoritesTableViewCell: UITableViewCell {
     private let heroNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -36,7 +37,6 @@ final class FavoritesTableViewCell: UITableViewCell {
     // MARK: - Initializers -
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemBlue
         setup()
     }
     

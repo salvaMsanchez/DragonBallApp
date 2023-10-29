@@ -17,9 +17,9 @@ final class SearchTableViewCell: UITableViewCell {
     // MARK: - UI components -
     private let shadowView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .systemOrange.withAlphaComponent(0.5)
+        uiView.backgroundColor = UIColor(named: "dragonBallColor")?.withAlphaComponent(0.5)
         uiView.layer.cornerRadius = 20
-        uiView.layer.shadowColor = UIColor.systemOrange.cgColor
+        uiView.layer.shadowColor = UIColor(named: "dragonBallColor")?.cgColor
         uiView.layer.shadowOpacity = 1
         uiView.layer.shadowOffset = CGSize(width: 0, height: 0)
         uiView.layer.shadowRadius = 10
@@ -40,14 +40,12 @@ final class SearchTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
-        imageView.image = UIImage(named: "goku")
         return imageView
     }()
     
     private let heroNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "GOKU"
-        label.textColor = .label
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,8 +54,7 @@ final class SearchTableViewCell: UITableViewCell {
     
     private let heroIndexLabel: UILabel = {
         let label = UILabel()
-        label.text = "#1"
-        label.textColor = .label
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +67,7 @@ final class SearchTableViewCell: UITableViewCell {
             UIColor.clear.cgColor,
             UIColor.clear.cgColor,
             UIColor.clear.cgColor,
-            UIColor.systemOrange.cgColor
+            UIColor(named: "dragonBallColor")?.cgColor ?? UIColor.systemOrange.cgColor
         ]
         gradientLayer.locations = [0.01, 0.1, 0.7, 1.0]
         gradientLayer.frame = cardView.bounds
@@ -81,7 +78,7 @@ final class SearchTableViewCell: UITableViewCell {
     // MARK: - Initializers -
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = UIColor(named: "mainBackgroundColor")
         setup()
     }
     
@@ -117,10 +114,8 @@ final class SearchTableViewCell: UITableViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
-//        contentView.addSubview(heroNameLabel)
         cardView.addSubview(heroNameLabel)
         cardView.addSubview(heroIndexLabel)
-//        contentView.addSubview(heroIndexLabel)
     }
     
     private func applyConstraints() {
@@ -172,8 +167,6 @@ extension SearchTableViewCell {
             initialSpringVelocity: 0.5
         ) { [weak self] in
             self?.shadowView.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-//            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-//            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
         }
     }
 
@@ -185,8 +178,6 @@ extension SearchTableViewCell {
             initialSpringVelocity: 2
         ) { [weak self] in
             self?.shadowView.transform = .identity
-//            self?.heroNameLabel.transform = .identity
-//            self?.heroIndexLabel.transform = .identity
         }
     }
 }

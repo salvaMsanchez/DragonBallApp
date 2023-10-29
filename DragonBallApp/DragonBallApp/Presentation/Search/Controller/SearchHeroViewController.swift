@@ -29,16 +29,13 @@ final class SearchHeroViewController: UIViewController {
     
     public let searchHeroTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemPink
+        tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemRed
         
         view.addSubview(searchHeroTableView)
         searchHeroTableView.dataSource = self

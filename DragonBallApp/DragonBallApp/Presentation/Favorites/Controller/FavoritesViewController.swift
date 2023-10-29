@@ -28,15 +28,13 @@ final class FavoritesViewController: UIViewController {
     
     private let favoritesTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemPink
+        tableView.backgroundColor = UIColor(named: "mainBackgroundColor")
         tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: FavoritesTableViewCell.identifier)
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemBrown
         
         title = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -47,7 +45,6 @@ final class FavoritesViewController: UIViewController {
         favoritesTableView.delegate = self
         
         setObservers()
-//        viewModel?.onViewAppear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
