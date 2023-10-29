@@ -53,9 +53,6 @@ enum APIRouter {
 }
 
 final class APIClient: ApiProviderProtocol {
-    // MARK: - Singleton -
-//    static let shared = APIClient()
-    
     // MARK: - APIError -
     enum APIError: Error {
         case unknown

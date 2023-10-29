@@ -30,7 +30,7 @@ final class LoginView: UIView {
         let label = UILabel()
         label.text = "Iniciar sesión"
         label.font = UIFont.systemFont(ofSize: 24)
-        label.textColor = .systemOrange
+        label.textColor = UIColor(named: "dragonBallColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -60,7 +60,7 @@ final class LoginView: UIView {
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 5.0
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.systemOrange.cgColor
+        textField.layer.borderColor = UIColor(named: "dragonBallColor")?.cgColor
         textField.backgroundColor = .systemGray6
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.attributedPlaceholder = NSAttributedString(string: "Introduce tu email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray2])
@@ -80,7 +80,6 @@ final class LoginView: UIView {
     
     public let invalidEmailText: UILabel = {
         let label = UILabel()
-//        label.text = "Indique un email válido"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemRed
         label.isHidden = true
@@ -105,7 +104,7 @@ final class LoginView: UIView {
         textField.layer.masksToBounds = true
         textField.layer.cornerRadius = 5.0
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.systemOrange.cgColor
+        textField.layer.borderColor = UIColor(named: "dragonBallColor")?.cgColor
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.backgroundColor = .systemGray6
         textField.attributedPlaceholder = NSAttributedString(string: "Introduce tu contraseña", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray2])
@@ -125,7 +124,6 @@ final class LoginView: UIView {
     
     public let invalidPasswordText: UILabel = {
         let label = UILabel()
-//        label.text = "Indique una password válida"
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemRed
         label.isHidden = true
@@ -138,7 +136,7 @@ final class LoginView: UIView {
         button.setTitle("Continuar", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 18.0)
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = UIColor(named: "dragonBallColor")
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
@@ -148,7 +146,6 @@ final class LoginView: UIView {
     
     public let activityIndicatorUiView: UIView = {
         let uiView = UIView()
-//        uiView.layer.cornerRadius = 20
         uiView.backgroundColor = .black.withAlphaComponent(0.6)
         uiView.isHidden = true
         uiView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +164,7 @@ final class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor(named: "mainBackgroundColor")
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -269,8 +266,6 @@ final class LoginView: UIView {
             activityIndicatorUiView.leadingAnchor.constraint(equalTo: leadingAnchor),
             activityIndicatorUiView.trailingAnchor.constraint(equalTo: trailingAnchor),
             activityIndicatorUiView.bottomAnchor.constraint(equalTo: bottomAnchor)
-//            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
-//            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 180)
         ]
         
         let animationViewConstraints = [
@@ -304,10 +299,6 @@ final class LoginView: UIView {
            let passwordInput = passwordTextField.text {
             delegate?.onLoginButtonTapped(send: (emailInput, passwordInput))
         }
-//        if let emailInput = emailTextField.text,
-//        let passwordInput = passwordTextField.text {
-//            buttonTapHandler?((emailInput, passwordInput))
-//        }
     }
     
 }

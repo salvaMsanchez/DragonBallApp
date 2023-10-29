@@ -38,7 +38,11 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
         viewState?(.loading(true))
         
         if userDefaultsManager.getIsLogged() ?? false {
-            defer { viewState?(.loading(false)) }
+            defer {
+                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+                    self?.viewState?(.loading(false))
+                }
+            }
             dataPersistanceManager.fetchingHeroes(completion: { [weak self] result in
                 switch result {
                     case .success(let heroes):
@@ -49,7 +53,11 @@ final class GalleryViewModel: GalleryViewControllerDelegate {
             })
         } else {
             DispatchQueue.global().async { [weak self] in
-                defer { self?.viewState?(.loading(false)) }
+                defer {
+                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+                        self?.viewState?(.loading(false))
+                    }
+                }
                 guard let token = self?.secureDataProvider.getToken() else {
                     return
                 }

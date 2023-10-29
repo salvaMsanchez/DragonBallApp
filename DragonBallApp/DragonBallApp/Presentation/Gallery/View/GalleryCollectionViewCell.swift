@@ -17,7 +17,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     // MARK: - UI components -
     private let shadowView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .systemOrange.withAlphaComponent(0.5)
+        uiView.backgroundColor = UIColor(named: "dragonBallColor")?.withAlphaComponent(0.5)
         uiView.layer.cornerRadius = 20
         uiView.layer.shadowColor = UIColor.systemOrange.cgColor
         uiView.layer.shadowOpacity = 1
@@ -41,16 +41,14 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
-//        imageView.image = UIImage(named: "goku")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let heroNameLabel: UILabel = {
         let label = UILabel()
-//        label.text = "GOKU"
-        label.textColor = .label
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,7 +60,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
             UIColor.clear.cgColor,
             UIColor.clear.cgColor,
             UIColor.clear.cgColor,
-            UIColor.systemOrange.cgColor
+            UIColor(named: "dragonBallColor")?.cgColor ?? UIColor.systemOrange.cgColor
         ]
         gradientLayer.locations = [0.01, 0.1, 0.7, 1.0]
         gradientLayer.frame = cardView.bounds
@@ -74,7 +72,8 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = UIColor(named: "mainBackgroundColor")
+        
         setup()
         addGradient()
         cardView.addSubview(heroNameLabel)
@@ -85,18 +84,18 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        heroImageView.frame = cardView.bounds
-        
-//        print(cardView.bounds)
-        
-//        if !gradientAdded && cardView.bounds != .zero {
-//            addGradient()
-//            cardView.addSubview(heroNameLabel)
-//            gradientAdded = true
-//        }
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+////        heroImageView.frame = cardView.bounds
+//
+////        print(cardView.bounds)
+//
+////        if !gradientAdded && cardView.bounds != .zero {
+////            addGradient()
+////            cardView.addSubview(heroNameLabel)
+////            gradientAdded = true
+////        }
+//    }
     
     // MARK: - Functions -
     public func cellPressedAnimation() {
@@ -113,7 +112,6 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
         shadowView.addSubview(cardView)
         cardView.addSubview(heroImageView)
         contentView.addSubview(shadowView)
-//        contentView.addSubview(heroNameLabel)
         cardView.addSubview(heroNameLabel)
     }
     
@@ -151,7 +149,7 @@ final class GalleryCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with model: Hero) {
-        heroNameLabel.text = model.name.capitalized
+        heroNameLabel.text = model.name.uppercased()
         heroImageView.kf.setImage(with: model.photo)
     }
 }
@@ -166,8 +164,6 @@ extension GalleryCollectionViewCell {
             initialSpringVelocity: 0.5
         ) { [weak self] in
             self?.shadowView.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-//            self?.heroNameLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
-//            self?.heroIndexLabel.transform = .identity.scaledBy(x: 0.94, y: 0.94)
         }
     }
 
@@ -179,8 +175,6 @@ extension GalleryCollectionViewCell {
             initialSpringVelocity: 2
         ) { [weak self] in
             self?.shadowView.transform = .identity
-//            self?.heroNameLabel.transform = .identity
-//            self?.heroIndexLabel.transform = .identity
         }
     }
 }

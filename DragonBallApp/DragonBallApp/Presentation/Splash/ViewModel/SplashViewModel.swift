@@ -47,13 +47,9 @@ final class SplashViewModel: SplashViewControllerDelegate {
     func onViewAppear() {
         viewState?(.loading(true))
         
-//        print(secureDataProvider.getToken() ?? "Default value")
-        
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)) {
-//            print("is logged: \(self.isLogged)")
             self.isLogged ? self.userDefaultsManager.save(isLogged: true) : self.userDefaultsManager.save(isLogged: false)
             self.isLogged ? self.viewState?(.navigateToMain) : self.viewState?(.navigateToLogin)
-//            self.isLogged ? self.viewState?(.navigateToLogin) : self.viewState?(.navigateToMain)
         }
     }
 }

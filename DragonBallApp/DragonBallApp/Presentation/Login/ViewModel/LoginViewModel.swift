@@ -48,7 +48,6 @@ final class LoginViewModel: LoginViewControllerDelegate {
                     self.viewState?(.loading(false))
                     self.viewState?(.showErrorEmail("Indique un email válido")) // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
                     self.viewState?(.hideErrorPassword)
-//                    print("Email invalid")
                     return
                 }
                 
@@ -56,7 +55,6 @@ final class LoginViewModel: LoginViewControllerDelegate {
                     self.viewState?(.loading(false))
                     self.viewState?(.showErrorPassword("Indique una contraseña válida"))
                     self.viewState?(.hideErrorEmail)
-//                    print("Password invalid")
                     return
                 }
                 
@@ -86,7 +84,6 @@ final class LoginViewModel: LoginViewControllerDelegate {
                     return
                 }
                 
-//                print("Tokenaso: \(token)")
                 secureDataProvider.save(token: token)
                 userDefaultsManager.save(isLogged: false)
                 viewState?(.navigateToNext)

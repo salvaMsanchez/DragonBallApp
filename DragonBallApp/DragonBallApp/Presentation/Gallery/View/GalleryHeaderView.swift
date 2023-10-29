@@ -25,14 +25,15 @@ final class GalleryHeaderView: UICollectionReusableView {
         label.text = "SHENRON"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
-        label.textColor = .label
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemYellow
+        
+        backgroundColor = UIColor(named: "mainBackgroundColor")
         
         setup()
     }

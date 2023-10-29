@@ -14,7 +14,6 @@ protocol GalleryViewControllerDelegate {
     var heroesCount: Int { get }
     var loginViewModel: LoginViewControllerDelegate { get }
     func onViewAppear()
-//    func onViewDidAppear()
     func heroBy(index: Int) -> Hero?
     func onAddFavoriteButtonPressed(model: Hero, isFavorite: Bool)
     func onLogOutButtonPressed(completion: @escaping (Result<Void, DataBaseError>) -> Void)
@@ -35,7 +34,7 @@ final class GalleryViewController: UIViewController {
         layout.itemSize = CGSize(width: 191.5, height: 250)
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemRed
+        collectionView.backgroundColor = UIColor(named: "mainBackgroundColor")
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         collectionView.register(GalleryHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: GalleryHeaderView.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,9 +43,7 @@ final class GalleryViewController: UIViewController {
     
     private let activityIndicatorUiView: UIView = {
         let uiView = UIView()
-        uiView.layer.cornerRadius = 20
         uiView.backgroundColor = .black.withAlphaComponent(0.6)
-//        uiView.isHidden = true
         uiView.translatesAutoresizingMaskIntoConstraints = false
         return uiView
     }()
@@ -55,15 +52,12 @@ final class GalleryViewController: UIViewController {
         let animation = LottieAnimationView(name: "dragonBallSplashAnimation")
         animation.loopMode = .loop
         animation.play()
-//        animation.isHidden = true
         animation.translatesAutoresizingMaskIntoConstraints = false
         return animation
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemBrown
         
         view.addSubview(galleryCollectionView)
         galleryCollectionView.dataSource = self
@@ -76,10 +70,10 @@ final class GalleryViewController: UIViewController {
         viewModel?.onViewAppear()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        viewModel?.onViewDidAppear()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+////        viewModel?.onViewDidAppear()
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -101,7 +95,6 @@ final class GalleryViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        print(isLoading)
                         self?.activityIndicatorUiView.isHidden = !isLoading
                         self?.animationView.isHidden = !isLoading
                     case .updateData:
@@ -126,7 +119,7 @@ final class GalleryViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .done, target: self, action: #selector(logOut)),
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil)
         ]
-        navigationController?.navigationBar.tintColor = .label
+        navigationController?.navigationBar.tintColor = .white
     }
     
     private func setup() {
@@ -141,10 +134,10 @@ final class GalleryViewController: UIViewController {
 
     private func applyConstraints() {
         let activityIndicatorUiViewConstraints = [
-            activityIndicatorUiView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicatorUiView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            activityIndicatorUiView.widthAnchor.constraint(equalToConstant: 180),
-            activityIndicatorUiView.heightAnchor.constraint(equalToConstant: 180)
+            activityIndicatorUiView.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicatorUiView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            activityIndicatorUiView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorUiView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         let animationViewConstraints = [
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -200,10 +193,6 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
             onHeroCellPressed(model: hero)
         }
     }
-    
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {

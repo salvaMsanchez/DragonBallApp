@@ -85,7 +85,6 @@ final class LoginViewController: UIViewController {
                         alertController.addAction(UIAlertAction(title: "OK", style: .default))
                         self?.present(alertController, animated: true)
                     case .navigateToNext:
-                        print("A navegar!")
                         let galleryViewController = GalleryViewController()
                         galleryViewController.viewModel = self?.viewModel?.galleryViewModel
                         let searchViewController = SearchViewController()
@@ -108,7 +107,6 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginViewDelegate {
     func onLoginButtonTapped(send loginData: LoginData) {
-        print("Email: \(loginData.email)\nPassword: \(loginData.password)")
         viewModel?.onLoginPressed(email: loginData.email, password: loginData.password)
     }
 }
