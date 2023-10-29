@@ -28,9 +28,6 @@
 		B46C4C742AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B46C4C722AD9A2380005FCB4 /* DragonBallApp.xcdatamodeld */; };
 		B46C4C762AD9A2390005FCB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B46C4C752AD9A2390005FCB4 /* Assets.xcassets */; };
 		B46C4C792AD9A2390005FCB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B46C4C772AD9A2390005FCB4 /* LaunchScreen.storyboard */; };
-		B46C4C842AD9A2390005FCB4 /* DragonBallAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4C832AD9A2390005FCB4 /* DragonBallAppTests.swift */; };
-		B46C4C8E2AD9A2390005FCB4 /* DragonBallAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4C8D2AD9A2390005FCB4 /* DragonBallAppUITests.swift */; };
-		B46C4C902AD9A2390005FCB4 /* DragonBallAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4C8F2AD9A2390005FCB4 /* DragonBallAppUITestsLaunchTests.swift */; };
 		B46C4CA62AD9A8960005FCB4 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CA52AD9A8960005FCB4 /* MainTabBarViewController.swift */; };
 		B46C4CA82AD9AAB20005FCB4 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CA72AD9AAB20005FCB4 /* SplashViewController.swift */; };
 		B46C4CAA2AD9AB070005FCB4 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46C4CA92AD9AB070005FCB4 /* SplashView.swift */; };
@@ -50,6 +47,10 @@
 		B4B9BBA02AEE79A8006DDAD1 /* ExploreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B9BB9F2AEE79A8006DDAD1 /* ExploreDetailView.swift */; };
 		B4B9BBA22AEE7A4B006DDAD1 /* ExploreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B9BBA12AEE7A4B006DDAD1 /* ExploreDetailViewController.swift */; };
 		B4B9BBA42AEE7AE7006DDAD1 /* ExploreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B9BBA32AEE7AE7006DDAD1 /* ExploreDetailViewModel.swift */; };
+		B4BBBA222AEF064100A1B4C2 /* SecureDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BBBA212AEF064100A1B4C2 /* SecureDataProviderTests.swift */; };
+		B4BBBA242AEF066500A1B4C2 /* ValidationFieldsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BBBA232AEF066500A1B4C2 /* ValidationFieldsTests.swift */; };
+		B4BBBA262AEF085400A1B4C2 /* UserDefaultsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BBBA252AEF085400A1B4C2 /* UserDefaultsManagerTests.swift */; };
+		B4BBBA282AEF09D600A1B4C2 /* DataPersistanceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BBBA272AEF09D600A1B4C2 /* DataPersistanceManagerTests.swift */; };
 		B4C8B0C92ADBFA08004B047C /* SearchHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */; };
 		B4D5159B2AE7E729003AAC3B /* SearchHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D5159A2AE7E729003AAC3B /* SearchHeroViewModel.swift */; };
 		B4D5159D2AE7ED81003AAC3B /* SearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D5159C2AE7ED81003AAC3B /* SearchAlgorithm.swift */; };
@@ -61,13 +62,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		B46C4C802AD9A2390005FCB4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B46C4C5E2AD9A2380005FCB4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B46C4C652AD9A2380005FCB4;
-			remoteInfo = DragonBallApp;
-		};
-		B46C4C8A2AD9A2390005FCB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46C4C5E2AD9A2380005FCB4 /* Project object */;
 			proxyType = 1;
@@ -101,10 +95,6 @@
 		B46C4C782AD9A2390005FCB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B46C4C7A2AD9A2390005FCB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B46C4C7F2AD9A2390005FCB4 /* DragonBallAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonBallAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B46C4C832AD9A2390005FCB4 /* DragonBallAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallAppTests.swift; sourceTree = "<group>"; };
-		B46C4C892AD9A2390005FCB4 /* DragonBallAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonBallAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B46C4C8D2AD9A2390005FCB4 /* DragonBallAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallAppUITests.swift; sourceTree = "<group>"; };
-		B46C4C8F2AD9A2390005FCB4 /* DragonBallAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B46C4CA52AD9A8960005FCB4 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		B46C4CA72AD9AAB20005FCB4 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		B46C4CA92AD9AB070005FCB4 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -121,6 +111,10 @@
 		B4B9BB9F2AEE79A8006DDAD1 /* ExploreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailView.swift; sourceTree = "<group>"; };
 		B4B9BBA12AEE7A4B006DDAD1 /* ExploreDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailViewController.swift; sourceTree = "<group>"; };
 		B4B9BBA32AEE7AE7006DDAD1 /* ExploreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailViewModel.swift; sourceTree = "<group>"; };
+		B4BBBA212AEF064100A1B4C2 /* SecureDataProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProviderTests.swift; sourceTree = "<group>"; };
+		B4BBBA232AEF066500A1B4C2 /* ValidationFieldsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFieldsTests.swift; sourceTree = "<group>"; };
+		B4BBBA252AEF085400A1B4C2 /* UserDefaultsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManagerTests.swift; sourceTree = "<group>"; };
+		B4BBBA272AEF09D600A1B4C2 /* DataPersistanceManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistanceManagerTests.swift; sourceTree = "<group>"; };
 		B4C8B0C82ADBFA08004B047C /* SearchHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewController.swift; sourceTree = "<group>"; };
 		B4D5159A2AE7E729003AAC3B /* SearchHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeroViewModel.swift; sourceTree = "<group>"; };
 		B4D5159C2AE7ED81003AAC3B /* SearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlgorithm.swift; sourceTree = "<group>"; };
@@ -142,13 +136,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B46C4C7C2AD9A2390005FCB4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B46C4C862AD9A2390005FCB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -340,7 +327,6 @@
 			children = (
 				B46C4C682AD9A2380005FCB4 /* DragonBallApp */,
 				B46C4C822AD9A2390005FCB4 /* DragonBallAppTests */,
-				B46C4C8C2AD9A2390005FCB4 /* DragonBallAppUITests */,
 				B46C4C672AD9A2380005FCB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -350,7 +336,6 @@
 			children = (
 				B46C4C662AD9A2380005FCB4 /* DragonBallApp.app */,
 				B46C4C7F2AD9A2390005FCB4 /* DragonBallAppTests.xctest */,
-				B46C4C892AD9A2390005FCB4 /* DragonBallAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,18 +356,12 @@
 		B46C4C822AD9A2390005FCB4 /* DragonBallAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				B46C4C832AD9A2390005FCB4 /* DragonBallAppTests.swift */,
+				B4BBBA212AEF064100A1B4C2 /* SecureDataProviderTests.swift */,
+				B4BBBA232AEF066500A1B4C2 /* ValidationFieldsTests.swift */,
+				B4BBBA252AEF085400A1B4C2 /* UserDefaultsManagerTests.swift */,
+				B4BBBA272AEF09D600A1B4C2 /* DataPersistanceManagerTests.swift */,
 			);
 			path = DragonBallAppTests;
-			sourceTree = "<group>";
-		};
-		B46C4C8C2AD9A2390005FCB4 /* DragonBallAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B46C4C8D2AD9A2390005FCB4 /* DragonBallAppUITests.swift */,
-				B46C4C8F2AD9A2390005FCB4 /* DragonBallAppUITestsLaunchTests.swift */,
-			);
-			path = DragonBallAppUITests;
 			sourceTree = "<group>";
 		};
 		B46C4C9C2AD9A2E50005FCB4 /* App */ = {
@@ -602,24 +581,6 @@
 			productReference = B46C4C7F2AD9A2390005FCB4 /* DragonBallAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B46C4C882AD9A2390005FCB4 /* DragonBallAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B46C4C992AD9A2390005FCB4 /* Build configuration list for PBXNativeTarget "DragonBallAppUITests" */;
-			buildPhases = (
-				B46C4C852AD9A2390005FCB4 /* Sources */,
-				B46C4C862AD9A2390005FCB4 /* Frameworks */,
-				B46C4C872AD9A2390005FCB4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B46C4C8B2AD9A2390005FCB4 /* PBXTargetDependency */,
-			);
-			name = DragonBallAppUITests;
-			productName = DragonBallAppUITests;
-			productReference = B46C4C892AD9A2390005FCB4 /* DragonBallAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -635,10 +596,7 @@
 					};
 					B46C4C7E2AD9A2390005FCB4 = {
 						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = B46C4C652AD9A2380005FCB4;
-					};
-					B46C4C882AD9A2390005FCB4 = {
-						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 						TestTargetID = B46C4C652AD9A2380005FCB4;
 					};
 				};
@@ -663,7 +621,6 @@
 			targets = (
 				B46C4C652AD9A2380005FCB4 /* DragonBallApp */,
 				B46C4C7E2AD9A2390005FCB4 /* DragonBallAppTests */,
-				B46C4C882AD9A2390005FCB4 /* DragonBallAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -680,13 +637,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B46C4C7D2AD9A2390005FCB4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B46C4C872AD9A2390005FCB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -748,16 +698,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B46C4C842AD9A2390005FCB4 /* DragonBallAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B46C4C852AD9A2390005FCB4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B46C4C902AD9A2390005FCB4 /* DragonBallAppUITestsLaunchTests.swift in Sources */,
-				B46C4C8E2AD9A2390005FCB4 /* DragonBallAppUITests.swift in Sources */,
+				B4BBBA262AEF085400A1B4C2 /* UserDefaultsManagerTests.swift in Sources */,
+				B4BBBA222AEF064100A1B4C2 /* SecureDataProviderTests.swift in Sources */,
+				B4BBBA242AEF066500A1B4C2 /* ValidationFieldsTests.swift in Sources */,
+				B4BBBA282AEF09D600A1B4C2 /* DataPersistanceManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,11 +712,6 @@
 			isa = PBXTargetDependency;
 			target = B46C4C652AD9A2380005FCB4 /* DragonBallApp */;
 			targetProxy = B46C4C802AD9A2390005FCB4 /* PBXContainerItemProxy */;
-		};
-		B46C4C8B2AD9A2390005FCB4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B46C4C652AD9A2380005FCB4 /* DragonBallApp */;
-			targetProxy = B46C4C8A2AD9A2390005FCB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -961,6 +900,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9THYRJN444;
@@ -970,6 +910,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.salvamoreno.DragonBallAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DragonBallApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DragonBallApp";
@@ -981,6 +922,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9THYRJN444;
@@ -993,42 +935,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DragonBallApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DragonBallApp";
-			};
-			name = Release;
-		};
-		B46C4C9A2AD9A2390005FCB4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9THYRJN444;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.salvamoreno.DragonBallAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DragonBallApp;
-			};
-			name = Debug;
-		};
-		B46C4C9B2AD9A2390005FCB4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9THYRJN444;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.salvamoreno.DragonBallAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DragonBallApp;
 			};
 			name = Release;
 		};
@@ -1058,15 +964,6 @@
 			buildConfigurations = (
 				B46C4C972AD9A2390005FCB4 /* Debug */,
 				B46C4C982AD9A2390005FCB4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B46C4C992AD9A2390005FCB4 /* Build configuration list for PBXNativeTarget "DragonBallAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B46C4C9A2AD9A2390005FCB4 /* Debug */,
-				B46C4C9B2AD9A2390005FCB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

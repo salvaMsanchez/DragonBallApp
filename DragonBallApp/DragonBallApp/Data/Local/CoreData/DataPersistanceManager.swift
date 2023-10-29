@@ -32,8 +32,6 @@ enum DataBaseError: Error {
 
 final class DataPersistanceManager: DataPersistanceManagerProtocol {
     
-//    static let shared = DataPersistanceManager()
-    
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         
