@@ -8,6 +8,7 @@
 import Foundation
 
 final class SplashViewModel: SplashViewControllerDelegate {
+    // MARK: Properties -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
     private let userDefaultsManager: UserDefaultsManagerProtocol
@@ -38,12 +39,14 @@ final class SplashViewModel: SplashViewControllerDelegate {
         secureDataProvider.getToken()?.isEmpty == false
     }
     
+    // MARK: Initializers -
     init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
         self.userDefaultsManager = userDefaultsManager
     }
     
+    // MARK: Functions -
     func onViewAppear() {
         viewState?(.loading(true))
         

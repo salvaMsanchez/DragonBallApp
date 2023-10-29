@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+// MARK: - Protocol -
 protocol DataPersistanceManagerProtocol {
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
     func saveLocation(id: String, heroLocations: LocationsHero, completion: @escaping (Result<Void, DataBaseError>) -> Void)
@@ -20,6 +21,7 @@ protocol DataPersistanceManagerProtocol {
     func deleteAllLocationDAO(completion: @escaping (Result<Void, DataBaseError>) -> Void)
 }
 
+// MARK: - DataBaseError -
 enum DataBaseError: Error {
     case failedToSaveData
     case failedToFetchHeroes
@@ -30,8 +32,9 @@ enum DataBaseError: Error {
     case failedToDeleteAllLocations
 }
 
+// MARK: - DataPersistanceManager -
 final class DataPersistanceManager: DataPersistanceManagerProtocol {
-    
+    // MARK: - Functions -
     func saveHero(hero: Hero, completion: @escaping (Result<Void, DataBaseError>) -> Void) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         
@@ -121,9 +124,6 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             var finalLocations: Locations = []
             locationContainers.forEach { locationContainer in
                 if let locations = locationContainer.locations as? Set<LocationDAO> {
-//                    locations.forEach { location in
-//                        let locationsHero: LocationsHero =
-//                    }
                     let locationsHero: LocationsHero = locations.compactMap { LocationMapper.mapLocationContainerToLocationsHero($0)
                     }
                     finalLocations.append(locationsHero)
@@ -199,5 +199,4 @@ final class DataPersistanceManager: DataPersistanceManagerProtocol {
             completion(.failure(.failedToDeleteAllLocations))
         }
     }
-    
 }

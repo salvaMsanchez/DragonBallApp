@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Protocol -
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String, apiRouter: APIRouter) async throws -> String
     func getHeroes(by name: String?, token: String, apiRouter: APIRouter) async throws -> Heroes
@@ -52,6 +53,7 @@ enum APIRouter {
     }
 }
 
+// MARK: - APIClient -
 final class APIClient: ApiProviderProtocol {
     // MARK: - APIError -
     enum APIError: Error {

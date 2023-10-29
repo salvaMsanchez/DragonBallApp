@@ -25,12 +25,13 @@ enum SplashViewState {
     case navigateToMain
 }
 
+// MARK: SplashViewController -
 final class SplashViewController: UIViewController {
-    
+    // MARK: Properties -
     var viewModel: SplashViewControllerDelegate?
-    
     private let splashView = SplashView()
     
+    // MARK: Lifecycle -
     override func loadView() {
         super.loadView()
         view = splashView
@@ -47,6 +48,7 @@ final class SplashViewController: UIViewController {
         splashView.splashAnimationView.stop()
     }
     
+    // MARK: Functions -
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
@@ -73,5 +75,4 @@ final class SplashViewController: UIViewController {
             }
         }
     }
-    
 }

@@ -16,7 +16,6 @@ struct HeroMapper {
               let photoURL = URL(string: photoString) else {
             return nil
         }
-
         return Hero(id: id, name: name, description: description, photo: photoURL, favorite: heroDAO.favorite)
     }
 }

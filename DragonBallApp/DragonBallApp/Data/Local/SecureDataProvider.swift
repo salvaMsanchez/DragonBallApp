@@ -8,12 +8,13 @@
 import Foundation
 import KeychainSwift
 
+// MARK: - Protocol -
 protocol SecureDataProviderProtocol {
     func save(token: String)
     func getToken() -> String?
 }
 
-// Lo suyo sería hacerlo genérico para poder guardar cualquier tipo de dato!
+// MARK: - SecureDataProvider -
 final class SecureDataProvider: SecureDataProviderProtocol {
     private let keychain = KeychainSwift()
     

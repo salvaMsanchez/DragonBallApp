@@ -9,7 +9,6 @@ import Foundation
 
 struct LocationMapper {
     static func mapLocationContainerToLocationsHero(_ locationDAO: LocationDAO) -> Location? {
-        
         guard let id = locationDAO.id,
               let heroId = locationDAO.heroId,
               let longitude = locationDAO.longitude,
@@ -17,8 +16,6 @@ struct LocationMapper {
               let date = locationDAO.date else {
             return nil
         }
-        
         return Location(latitud: latitude, hero: HeroId(id: heroId), longitud: longitude, id: id, dateShow: date)
-        
     }
 }

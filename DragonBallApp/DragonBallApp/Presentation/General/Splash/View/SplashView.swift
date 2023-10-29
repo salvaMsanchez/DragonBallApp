@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 final class SplashView: UIView {
-    
+    // MARK: - UI elements -
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainBackgroundSplash")
@@ -35,6 +35,7 @@ final class SplashView: UIView {
         return animation
     }()
     
+    // MARK: - Init -
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(named: "mainBackgroundColor")
@@ -51,6 +52,7 @@ final class SplashView: UIView {
         backgroundImage.frame = bounds
     }
     
+    // MARK: - Functions -
     private func setup() {
         addViews()
         applyConstraints()

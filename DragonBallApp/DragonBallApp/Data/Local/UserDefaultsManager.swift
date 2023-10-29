@@ -7,14 +7,15 @@
 
 import Foundation
 
+// MARK: - Protocol -
 protocol UserDefaultsManagerProtocol {
     func getIsLogged() -> Bool?
     func save(isLogged: Bool)
     func deleteIsLogged()
 }
 
+// MARK: - UserDefaultsManager -
 struct UserDefaultsManager: UserDefaultsManagerProtocol {
-    
     private let userDefaults = UserDefaults.standard
     
     private let key = "IsLogged"
