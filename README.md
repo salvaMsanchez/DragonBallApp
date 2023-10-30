@@ -28,16 +28,14 @@
 * [Práctica: Dragon Ball Heroes App](#practica)
 	* [Descripción](#descripcion)
 	* [Arquitectura](#arquitectura)
-	* [Diseño](#diseno)
-	* [Requisitos](#requisitos)
-		* [Obligatorios](#requisitosObligatorios)
-		* [Opcionales](#requisitosOpcionales) 
-	* [Características adicionales de mejora](#caracteristicas)
+	* [Diseño](#diseno) 
 	* [Problemas, decisiones y resolución](#problemas)
 		* [Añadir gradiente a vista específica dentro de una `UITableViewCell`](#problemas1)
 		* [Comportamiento inesperado `UICollectionViewCell`: la imagen y el gradiente aparecen en celdas que no se ven en pantalla y cuando pulsas en ellas, aparecen](#problemas2)
 		* [`UILabel` sobre gradiente](#problemas3)
 		* [Mala adjudicación del tag del `UIButton` cada vez que se creaba una `annotation` en la función `mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?` del `MKMapViewDelegate`](#problemas4)
+		* [*Testing* sobre la capa de modelo](#problemas5)
+	* [Algunos aspectos en los que seguir mejorando la aplicación](#mejoras)
 
 <a name="herramientas"></a>
 ## Herramientas
@@ -59,52 +57,54 @@
 </p>
 
 <a name="practica"></a>
-## Práctica: Dragon Ball Heroes App
+## Práctica: Dragon Ball App
 
 ![Demo app gif](images/demoApp.gif)
 
 <a name="descripcion"></a>
 ### Descripción
 
-Como práctica final al módulo de *Fundamentos iOS* del *Bootcamp* en Desarrollo de Apps Móviles, se nos ha propuesto el desarrollo de una **aplicación iOS siguiendo la arquitectura MVC que consuma la *API Rest Dragon Ball* de *KeepCoding*,** con el objetivo de poner a prueba los contenidos impartidos.
+Como práctica final al módulo de *iOS avanzado* del *Bootcamp* en Desarrollo de Apps Móviles, se nos ha propuesto el desarrollo de una **aplicación iOS siguiendo la arquitectura MVVM que consuma la *API Rest Dragon Ball* de *KeepCoding*.** Teniendo en cuenta los siguientes requisitos:
+
+* **Obligatiorios**:
+	* Listar los superhéroes.
+	* Mostrar un mapa con los superhéroes.
+	* Poder consultar los detalles de un héroe en particular desde la lista de superhéroes.
+	* En la pantalla principal (lista de héroes) deberá existir un botón para hacer *log out*.
+
+* **Opcionales**:
+	* Poder consultar los detalles de un héroe en particular desde el mapa.
+	* Añadir un buscador en la pantalla dónde se muestra la lista de superhéroes. Con este buscador, el usuario podrá buscar héroes. Una vez aparezcan los resultados, el usuario podrá consultar sus detalles.
+	* Añadir un botón que permita limpiar la información almacenada en el dispositivo.
+
+En mi caso, he querido poner en práctica todos los conocimientos que he ido adquiriendo y realizar una aplicación lo más completa posible en relación al tiempo que he podido dedicar; **atendiendo al diseño, la lógica y la ordenación y limpieza del código**.
 
 <a name="arquitectura"></a>
 ### Arquitectura
 
-* According to [uncle Bob's Clean Architecture pattern](https://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html), you may divide your code in 3 Layers :
+Según [uncle Bob's Clean Architecture pattern](https://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html), se puede dividir el código en 3 capas:
 
-	* Presentation : All Code which is Framework ( Cocoa here ) dependant. So Put your Views, ViewModels, Vierwcontrollers, etc.
-	* Data : All the code interacting with repositories ( Like Network Calls, DB calls, User Defaults, etc )
-	* Domain : All your Models
+* *Presentation*: todo el código que depende del *framework*. *Views, ViewModels, Vierwcontrollers*, etc.
+* *Data*: todo el código que interactúa con los repositorios (como llamadas a la red, llamadas a la base de datos, valores predeterminados de usuario, etc.).
+* *Domain*: todos los modelos.
+
+Siguiendo las indicaciones de Robert Cecil Martin, experto ingeniero de *software*, en el artículo que referencio; y guiado por MVVM, he construido mi código.
 
 <a name="diseno"></a>
 ### Diseño
 
-* Celdas `UITableView` animadas.
+Para la parte más visual, estética y artística de la aplicación, he partido como inspiración del [concepto creativo y prototipo](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info) del usuario llamado [Satyajit Mane](https://dribbble.com/Satyajit_Mane) encontrado en la web [Dribbble](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info), punto de partida que me ha ayudado para comenzar el proyecto y diseñar el resto de pantallas intentando seguir la misma línea creativa.
 
-<a name="requisitos"></a>
-### Requisitos
+Por otro lado, para la pantalla de *Login* me he inspirado en el [prototipo](https://dribbble.com/shots/14187565-Login-Page) del usuario llamado [Shubham Rathod](https://dribbble.com/shubhamdesign1) de [Dribbble](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info).
 
-<a name="requisitosObligatorios"></a>
-#### Obligatorios
+Algunas características a nivel diseño y código serían:
 
-1. La aplicación será desarrollada siguiendo la **arquitectura MVC**.
-2. No usar *storyboards*, preferiblemente `.xibs`.
-3. La aplicación contará con las siguientes pantallas:
-	1. **Login**, que permita identificar a un usuario.
-	2. **Listado de heroes**, que liste todos los heroes. Se podrá escoger entre `UITableViewController` y `UICollectionViewController`.
-	3. **Detalle de héroe**, que represente algunas de las propiedades del héroe y que contenga un botón para mostrar el listado de transformaciones.
-	4. **Lista de transformaciones del héroe**, que liste todas las transformaciones disponibles para ese héroe.
-4. El proyecto debe **incluir *Unit Test* para la capa de modelo**.
-
-<a name="requisitosOpcionales"></a>
-#### Opcionales
-
-1. **Mostrar/esconder el botón de transformaciones en el detalle de héroe**. Si el héroe cuenta con transformaciones, el botón será mostrado. Si el héroe no cuenta con transformaciones, debemos esconder el botón.
-2. **Detalle de transformación**, que represente algunas de las propiedades de la transformación.
-
-<a name="caracteristicas"></a>
-### Características adicionales de mejora
+* Interfaz de usuario conformada 100% programáticamente.
+* `UICollectionView` con un `Header` y con celdas animadas con sombra y gradiente que aceptan pulsación inmediata y pulsación prolongada para ofrecer al usuario diversas funciones.
+* Celdas `UITableView` animadas con sombra y gradiente.
+* `UItableView` para la pantalla de *Favoritos* en las que sus celdas poseen un botón oculto a la derecha para eliminar del `UITableView`.
+* Animación con la librería *Lottie*.
+* `UITextField` que al ser pulsados despliegan una sombra de forma animada en pos de mejorar la experiencia de usuario.
 
 <a name="problemas"></a>
 ### Problemas, decisiones y resolución
@@ -214,15 +214,22 @@ Se quería asignar un *tag* al botón incluso cuando el código entrara en la pa
 
 Esto significa que ahora se está asignando un *tag* a `rightButton` tanto en el caso de que `annotationView` sea `nil` (cuando se crea una nueva vista de anotación) como en el caso de que no lo sea (cuando se reutiliza una vista de anotación existente).
 
----
+<a name="problemas5"></a>
+#### *Testing* sobre la capa de modelo
 
-# A mejorar
+La API Rest empleada aquí ya la usé en otro [proyecto](https://github.com/salvaMsanchez/fundamentos-ios-bootcamp), en el que realizaba las llamadas con `dataTask` y sobre las que ya realicé *tests* unitarios. Fue así que decidí cambiar en este proyecto y hacer las llamadas con `async/await`. Sin embargo, no fui capaz de pasarle los *tests* unitarios ya que no conseguí realizar un `MockProtocol` que respondiera correctamente. Se trata de uno de los puntos en los que debo seguir investigando. 
 
- // los números deberían estar en variables constantes!! y no hardcodearlos
- // los textos no deberían ir a fuego, deberían ir en un archivo localizable y traducido a otros idiomas
- // Lo suyo sería hacerlo genérico para poder guardar cualquier tipo de dato!
- - Se podría separar los elementos de la UI que se incluyen en el ExploreViewController
- - Eliminar mensajes de error cuando ya no son necesarios, como, por ejmeplo, cuando se pulsa en una celda de nuevo tras errar. Esto lo podrñíamos hacer en el delegado de los textfields.
+Es por todo esto que, al final, no añadí *tests* unitarios a la capa de modelo. No obstante, realicé *Unit Testing* para `SecureDataProvider` (*Keychain*), para `UserDefaultsManager`, para `DataPersistanceManager` (*CoreData*) y para algunos métodos aislados.
+
+<a name="mejoras"></a>
+# Algunos aspectos en los que seguir mejorando la aplicación
+
+* Tamaños y estilo adecuados respecto a la tipografía empleada.
+* Limpieza de los números colocados "a fuego" en el código y no agrupados en constantes o *enums*.
+* Agrupar los texto que no son dinámicos en el ciclo de vida de la aplicación en archivos localizables y que puedan ser traducidos a otros idiomas.
+* Falta realizar tareas de refactorización y ver qué se podría reutilizar a través del uso de genéricos como se podría hacer en la clase que emplea *Keychain* o en el uso de un solo `DetailView` en vez de haber ocnstruido dos casi idénticos.
+* Se podría analizar y estudiar la separación de los elementos de la UI que ahora solo están incluidos en el `ExploreViewController` por facilidad de desarrollo. Sin embargo, sería adecuado desacoplar para tener un código más escalable y reutilizable en un futuro.
+* Eliminar mensajes de error cuando ya no son necesarios como, por ejmplo, cuando se pulsa en una celda de nuevo tras errar. Esto lo podríamos hacer en el delegado correspondiente a los `UITextField`.
 
 ---
 

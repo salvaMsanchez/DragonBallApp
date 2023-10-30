@@ -18,7 +18,6 @@ protocol FavoritesViewControllerDelegate {
 
 // MARK: View State -
 enum FavoritesViewState {
-    case navigateToDetail(_ model: Hero)
     case updateData
     case deleteData(_ indexPath: IndexPath, _ animation: UITableView.RowAnimation)
 }
@@ -40,7 +39,7 @@ final class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Favorites"
+        title = "Favoritos"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
@@ -66,9 +65,6 @@ final class FavoritesViewController: UIViewController {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
                 switch state {
-                    case .navigateToDetail(_):
-                        // TODO: Navegar al Detail
-                        break
                     case .updateData:
                         self?.favoritesTableView.reloadData()
                     case .deleteData(let indexPath, let animation):
