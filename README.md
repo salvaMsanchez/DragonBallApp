@@ -56,6 +56,10 @@
   
 </p>
 
+* **iOS:** 16
+* **Swift:** 5.9
+* **Xcode:** 14.3.1
+
 <a name="practica"></a>
 ## Práctica: Dragon Ball App
 
@@ -93,9 +97,9 @@ Siguiendo las indicaciones del citado Robert Cecil Martin, experto ingeniero de 
 <a name="diseno"></a>
 ### Diseño
 
-Para la parte más visual, estética y artística de la aplicación, he partido como **inspiración del [concepto creativo y prototipo](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info)** del usuario llamado [Satyajit Mane](https://dribbble.com/Satyajit_Mane) encontrado en la web [Dribbble](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info), punto de partida que me ha ayudado para comenzar el proyecto y diseñar el resto de pantallas intentando seguir la misma línea creativa.
+Para la parte más visual, estética y artística de la aplicación, he partido como **inspiración del [concepto creativo y prototipo](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info)** del usuario llamado [Satyajit Mane](https://dribbble.com/Satyajit_Mane) encontrado en la web [Dribbble](https://dribbble.com), punto de partida que me ha ayudado para comenzar el proyecto y diseñar el resto de pantallas intentando seguir la misma línea creativa.
 
-Por otro lado, para la pantalla de *Login* me he **inspirado en el [prototipo](https://dribbble.com/shots/14187565-Login-Page)** del usuario llamado [Shubham Rathod](https://dribbble.com/shubhamdesign1) de [Dribbble](https://dribbble.com/shots/22234085-Dragon-Ball-Z-Character-Info).
+Por otro lado, para la pantalla de *Login* me he **inspirado en el [prototipo](https://dribbble.com/shots/14187565-Login-Page)** del usuario llamado [Shubham Rathod](https://dribbble.com/shubhamdesign1) de [Dribbble](https://dribbble.com).
 
 Algunas características a destacar a nivel diseño y código serían:
 

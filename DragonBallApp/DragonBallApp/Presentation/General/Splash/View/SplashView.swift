@@ -11,16 +11,6 @@ import Lottie
 // MARK: - SplashView -
 final class SplashView: UIView {
     // MARK: - UI elements -
-    private let backgroundImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "mainBackgroundSplash")
-        imageView.alpha = 0.8
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private let splashActivityIndicatorUiView: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = UIColor(named: "mainBackgroundColor")
@@ -46,11 +36,6 @@ final class SplashView: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backgroundImage.frame = bounds
     }
     
     // MARK: - Functions -
